@@ -36,3 +36,8 @@
   min-height: 500px;
 }
 
+* {
+  color : inherit !important;
+  text-decoration: none !important;
+}
+

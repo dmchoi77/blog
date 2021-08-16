@@ -40,10 +40,12 @@ function BoardWrite() {
                 <CKEditor
                     editor={ClassicEditor}
                     data=""
+                    name = 'content'
+
 
                     onChange={(event, editor) => {
                         const data = editor.getData();
-                        console.log({ event, editor, data });
+                        //console.log({ event, editor, data });
                         setPost({
                             ...post,
                             content: data

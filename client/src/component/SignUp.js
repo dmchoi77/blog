@@ -11,11 +11,12 @@ function SignUp() {
         const psw_check = document.getElementsByName('signup_pswCheck')[0].value.trim();
 
         const eng_check = /^[a-z]+[a-z0-9]{5,19}$/g;
+        const pw_check = /^[a-z]+[a-z0-9]{5,19}$/g;
+
         if (!eng_check.test(id)) {
             return alert('아이디는 영문자로 시작하는 6~20자여야만 합니다.')
         }
 
-        const pw_check = /^[a-z]+[a-z0-9]{5,19}$/g;
         if (!pw_check.test(password)) {
             return alert('비밀번호는 영문자로 시작하는 6~20자여야만 합니다.')
 
@@ -30,12 +31,13 @@ function SignUp() {
                 password: password,
                 psw_check: psw_check
             }).then((res) => {
-                console.log(res.data);
+                if (res.data === "ER_DUP_ENTRY") return alert("이미 가입되어 있는 아이디 입니다.");
+                else if (res.data === "complete") return alert("회원가입 완료");
             })
         };
+
         addUser();
-        alert("회원가입 완료");
-        document.location.href = '/';
+        //document.location.href = '/';
     };
 
 

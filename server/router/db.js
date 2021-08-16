@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 
-
-
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -11,11 +9,4 @@ const db = mysql.createPool({
     database: "board"
 });
 
-router.get("/api/get", (req, res) => {
-    const sqlQuery = "SELECT * FROM TABLE1";
-    db.query(sqlQuery, (err, result) => {
-        res.send(result);
-    });
-});
-
-module.exports = router;
+module.exports = db;

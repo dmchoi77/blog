@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function BoardList() {
@@ -21,6 +21,7 @@ function BoardList() {
 
     return (
         <div>
+        <Container>
             <Table responsive="sm">
                 <thead>
                     <tr>
@@ -36,10 +37,10 @@ function BoardList() {
                             // 최초 선언한 기본값은 나타내지 않음
                             <tr>
                                 <td>
-                                    <Link to={`/BoardContent/${rowData.idx}`}>{rowData.idx}</Link>
+                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >{rowData.idx}</Link>
                                 </td>
                                 <td>
-                                    <Link to={`/BoardContent/${rowData.idx}`}>{rowData.title}</Link>
+                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx}>{rowData.title}</Link>
                                 </td>
                                 <td>
                                     <Link>{rowData.date}</Link>
@@ -49,8 +50,13 @@ function BoardList() {
                     }
                 </tbody>
             </Table>
+        </Container >
+
         </div>
+
+
     )
 }
+
 
 export default BoardList;

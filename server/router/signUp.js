@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.post("/api/signup", (req, res) => {
+  
     const name = req.body.name;
     const id = req.body.id;
     let password = req.body.password;

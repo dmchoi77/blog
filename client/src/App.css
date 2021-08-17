@@ -2,15 +2,6 @@
   text-align: center;
 }
 
-.movie-container {
-  margin: 0 auto;
-  width: 80%;
-  border: 1px solid #333;
-  padding: 10px 0 30px 0;
-  border-radius: 5px;
-  margin-bottom : 50px;
-}
-
 .form-wrapper{
   width: 80%;
   margin: 0 auto;
@@ -37,7 +28,12 @@
 }
 
 * {
-  color : inherit !important;
   text-decoration: none !important;
 }
 
+a {
+  color : black;
+}
+.link {
+  color : #ffff
+}

@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function SignUp() {
 
-    const _signUp = async () => {
+    const history = useHistory();
+    const _signUp = () => {
         const userName = document.getElementsByName('signup_name')[0].value.trim();
         const id = document.getElementsByName('signup_id')[0].value.trim();
         const password = document.getElementsByName('signup_password')[0].value.trim();
@@ -32,15 +33,15 @@ function SignUp() {
                 psw_check: psw_check
             }).then((res) => {
                 if (res.data === "ER_DUP_ENTRY") return alert("이미 가입되어 있는 아이디 입니다.");
-                else if (res.data === "complete") return alert("회원가입 완료");
+                else if (res.data === "complete") {
+                   alert("회원가입 완료");
+                   return history.push('/');
+                }
             })
         };
 
         addUser();
-        //document.location.href = '/';
     };
-
-
 
     return (
         <div>
@@ -75,12 +76,11 @@ function SignUp() {
                             </div>
                         </div>
                         <button onClick={_signUp}>회원가입</button>
-                        <button ><Link to="/">취소</Link></button>
-
+                        <button onClick={() => history.push("/")}>취소</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 };
 

@@ -2,6 +2,7 @@ import './App.css';
 import BoardWrite from './component/BoardWrite';
 import BoardList from './component/BoardList';
 import SignUp from './component/SignUp';
+import Login from './component/Login';
 import View from './component/View';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ function App() {
               </Nav>
             <Nav>
             <Nav.Link><Link to={"/board/signup"} className= "link">Sign Up</Link></Nav.Link>
-            <Nav.Link><Link to={"/board/signup"} className= "link">Login</Link></Nav.Link>
+            <Nav.Link><Link to={"/board/login"} className= "link">Login</Link></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -31,6 +32,7 @@ function App() {
       <button><Link to={"/board/write"} >글쓰기</Link></button>
       <Route exact path="/board/list" component={BoardList} />
       <Route exact path="/board/write" component={BoardWrite} />
+      <Route exact path="/board/login" component={Login} />
       <Route exact path="/board/signup" component={SignUp} />
       <Route exact path="/board/view/:data" component={View} />
 

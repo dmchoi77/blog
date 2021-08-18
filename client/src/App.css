@@ -1,5 +1,13 @@
+* {
+  text-decoration: none !important;
+}
+
 .App {
   text-align: center;
+}
+
+.form {
+  display : block;
 }
 
 .form-wrapper{
@@ -7,13 +15,24 @@
   margin: 0 auto;
 }
 
+.form-control {
+  display :block;
+  align-items: center;
+
+}
+
 .title-input {
   width: 100%;
   height: 40px;
-  margin: 10px;
+  margin: 10px 0 10px;
 }
 
-.submit-button {
+.btn {
+  border-radius: 0;
+  width: 100%;
+}
+
+.submit-btn {
   width: 200px;
   height: 50px;
   font-size: 20px;
@@ -27,13 +46,52 @@
   min-height: 500px;
 }
 
-* {
-  text-decoration: none !important;
-}
-
 a {
   color : black;
 }
+
 .link {
   color : #ffff
+}
+
+.nav-link {
+  color :#ffff;
+}
+
+.sign-up {
+  text-align: center;
+  padding-top: 20px;
+  color :rgb(0, 25, 147);
+  font-weight:bolder;
+}
+
+.post-view-go-list-btn, .post-write-btn {
+  width :100px;
+  margin-top: 5px;
+}
+
+.post-view-wrapper {
+  padding : 10px;
+  margin : 0 auto;
+  width : 1000px;
+  height: auto;
+}
+
+.date-before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: #ccc;
+  margin: 0 10px 0 6px;
+  vertical-align: -2px;
+}
+
+#container {
+  margin-top: 170px;
+  height: 280px;
+  position: absolute;
+  left: 50%;
+  margin-left: -180px;
+  width: 360px;
 }

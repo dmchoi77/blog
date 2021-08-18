@@ -1,43 +1,43 @@
 import './App.css';
-import BoardWrite from './component/BoardWrite';
-import BoardList from './component/BoardList';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import SignUp from './component/SignUp';
 import Login from './component/Login';
-import View from './component/View';
-import { Nav, Navbar, Container } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom';
+import Home from './component/Home';
+import PrivateRoute from './component/PrivateRoute';
 
 function App() {
+  // 로그인 상태 관리
+  const [isLogin, setIsLogin] = useState(false)
+
+  useEffect(() => {
+    if (sessionStorage.getItem('id') === null) {
+      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
+      console.log('isLogin ?? :: ', isLogin)
+    } else {
+      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
+      // 로그인 상태 변경
+      setIsLogin(true)
+      console.log('isLogin ??? :: ', isLogin)
+    }
+  });
+
   return (
-    <div className="App">
-      
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="/">My Blog</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-                <Nav.Link><Link to={"/board/list"} className= "link">Board</Link></Nav.Link>
-                <Nav.Link><Link to={"/board/list"} className= "link">Board</Link></Nav.Link>
-              </Nav>
-            <Nav>
-            <Nav.Link><Link to={"/board/signup"} className= "link">Sign Up</Link></Nav.Link>
-            <Nav.Link><Link to={"/board/login"} className= "link">Login</Link></Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <div>
+      {isLogin ?
+        <Home /> :
+        <Login />
+      }
+      <Switch>
+        {/* <PrivateRoute exact path="/home" component={Home} /> */}
+        <Route exact path="/login" component={Login} />
+        {/* <Route exact path="/" component={Login} /> */}
+        <Route exact path="/signup" component={SignUp} />
 
 
-      <button><Link to={"/board/write"} >글쓰기</Link></button>
-      <Route exact path="/board/list" component={BoardList} />
-      <Route exact path="/board/write" component={BoardWrite} />
-      <Route exact path="/board/login" component={Login} />
-      <Route exact path="/board/signup" component={SignUp} />
-      <Route exact path="/board/view/:data" component={View} />
-
-    </div >
-  );
+      </Switch>
+    </div>
+  )
 }
 
 export default App;

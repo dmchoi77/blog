@@ -9,6 +9,7 @@ const boardNew = require('./router/boardNew');
 const boardList = require('./router/boardList');
 const signUp = require('./router/signUp');
 const view = require('./router/view');
+const userInform = require('./router/userInform');
 
 app.use(cors());
 app.use(express.json());
@@ -19,10 +20,11 @@ app.use('/',boardNew);
 app.use('/',boardList);
 app.use('/',signUp);
 app.use('/',view);
-
+app.use('/',userInform);
 
 app.listen(PORT, () => {
     console.log(`running on PORT ${PORT}`);
 });
 
     
+ 

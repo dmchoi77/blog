@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
 function SignUp() {
+
 
     const history = useHistory();
     const _signUp = () => {
@@ -25,7 +27,7 @@ function SignUp() {
             return alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.')
         }
 
-        const addUser = () => {
+        (() => {
             axios.post('http://localhost:8000/api/signup', {
                 name: userName,
                 id: id,
@@ -34,52 +36,36 @@ function SignUp() {
             }).then((res) => {
                 if (res.data === "ER_DUP_ENTRY") return alert("이미 가입되어 있는 아이디 입니다.");
                 else if (res.data === "complete") {
-                   alert("회원가입 완료");
-                   return history.push('/');
+                    alert("회원가입 완료");
+                    return history.push('/');
                 }
             })
-        };
+        })();
 
-        addUser();
     };
 
     return (
-        <div>
-            <div>
-                <div>
-                    <h3 id='signup_title'>회원가입</h3>
-                </div>
-                <div className='Signup'>
-                    <div>
-                        <div id='signup_section'>
-                            {/* 이름 */}
-                            <div>
-                                <h5> 이름 </h5>
-                                <input type='text' maxLength='10' name='signup_name' />
-                            </div>
-                            {/* 아이디 */}
-                            <div>
-                                <h5> 아이디 </h5>
-                                <input type='text' maxLength='20' name='signup_id' />
-                            </div>
+        <div id="container">
+            <h1>회원가입</h1>
 
-                            {/* 비밀번호 */}
-                            <div>
-                                <h5> 비밀번호 </h5>
-                                <input type='password' maxLength='15' name='signup_password' />
-                            </div>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control type='text' maxLength='10' name='signup_name' placeholder="이름" />
+            </Form.Group>
 
-                            {/* 비밀번호 */}
-                            <div>
-                                <h5> 비밀번호 확인 </h5>
-                                <input type='password' maxLength='15' name='signup_pswCheck' />
-                            </div>
-                        </div>
-                        <button onClick={_signUp}>회원가입</button>
-                        <button onClick={() => history.push("/")}>취소</button>
-                    </div>
-                </div>
-            </div>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type='text' maxLength='20' name='signup_id' placeholder="아이디" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type='password' maxLength='15' name='signup_password' placeholder="비밀번호" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" />
+            </Form.Group>
+            <Button className="submit-btn" variant="primary" type='button' onClick={_signUp}>
+                회원가입
+            </Button>
         </div >
     )
 };

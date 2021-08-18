@@ -10,10 +10,6 @@
   display : block;
 }
 
-.form-wrapper{
-  width: 80%;
-  margin: 0 auto;
-}
 
 .form-control {
   display :block;
@@ -50,6 +46,15 @@ a {
   color : black;
 }
 
+.list-wrapper{
+  margin-top: 80px;
+}
+
+.write-wrapper{
+  width: 80%;
+  margin: 80px auto;
+}
+
 .link {
   color : #ffff
 }
@@ -71,9 +76,9 @@ a {
 }
 
 .post-view-wrapper {
-  padding : 10px;
+  padding : 80px;
   margin : 0 auto;
-  width : 1000px;
+  width : 1200px;
   height: auto;
 }
 

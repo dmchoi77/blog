@@ -8,7 +8,8 @@ function BoardWrite() {
 
     const [post, setPost] = useState({
         title: '',
-        content: ''
+        content: '',
+        writer : sessionStorage.id
     });
 
     const getValue = e => {
@@ -23,9 +24,9 @@ function BoardWrite() {
     const submit = () => {
         axios.post('http://localhost:8000/api/insert', {
             title: post.title,
-            content: post.content
+            content: post.content,
+            writer : post.writer
         }).then((res) => {
-            console.log(res.data);
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
             } else {
@@ -35,7 +36,7 @@ function BoardWrite() {
         })
     };
     return (
-        <div className='form-wrapper'>
+        <div className='write-wrapper'>
             <input className="title-input" type='text' placeholder='제목' name='title' onChange={getValue} />
 
             <CKEditor

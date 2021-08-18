@@ -12,7 +12,10 @@ function BoardList() {
         title: '',
         content: '',
         date: '',
+        writer : ''
     }]);
+
+    const writer = sessionStorage.id;
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/get')
@@ -23,18 +26,20 @@ function BoardList() {
 
     return (
         <div>
-            <Container>
+            <Container className="list-wrapper">
                 <Table responsive="sm">
                     <thead>
                         <tr>
                             <th>글번호</th>
                             <th>제목</th>
                             <th>작성일</th>
+                            <th>작성자</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             list.map(rowData => (
+                                console.log(rowData),
                                 rowData.idx !== '' &&
                                 // 최초 선언한 기본값은 나타내지 않음
                                 <tr>
@@ -46,6 +51,9 @@ function BoardList() {
                                     </td>
                                     <td>
                                         <Link>{rowData.date}</Link>
+                                    </td>
+                                    <td>
+                                        <Link>{rowData.writer}</Link>
                                     </td>
                                 </tr>
                             ))

@@ -1,8 +1,7 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom';
-import SignUp from './SignUp';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -55,13 +54,11 @@ function Login() {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
                 </Form.Group>
-                <Button className="submit-btn" variant="primary" type='button' onClick={_login}>
+                <Button variant="primary" type='button' onClick={_login}>
                     로그인
                 </Button>
                 <p className="sign-up">처음이면 <Link to={"/signup"}>회원가입</Link></p>
-            
             </Form>
-
         </div>
     )
 };

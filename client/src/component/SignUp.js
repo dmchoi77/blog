@@ -5,7 +5,6 @@ import { Form, Button } from 'react-bootstrap';
 
 function SignUp() {
 
-
     const history = useHistory();
     const _signUp = () => {
         const userName = document.getElementsByName('signup_name')[0].value.trim();
@@ -47,7 +46,6 @@ function SignUp() {
     return (
         <div id="container">
             <h1>회원가입</h1>
-
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type='text' maxLength='10' name='signup_name' placeholder="이름" />
             </Form.Group>
@@ -63,7 +61,7 @@ function SignUp() {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" />
             </Form.Group>
-            <Button className="submit-btn" variant="primary" type='button' onClick={_signUp}>
+            <Button variant="primary" type='button' onClick={_signUp}>
                 회원가입
             </Button>
         </div >

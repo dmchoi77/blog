@@ -38,7 +38,6 @@ function Home(props) {
           <PrivateRoute exact path="/board/list" component={BoardList} />
           <PrivateRoute exact path="/board/write" component={BoardWrite} />
           <PrivateRoute exact path="/board/view/:data" component={View} />
-          <PrivateRoute exact path="board/write" component={BoardWrite} />
         </Switch>
     </div>
   )

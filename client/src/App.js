@@ -1,10 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import SignUp from './component/SignUp';
 import Login from './component/Login';
 import Home from './component/Home';
-import PrivateRoute from './component/PrivateRoute';
 
 function App() {
   // 로그인 상태 관리
@@ -24,18 +23,14 @@ function App() {
 
   return (
     <div>
-      {isLogin ?
-        <Home /> :
-        <Login />
+      {isLogin
+        ? <Home />
+        : <Switch>          
+          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
+        </Switch>
       }
-      <Switch>
-        {/* <PrivateRoute exact path="/home" component={Home} /> */}
-        <Route exact path="/login" component={Login} />
-        {/* <Route exact path="/" component={Login} /> */}
-        <Route exact path="/signup" component={SignUp} />
-
-
-      </Switch>
     </div>
   )
 }

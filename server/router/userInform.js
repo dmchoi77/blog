@@ -1,38 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
+const bcrypt = require('bcrypt');
 
-const util = require('util');
 
- 
 router.post('/api/onLogin', (req, res) => {
-    //console.log(`= = = > req : ${util.inspect(req)}`);
+
     const user_id = req.query.id;
     const user_pw = req.query.password;
     //db에 입력된 id와 동일한 id가 있는지 검사
-    const sql1 = 'SELECT COUNT(*) AS result FROM user WHERE id = ?';
+    const sql = 'SELECT * FROM user WHERE Id = ?';
 
-    db.query(sql1, user_id, (err, data) => {
+    db.query(sql, user_id, (err, data) => {
+        console.log(data[0]);
         if (!err) {
-            if (data[0].result < 1) { //동일한 id가 없다면
+            if (!data[0]) { //동일한 id가 없다면
                 res.send({ 'msg': '일치하는 id가 없습니다.' });
             } else {
-                const sql2 = `SELECT
-                                CASE (SELECT COUNT(*) FROM user WHERE id = ? AND password = ?) WHEN '0' THEN NULL
-                                    ELSE (SELECT id FROM user WHERE id = ? AND password = ?)
-                                END AS userId
-                                , CASE (SELECT COUNT(*) FROM user WHERE id = ? AND password = ?)
-                                    WHEN '0' THEN NULL
-                                    ELSE (SELECT password FROM user WHERE id = ? AND password = ?)
-                                END AS userPw`;
-                const params = [user_id, user_pw, user_id, user_pw, user_id, user_pw, user_id, user_pw]
-                db.query(sql2, params, (err, data) => {
-                    if (!err) {
-                        res.send(data[0]); //{ userId : , userPw : }
-                    } else {
-                        res.send(err);
-                    }
-                })
+                const match = bcrypt.compareSync(user_pw, data[0].password);
+                if (match) { //입력 비밀번호와 DB 비밀번호가 서로 같으면
+                    res.send(data[0]);
+                } else if (!match) { //일치하는 아이디는 있는데 비밀번호가 서로 틀리면
+                    res.send({ 'msg': '비밀번호가 일치하지 않습니다.' });
+                }
             }
         } else {
             res.send(err)

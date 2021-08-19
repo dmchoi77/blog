@@ -4,41 +4,45 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
-function BoardWrite(props) {
+function BoardModify(props) {
 
-
-
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [title, setTitle] = useState(sessionStorage.getItem('title'));
+    const [content, setContent] = useState(sessionStorage.getItem('content'));
     const writer = sessionStorage.id;
+    const idx = sessionStorage.getItem('idx');
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);
     }
-  
+
     const submit = () => {
-        console.log(title,content);
-        axios.post('http://localhost:8000/api/insert', {
+        console.log(title, content);
+        axios.post('http://localhost:8000/api/modify', {
             title: title,
             content: content,
-            writer: writer
+            idx: idx
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
             } else {
-                alert("게시글이 등록되었습니다.");
+                alert("게시글이 수정되었습니다.");
                 document.location.href = '/board/list';
             }
         })
+        sessionStorage.removeItem('title');
+        sessionStorage.removeItem('content');
+        sessionStorage.removeItem('idx');
     };
+
     return (
         <div className='write-wrapper'>
-            <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
+            <h2>게시글 수정</h2>
+            <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
 
             <CKEditor
                 editor={ClassicEditor}
-                data=""
+                data={content}
                 name='content'
 
                 onChange={(event, editor) => {
@@ -55,11 +59,11 @@ function BoardWrite(props) {
                 }}
             />
             <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                등록
-                </Button>
+                수정
+            </Button>
         </div>
     )
 }
 
 
-export default BoardWrite;
+export default BoardModify;

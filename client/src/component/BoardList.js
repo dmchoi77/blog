@@ -39,7 +39,7 @@ function BoardList() {
                     <tbody>
                         {
                             list.map(rowData => (
-                                console.log(rowData),
+                                //console.log(rowData),
                                 rowData.idx !== '' &&
                                 // 최초 선언한 기본값은 나타내지 않음
                                 <tr>
@@ -61,8 +61,7 @@ function BoardList() {
                     </tbody>
                 </Table>
                 <Button className="post-write-btn" variant="primary" type='button'  >
-                    <Link to={"/board/write"} className="link">글쓰기</Link>
-
+                    <Link to={"/board/newpost"} className="link">글쓰기</Link>
                 </Button>
             </Container >
         </div>

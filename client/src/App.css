@@ -70,9 +70,9 @@ a {
   font-weight:bolder;
 }
 
-.post-view-go-list-btn, .post-write-btn {
+.post-view-go-list-btn, .post-write-btn, .post-view-go-modify-btn {
   width :100px;
-  margin-top: 5px;
+  margin: 5px 5px;
 }
 
 .post-view-wrapper {

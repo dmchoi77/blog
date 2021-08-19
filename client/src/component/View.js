@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link, Switch } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import BoardModify from './BoardModify';
+
 
 function View(props) {
     const [index, setIndex] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
+
+    const [babo, setBabo] = useState(false);
 
     const { params } = props.match;
     const idx = params.data;
@@ -32,29 +36,43 @@ function View(props) {
         }
     }, [])
 
+    const onModify=()=>{
+        sessionStorage.setItem('title', title); 
+        sessionStorage.setItem('content', content); 
+        sessionStorage.setItem('idx', idx);
+    }
+
+
     return (
-        <div className="post-view-wrapper">
-            <hr />
-            <div>
-                <div className="post-view-row">
-                    <h2>{title}</h2>
-                </div>
+        <Switch>
+            <div className="post-view-wrapper">
                 <hr />
-                <div className="post-view-row">
-                    <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
-                </div>
-                <hr />
-                <div className="post-view-row">
-                    <div>
-                        {ReactHtmlParser(content)}
+                <div>
+                    <div className="post-view-row">
+                        <h2>{title}</h2>
                     </div>
-                </div>
-                <hr />
-                <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
-                    전체글
+                    <hr />
+                    <div className="post-view-row">
+                        <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
+                    </div>
+                    <hr />
+                    <div className="post-view-row">
+                        <div>
+                            {ReactHtmlParser(content)}
+                        </div>
+                    </div>
+                    <hr />
+                    <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
+                        전체글
                 </Button>
+                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick = {onModify}>
+                        <Link to={`/board/modify/${idx}`} className="link">수정</Link>
+                    </Button>
+                </div>
             </div>
-        </div>
+
+            <BoardModify></BoardModify>
+        </Switch>
     )
 }
 

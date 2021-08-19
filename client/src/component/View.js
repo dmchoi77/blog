@@ -11,13 +11,11 @@ function View(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
-
-    const [babo, setBabo] = useState(false);
+    const [writer, setWriter] = useState('');
 
     const { params } = props.match;
     const idx = params.data;
     const history = useHistory();
-    const writer = sessionStorage.id;
 
     useEffect(async () => {
         try {//데이터를 호출하는 동안 대기할 수 있도록 async, await 사용
@@ -30,16 +28,18 @@ function View(props) {
             setTitle(res.data[0].title);
             setContent(res.data[0].content);
             setDate(res.data[0].date);
+            setWriter(res.data[0].writer);
 
         } catch (e) {
             console.error(e.message);
         }
     }, [])
 
-    const onModify=()=>{
-        sessionStorage.setItem('title', title); 
-        sessionStorage.setItem('content', content); 
+    const onModify = () => {
+        sessionStorage.setItem('title', title);
+        sessionStorage.setItem('content', content);
         sessionStorage.setItem('idx', idx);
+        sessionStorage.setItem('writer', writer);
     }
 
 
@@ -65,9 +65,9 @@ function View(props) {
                     <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
                         전체글
                 </Button>
-                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick = {onModify}>
-                        <Link to={`/board/modify/${idx}`} className="link">수정</Link>
-                    </Button>
+
+                    <Link to={`/board/modify/${idx}`} className="link"><Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>수정                    </Button>
+                    </Link>
                 </div>
             </div>
 

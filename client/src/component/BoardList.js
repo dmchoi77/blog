@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Table, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute';
-import BoardWrite from './BoardWrite';
 
 function BoardList() {
 
@@ -12,10 +10,8 @@ function BoardList() {
         title: '',
         content: '',
         date: '',
-        writer : ''
+        writer: ''
     }]);
-
-    const writer = sessionStorage.id;
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/get')
@@ -60,13 +56,13 @@ function BoardList() {
                         }
                     </tbody>
                 </Table>
-                <Button className="post-write-btn" variant="primary" type='button'  >
-                    <Link to={"/board/newpost"} className="link">글쓰기</Link>
-                </Button>
+                <Link to={"/board/newpost"} className="link">
+                    <Button className="post-write-btn" variant="primary" type='button'  >
+                        글쓰기
+                    </Button>
+                </Link>
             </Container >
         </div>
-
-
     )
 }
 

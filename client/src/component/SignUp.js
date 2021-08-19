@@ -24,11 +24,8 @@ function SignUp() {
     }
 
     const history = useHistory();
+
     const _signUp = () => {
-        // const userName = document.getElementsByName('signup_name')[0].value.trim();
-        // const id = document.getElementsByName('signup_id')[0].value.trim();
-        // const password = document.getElementsByName('signup_password')[0].value.trim();
-        // const psw_check = document.getElementsByName('signup_pswCheck')[0].value.trim();
 
         const eng_check = /^[a-z]+[a-z0-9]{5,19}$/g;
         const pw_check = /^[a-z]+[a-z0-9]{5,19}$/g;

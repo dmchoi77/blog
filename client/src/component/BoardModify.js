@@ -3,18 +3,31 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
-function BoardModify(props) {
+function BoardModify() {
 
     const [title, setTitle] = useState(sessionStorage.getItem('title'));
     const [content, setContent] = useState(sessionStorage.getItem('content'));
-    const writer = sessionStorage.id;
+    const id = sessionStorage.id;
+    const writer = sessionStorage.writer;
     const idx = sessionStorage.getItem('idx');
+    const history = useHistory();
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);
     }
+
+    if (writer !== id) {
+        alert("수정 권한이 없습니다.");
+        sessionStorage.removeItem('title');
+        sessionStorage.removeItem('content');
+        sessionStorage.removeItem('idx');
+        sessionStorage.removeItem('writer');
+        history.goBack();
+    }
+  
 
     const submit = () => {
         console.log(title, content);
@@ -33,6 +46,7 @@ function BoardModify(props) {
         sessionStorage.removeItem('title');
         sessionStorage.removeItem('content');
         sessionStorage.removeItem('idx');
+        sessionStorage.removeItem('writer');
     };
 
     return (

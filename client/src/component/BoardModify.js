@@ -11,7 +11,7 @@ function BoardModify() {
     const [content, setContent] = useState(sessionStorage.getItem('content'));
     const id = sessionStorage.id;
     const writer = sessionStorage.writer;
-    const idx = sessionStorage.getItem('idx');
+    const index = sessionStorage.getItem('idx');
     const history = useHistory();
 
     const handleInputTitle = (e) => {
@@ -30,11 +30,10 @@ function BoardModify() {
   
 
     const submit = () => {
-        console.log(title, content);
         axios.post('http://localhost:8000/api/modify', {
             title: title,
             content: content,
-            idx: idx
+            idx: index
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");

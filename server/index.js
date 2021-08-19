@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { urlencoded } = require('body-parser');
 const db = require('./router/db');
-const boardNew = require('./router/boardNew');
+const boardManage = require('./router/boardManage');
 const boardList = require('./router/boardList');
 const signUp = require('./router/signUp');
 const view = require('./router/view');
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.use('/',boardNew);
+app.use('/',boardManage);
 app.use('/',boardList);
 app.use('/',signUp);
 app.use('/',view);

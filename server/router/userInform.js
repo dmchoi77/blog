@@ -12,7 +12,6 @@ router.post('/api/onLogin', (req, res) => {
     const sql = 'SELECT * FROM user WHERE Id = ?';
 
     db.query(sql, user_id, (err, data) => {
-        console.log(data[0]);
         if (!err) {
             if (!data[0]) { //동일한 id가 없다면
                 res.send({ 'msg': '일치하는 id가 없습니다.' });

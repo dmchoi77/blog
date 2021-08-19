@@ -35,10 +35,24 @@ router.post("/api/modify", (req, res) => {
         res.send("null!");
         return;
     }
+
     db.query(sql, [title, content], (err, result) => {
         res.send('Success!');
     });
 
+});
+
+//게시글 삭제
+router.post("/api/delete", (req, res) => {
+    const title = req.body.title;
+    const content = req.body.content;
+    const idx = req.body.idx;
+
+    const sql = `DELETE FROM table1 WHERE title = ? and content = ? and idx = ?`;
+
+    db.query(sql, [title, content, idx], (err, result) => {
+        res.send('Success!');
+    });
 });
 
 module.exports = router;

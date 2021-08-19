@@ -42,6 +42,22 @@ function View(props) {
         sessionStorage.setItem('writer', writer);
     }
 
+    const onDelete = () => {
+        if (writer === sessionStorage.id) {
+            axios.post('http://localhost:8000/api/delete', {
+                title: title,
+                content: content,
+                idx: idx
+            }).then((res) => {
+                alert("삭제되었습니다.");
+                document.location.href = '/board/list';
+            })
+        }
+        else {
+            alert("삭제 권한이 없습니다.");
+        }
+    }
+
 
     return (
         <Switch>
@@ -64,10 +80,15 @@ function View(props) {
                     <hr />
                     <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
                         전체글
-                </Button>
-
-                    <Link to={`/board/modify/${idx}`} className="link"><Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>수정                    </Button>
+                    </Button>
+                    <Link to={`/board/modify/${idx}`} className="link">
+                        <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
+                            수정
+                        </Button>
                     </Link>
+                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                        삭제
+                    </Button>
                 </div>
             </div>
 

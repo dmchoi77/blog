@@ -10,11 +10,15 @@
   display : block;
 }
 
-
 .form-control {
   display :block;
   align-items: center;
 
+}
+
+.text-area {
+  width : 100%;
+  height : 70px
 }
 
 .title-input {
@@ -70,7 +74,7 @@ a {
   font-weight:bolder;
 }
 
-.post-view-go-list-btn, .post-write-btn, .post-view-go-modify-btn {
+.post-view-go-list-btn, .post-write-btn, .post-view-go-modify-btn, .reply-btn {
   width :100px;
   margin: 5px 5px;
 }

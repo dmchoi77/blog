@@ -35,6 +35,7 @@ function Home(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div align="center">짜잔 홈화면</div>
       <Switch>
         <PrivateRoute exact path="/board/list" component={BoardList} />
         <PrivateRoute exact path="/board/newpost" component={BoardWrite} />

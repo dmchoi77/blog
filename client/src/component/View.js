@@ -4,7 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import BoardModify from './BoardModify';
-
+import Reply from './Reply';
 
 function View(props) {
     const [index, setIndex] = useState('');
@@ -90,6 +90,7 @@ function View(props) {
                         삭제
                     </Button>
                 </div>
+                <Reply></Reply>
             </div>
 
             <BoardModify></BoardModify>

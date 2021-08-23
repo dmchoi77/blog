@@ -13,12 +13,15 @@ function SignUp() {
     const handleInputName = (e) => {
         setName(e.target.value.trim());
     }
+
     const handleInputId = (e) => {
         setId(e.target.value.trim());
     }
+
     const handleInputPwd = (e) => {
         setPwd(e.target.value.trim());
     }
+
     const handleInputPwdCheck = (e) => {
         setPwdCheck(e.target.value.trim());
     }
@@ -56,7 +59,7 @@ function SignUp() {
             })
         })();
 
-    };
+    }
 
     return (
         <div id="container">

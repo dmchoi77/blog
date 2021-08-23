@@ -46,7 +46,7 @@ function BoardModify() {
         sessionStorage.removeItem('content');
         sessionStorage.removeItem('idx');
         sessionStorage.removeItem('writer');
-    };
+    }
 
     return (
         <div className="body">

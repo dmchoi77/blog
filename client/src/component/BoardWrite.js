@@ -31,7 +31,8 @@ function BoardWrite(props) {
                 document.location.href = '/board/list';
             }
         })
-    };
+    }
+
     return (
         <div className="body">
             <div className='write-wrapper'>

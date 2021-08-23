@@ -44,6 +44,7 @@ function Reply() {
             <Button className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
                 등록
             </Button>
+            <hr/>
             {
                 data !== null ?
                     <ReplyList data={data} />
@@ -52,7 +53,7 @@ function Reply() {
             }
         </div>
     )
-};
+}
 
 function ReplyList(props) {
     return (

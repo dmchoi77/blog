@@ -60,41 +60,44 @@ function View(props) {
 
 
     return (
-        <Switch>
-            <div className="post-view-wrapper">
-                <hr />
-                <div>
-                    <div className="post-view-row">
-                        <h2>{title}</h2>
-                    </div>
+        <div className="body">
+            <Switch>
+                <div className="post-view-wrapper">
                     <hr />
-                    <div className="post-view-row">
-                        <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
-                    </div>
-                    <hr />
-                    <div className="post-view-row">
-                        <div>
-                            {ReactHtmlParser(content)}
+                    <div>
+                        <div className="post-view-row">
+                            <h2>{title}</h2>
                         </div>
-                    </div>
-                    <hr />
-                    <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
-                        전체글
+                        <hr />
+                        <div className="post-view-row">
+                            <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
+                        </div>
+                        <hr />
+                        <div className="post-view-row">
+                            <div>
+                                {ReactHtmlParser(content)}
+                            </div>
+                        </div>
+                        <hr />
+                        <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
+                            전체글
                     </Button>
-                    <Link to={`/board/modify/${idx}`} className="link">
-                        <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
-                            수정
+                        <Link to={`/board/modify/${idx}`} className="link">
+                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
+                                수정
                         </Button>
-                    </Link>
-                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                        삭제
+                        </Link>
+                        <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                            삭제
                     </Button>
+                    </div>
+                    <Reply></Reply>
                 </div>
-                <Reply></Reply>
-            </div>
 
-            <BoardModify></BoardModify>
-        </Switch>
+                <BoardModify></BoardModify>
+            </Switch>
+        </div>
+
     )
 }
 

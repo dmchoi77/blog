@@ -27,7 +27,7 @@ function BoardModify() {
         sessionStorage.removeItem('writer');
         history.goBack();
     }
-  
+
 
     const submit = () => {
         axios.post('http://localhost:8000/api/modify', {
@@ -49,31 +49,33 @@ function BoardModify() {
     };
 
     return (
-        <div className='write-wrapper'>
-            <h2>게시글 수정</h2>
-            <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
+        <div className="body">
+            <div className='write-wrapper'>
+                <h2>게시글 수정</h2>
+                <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
 
-            <CKEditor
-                editor={ClassicEditor}
-                data={content}
-                name='content'
+                <CKEditor
+                    editor={ClassicEditor}
+                    data={content}
+                    name='content'
 
-                onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setContent(data)
-                    //console.log(content);
-                }}
+                    onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setContent(data)
+                        //console.log(content);
+                    }}
 
-                onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                    console.log('Focus.', editor);
-                }}
-            />
-            <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                수정
+                    onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                    }}
+                    onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                    }}
+                />
+                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                    수정
             </Button>
+            </div>
         </div>
     )
 }

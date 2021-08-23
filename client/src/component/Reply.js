@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Toast } from 'react-bootstrap';
 
 function Reply() {
     const [data, setData] = useState([
@@ -17,7 +17,7 @@ function Reply() {
 
         setWrite(e.target.value);
     }
-    
+
     const onSubmit = () => {
 
         if (write === "") {
@@ -46,9 +46,7 @@ function Reply() {
             </Button>
             {
                 data !== null ?
-                    data.map(i => (
-                        <div>{i.content}</div>
-                    ))
+                    <ReplyList data={data} />
                     : null
 
             }
@@ -56,6 +54,21 @@ function Reply() {
     )
 };
 
+function ReplyList(props) {
+    return (
+        props.data.map(i => (
+            <div>
+                <Toast>
+                    <Toast.Header closeButton={false}>
+                        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                        <strong className="me-auto">익명</strong>
+                    </Toast.Header>
+                    <Toast.Body>{i.content}</Toast.Body>
+                </Toast>
+            </div>
+        ))
+    )
+}
 
 
 

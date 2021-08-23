@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Nav, Navbar, Container } from 'react-bootstrap';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import React from 'react';
+import { Nav, Navbar, Container, Card } from 'react-bootstrap';
+import { Link, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import BoardWrite from './BoardWrite';
 import BoardModify from './BoardModify';
 import BoardList from './BoardList';
-import SignUp from './SignUp';
-import Login from './Login';
+
 import View from './View';
 
 
@@ -35,13 +34,20 @@ function Home(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div align="center">짜잔 홈화면</div>
+
       <Switch>
         <PrivateRoute exact path="/board/list" component={BoardList} />
         <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
         <PrivateRoute exact path="/board/view/:data" component={View} />
         <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
       </Switch>
+
+
+      <div className="footer">
+        <div className="cr">
+          copyright©dmchoi
+        </div>
+      </div>
     </div>
   )
 }

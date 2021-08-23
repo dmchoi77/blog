@@ -21,7 +21,7 @@ function BoardList() {
     }, [])
 
     return (
-        <div>
+        <div className="body">
             <Container className="list-wrapper">
                 <Table responsive="sm">
                     <thead>

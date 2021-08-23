@@ -16,9 +16,9 @@ function BoardWrite(props) {
         setTitle(e.target.value);
         //console.log(title);
     }
-  
+
     const submit = () => {
-        console.log(title,content);
+        console.log(title, content);
         axios.post('http://localhost:8000/api/insert', {
             title: title,
             content: content,
@@ -33,30 +33,31 @@ function BoardWrite(props) {
         })
     };
     return (
-        <div className='write-wrapper'>
-            <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
+        <div className="body">
+            <div className='write-wrapper'>
+                <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
+                <CKEditor
+                    editor={ClassicEditor}
+                    data=""
+                    name='content'
 
-            <CKEditor
-                editor={ClassicEditor}
-                data=""
-                name='content'
+                    onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setContent(data)
+                        //console.log(content);
+                    }}
 
-                onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setContent(data)
-                    //console.log(content);
-                }}
-
-                onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                    console.log('Focus.', editor);
-                }}
-            />
-            <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                등록
+                    onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                    }}
+                    onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                    }}
+                />
+                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                    등록
                 </Button>
+            </div>
         </div>
     )
 }

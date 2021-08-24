@@ -3,6 +3,7 @@ import { useHistory, Link, Switch, Route } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import BoardList from './BoardList';
 import BoardModify from './BoardModify';
 import Reply from './Reply';
 
@@ -37,7 +38,7 @@ function View(props) {
     }, [])
 
     const onModify = (e) => {
-        if( id !== writer){
+        if (id !== writer) {
             alert("수정 권한이 없습니다.");
             e.preventDefault();
         }
@@ -48,19 +49,19 @@ function View(props) {
         sessionStorage.setItem('writer', writer);
     }
 
-    const onDelete = () => {
-        if (writer === sessionStorage.id) {
+    const onDelete = (e) => {
+        if (writer !== sessionStorage.id) {
+            alert("삭제 권한이 없습니다.");
+            e.preventDefault();
+        }
+        else {
             axios.post('http://localhost:8000/api/delete', {
                 title: title,
                 content: content,
                 idx: idx
             }).then((res) => {
                 alert("삭제되었습니다.");
-                document.location.href = '/board/list';
             })
-        }
-        else {
-            alert("삭제 권한이 없습니다.");
         }
     }
 
@@ -68,7 +69,6 @@ function View(props) {
     return (
         <div className="body">
             <Switch>
-
                 <div className="post-view-wrapper">
                     <hr />
                     <div>
@@ -94,17 +94,16 @@ function View(props) {
                                 수정
                             </Button>
                         </Link>
-                        <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                            삭제
-                        </Button>
-
+                        <Link to={"/board/list"} className="link">
+                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                                삭제
+                            </Button>
+                        </Link>
                     </div>
                     <Reply></Reply>
                 </div>
-
                 <Route exact path="/board/modify/:data" component={BoardModify} />
-
-
+                <Route exact path="/board/list" component={BoardList} />
             </Switch>
         </div>
 

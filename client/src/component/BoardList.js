@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Table, Container } from 'react-bootstrap';
+import { Button, Table, Container, Form, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
 import { paginate } from './Pagination';
@@ -16,7 +16,7 @@ function BoardList() {
             writer: ''
         },
         pageSize: 10, //한 페이지에 글목록 10개
-        currentPage: 1 
+        currentPage: 1
     });
 
     useEffect(() => {
@@ -91,6 +91,18 @@ function BoardList() {
                         글쓰기
                     </Button>
                 </Link>
+                    <Form >
+                        <Row align="center" className="search-bar">
+                            <Col sm={3} className="my-1">
+                                <Form.Control id="inlineFormInputName" placeholder="Search" />
+                            </Col>
+                            <Col xs={1} className="my-1">
+                                <Link>
+                                    <Button type="button">검색</Button>
+                                </Link>
+                            </Col>
+                        </Row>
+                    </Form>
             </Container >
         </div>
     )

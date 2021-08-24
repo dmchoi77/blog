@@ -8,16 +8,19 @@ import { paginate } from './Pagination';
 function BoardList() {
 
     const [list, setList] = useState({
-        data: {
+        data: [{
             idx: '',
             title: '',
             content: '',
             date: '',
             writer: ''
-        },
+        }],
         pageSize: 10, //한 페이지에 글목록 10개
         currentPage: 1
     });
+
+    //검색어 상태 관리
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/get')
@@ -33,6 +36,7 @@ function BoardList() {
             });
     }, [])
 
+    //페이징
     const handlePageChange = (page) => {
         setList({
             ...list,
@@ -42,8 +46,27 @@ function BoardList() {
 
     const { data, pageSize, currentPage } = list;
     const { length: count } = list.data;
-
     const pagedList = paginate(data, currentPage, pageSize);
+
+    //게시글 제목 검색
+    const onSearch = () => {
+
+        if (search === "" || search.includes(" ")) { //공백이나 띄어쓰기를 검색할 경우
+            alert("검색어를 입력하세요.");
+            return;
+        }
+
+        setList({
+            data: data.filter(word => word.title.includes(search)),
+            pageSize: 10,
+            currentPage: 1,
+        });
+    }
+
+    //검색어 입력값 가져오기
+    const handleInputTitle = (e) => {
+        setSearch(e.target.value);
+    }
 
     return (
         <div className="body">
@@ -70,10 +93,10 @@ function BoardList() {
                                         <Link to={`/board/view/${rowData.idx}`} index={rowData.idx}>{rowData.title}</Link>
                                     </td>
                                     <td>
-                                        <Link>{rowData.date}</Link>
+                                        {rowData.date}
                                     </td>
                                     <td>
-                                        <Link>{rowData.writer}</Link>
+                                        {rowData.writer}
                                     </td>
                                 </tr>
                             ))
@@ -91,18 +114,18 @@ function BoardList() {
                         글쓰기
                     </Button>
                 </Link>
-                    <Form >
-                        <Row align="center" className="search-bar">
-                            <Col sm={3} className="my-1">
-                                <Form.Control id="inlineFormInputName" placeholder="Search" />
-                            </Col>
-                            <Col xs={1} className="my-1">
-                                <Link>
-                                    <Button type="button">검색</Button>
-                                </Link>
-                            </Col>
-                        </Row>
-                    </Form>
+                <Form >
+                    <Row align="center" className="search-bar">
+                        <Col sm={3} className="my-1">
+                            <Form.Control id="inlineFormInputName" placeholder="Search" onChange={handleInputTitle}/>
+                        </Col>
+                        <Col xs={1} className="my-1">
+                            <Link>
+                                <Button type="button" onClick={onSearch}>검색</Button>
+                            </Link>
+                        </Col>
+                    </Row>
+                </Form>
             </Container >
         </div>
     )

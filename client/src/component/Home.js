@@ -26,7 +26,8 @@ function Home() {
 
   return (
     <div className="body">
-      <div className="cover-image">
+      <h1>전체글</h1>
+      {/* <div className="cover-image">
         <img
           src={main}
           width='100%'
@@ -36,7 +37,7 @@ function Home() {
         <div className="text">
           <p>Welecome My blog!</p>
         </div>
-      </div>
+      </div> */}
       <Container className="list-wrapper">
         {
           list.map(rowData => (

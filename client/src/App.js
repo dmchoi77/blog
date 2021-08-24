@@ -41,29 +41,24 @@ function App() {
           <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
             <Container>
               <Navbar.Brand><Link to={"/home"} className="home-link">dmchoi</Link></Navbar.Brand>
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav.Link onClick={onLogout}>Log out</Nav.Link>
-              </Navbar.Collapse>
+              <Nav.Link onClick={onLogout}>Log out</Nav.Link>
             </Container>
           </Navbar>
-
           <Container>
-
             <Row>
               <Col className="category">
                 <Card.Body>
-                <Card.Header as="h5">Category</Card.Header>
+                  <Card.Header as="h5">Categories</Card.Header>
                   <Card.Text>
                     <li><Link to={"/board/list"} className="link">리액트</Link></li>
-                    <li><Link to={"/board/list"} className="link">자바스크립트</Link></li>
-                    <li><Link to={"/board/list"} className="link">데이터베이스</Link></li>
+                    <li><Link to={"/board/list"} className="link">추후</Link></li>
+                    <li><Link to={"/board/list"} className="link">추가 예정</Link></li>
                   </Card.Text>
                 </Card.Body>
               </Col>
               <Col xs={10}>
                 <Switch>
-                  {/* <PrivateRoute exact path="/home" component={Home} /> */}
+                  <PrivateRoute exact path="/home" component={Home} />
                   <PrivateRoute exact path="/board/list" component={BoardList} />
                   <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
                   <PrivateRoute exact path="/board/view/:data" component={View} />
@@ -73,9 +68,8 @@ function App() {
             </Row>
           </Container>
           <div className="footer">
-            <div className="cr">
-              copyright©dmchoi
-          </div>
+            <div>contact : minminnn11@hanmail.net</div>
+            <div className="cr">copyright©dmchoi</div>
           </div>
         </div>
         : <Switch>

@@ -2,23 +2,48 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Table, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Pagination from './Pagination';
+import { paginate } from './Pagination';
 
 function BoardList() {
 
-    const [list, setList] = useState([{
-        idx: '',
-        title: '',
-        content: '',
-        date: '',
-        writer: ''
-    }]);
+    const [list, setList] = useState({
+        data: {
+            idx: '',
+            title: '',
+            content: '',
+            date: '',
+            writer: ''
+        },
+        pageSize: 10, //한 페이지에 글목록 10개
+        currentPage: 1 
+    });
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/get')
             .then((response) => {
-                setList(response.data.reverse());
+                let data = response.data.reverse();
+
+                setList({
+                    data,
+                    pageSize: 10,
+                    currentPage: 1,
+                });
+
             });
     }, [])
+
+    const handlePageChange = (page) => {
+        setList({
+            ...list,
+            currentPage: page
+        });
+    }
+
+    const { data, pageSize, currentPage } = list;
+    const { length: count } = list.data;
+
+    const pagedList = paginate(data, currentPage, pageSize);
 
     return (
         <div className="body">
@@ -34,11 +59,10 @@ function BoardList() {
                     </thead>
                     <tbody>
                         {
-                            list.map(rowData => (
-                                //console.log(rowData),
+                            pagedList.map(rowData => (
                                 rowData.idx !== '' &&
                                 // 최초 선언한 기본값은 나타내지 않음
-                                <tr>
+                                <tr key={rowData.idx}>
                                     <td>
                                         <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >{rowData.idx}</Link>
                                     </td>
@@ -56,6 +80,12 @@ function BoardList() {
                         }
                     </tbody>
                 </Table>
+                <Pagination
+                    itemCount={count}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                />
                 <Link to={"/board/newpost"} className="link">
                     <Button className="post-write-btn" variant="primary" type='button'  >
                         글쓰기

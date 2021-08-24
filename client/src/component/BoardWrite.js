@@ -6,8 +6,6 @@ import { Button } from 'react-bootstrap';
 
 function BoardWrite(props) {
 
-
-
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
@@ -45,7 +43,6 @@ function BoardWrite(props) {
                     onChange={(event, editor) => {
                         const data = editor.getData();
                         setContent(data)
-                        //console.log(content);
                     }}
 
                     onBlur={(event, editor) => {

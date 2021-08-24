@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link, Switch } from 'react-router-dom';
+import { useHistory, Link, Switch, Route } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -14,6 +14,7 @@ function View(props) {
     const [writer, setWriter] = useState('');
 
     const { params } = props.match;
+    const id = sessionStorage.id;
     const idx = params.data;
     const history = useHistory();
 
@@ -35,7 +36,12 @@ function View(props) {
         }
     }, [])
 
-    const onModify = () => {
+    const onModify = (e) => {
+        if( id !== writer){
+            alert("수정 권한이 없습니다.");
+            e.preventDefault();
+        }
+
         sessionStorage.setItem('title', title);
         sessionStorage.setItem('content', content);
         sessionStorage.setItem('idx', idx);
@@ -62,6 +68,7 @@ function View(props) {
     return (
         <div className="body">
             <Switch>
+
                 <div className="post-view-wrapper">
                     <hr />
                     <div>
@@ -81,20 +88,23 @@ function View(props) {
                         <hr />
                         <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
                             전체글
-                    </Button>
+                        </Button>
                         <Link to={`/board/modify/${idx}`} className="link">
                             <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
                                 수정
-                        </Button>
+                            </Button>
                         </Link>
                         <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
                             삭제
-                    </Button>
+                        </Button>
+
                     </div>
                     <Reply></Reply>
                 </div>
 
-                <BoardModify></BoardModify>
+                <Route exact path="/board/modify/:data" component={BoardModify} />
+
+
             </Switch>
         </div>
 

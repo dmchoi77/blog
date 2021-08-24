@@ -19,16 +19,6 @@ function BoardModify() {
         //console.log(title);
     }
 
-    if (writer !== id) {
-        alert("수정 권한이 없습니다.");
-        sessionStorage.removeItem('title');
-        sessionStorage.removeItem('content');
-        sessionStorage.removeItem('idx');
-        sessionStorage.removeItem('writer');
-        history.goBack();
-    }
-
-
     const submit = () => {
         axios.post('http://localhost:8000/api/modify', {
             title: title,
@@ -39,7 +29,6 @@ function BoardModify() {
                 alert("내용을 입력하세요.");
             } else {
                 alert("게시글이 수정되었습니다.");
-                document.location.href = '/board/list';
             }
         })
         sessionStorage.removeItem('title');
@@ -74,7 +63,7 @@ function BoardModify() {
                 />
                 <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
                     수정
-            </Button>
+                </Button>
             </div>
         </div>
     )

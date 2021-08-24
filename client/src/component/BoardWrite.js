@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 function BoardWrite(props) {
@@ -15,7 +16,7 @@ function BoardWrite(props) {
         //console.log(title);
     }
 
-    const submit = () => {
+    const submit = (e) => {
         console.log(title, content);
         axios.post('http://localhost:8000/api/insert', {
             title: title,
@@ -24,9 +25,9 @@ function BoardWrite(props) {
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
+                e.preventDefault();
             } else {
                 alert("게시글이 등록되었습니다.");
-                document.location.href = '/board/list';
             }
         })
     }
@@ -52,9 +53,11 @@ function BoardWrite(props) {
                         console.log('Focus.', editor);
                     }}
                 />
-                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                    등록
-                </Button>
+                <Link to={"/board/list"} className="link">
+                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                        등록
+                    </Button>
+                </Link>
             </div>
         </div>
     )

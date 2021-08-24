@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div>
-      {isLogin
+      {isLogin //로그인한 경우
         ? <div>
           <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
             <Container>
@@ -58,11 +58,11 @@ function App() {
               </Col>
               <Col xs={10}>
                 <Switch>
-                  <PrivateRoute exact path="/home" component={Home} />
-                  <PrivateRoute exact path="/board/list" component={BoardList} />
-                  <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
-                  <PrivateRoute exact path="/board/view/:data" component={View} />
-                  <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
+                  <Route exact path="/home" component={Home} />
+                  <Route exact path="/board/list" component={BoardList} />
+                  <Route exact path="/board/newpost" component={BoardWrite} />
+                  <Route exact path="/board/view/:data" component={View} />
+                  <Route exact path="/board/modify/:data" component={BoardModify} />
                 </Switch>
               </Col>
             </Row>
@@ -71,8 +71,13 @@ function App() {
             <div>contact : minminnn11@hanmail.net</div>
             <div className="cr">copyright©dmchoi</div>
           </div>
-        </div>
+        </div> //로그인안한 경우
         : <Switch>
+          <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/board/list" component={BoardList} />
+          <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
+          <PrivateRoute exact path="/board/view/:data" component={View} />
+          <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
           <Route exact path="/" component={Login} />
           <Route exact path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />

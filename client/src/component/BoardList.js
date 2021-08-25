@@ -24,18 +24,23 @@ function BoardList() {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
+        let isComponentMounted = true;
         axios.get('http://localhost:8000/api/get')
             .then((response) => {
                 let data = response.data.reverse();
-
-                setList({
-                    data,
-                    pageSize: 10,
-                    currentPage: 1,
-                    searchKeyword: ''
-                });
+                if (isComponentMounted) {
+                    setList({
+                        data,
+                        pageSize: 10,
+                        currentPage: 1,
+                        searchKeyword: ''
+                    });
+                }
             })
-    }, [])
+        return () => {
+            isComponentMounted = false
+        }
+    },[])
 
     //페이징
     const handlePageChange = (page) => {
@@ -47,7 +52,7 @@ function BoardList() {
 
     const { data, pageSize, currentPage, searchKeyword } = list;
     const { length: count } = list.data;
-    
+
     const pagedList = paginate(searchKeyword ? searchKeyword : data, currentPage, pageSize);
 
     //게시글 제목 검색
@@ -127,9 +132,7 @@ function BoardList() {
                             <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle} />
                         </Col>
                         <Col xs={1} className="my-1">
-                            <Link>
-                                <Button type="button" onClick={onSearch}>검색</Button>
-                            </Link>
+                            <Button type="button" onClick={onSearch}>검색</Button>
                         </Col>
                     </Row>
                 </Form>

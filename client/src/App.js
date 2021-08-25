@@ -56,37 +56,39 @@ function App() {
                 <Card.Body>
                   <Card.Header as="h5">Categories</Card.Header>
                   <Card.Text>
-                    <li><Link to={"/board/list"} className="link">리액트</Link></li>
-                    <li><Link to={"/board/list"} className="link">추후</Link></li>
-                    <li><Link to={"/board/list"} className="link">추가 예정</Link></li>
+                    <li><Link to={"/board/list"} className="link">Board</Link></li>
                   </Card.Text>
                 </Card.Body>
               </Col>
               <Col xs={10}>
                 <Switch>
-                  <Route exact path="/home" component={Home} />
-                  <Route exact path="/board/list" component={BoardList} />
-                  <Route exact path="/board/newpost" component={BoardWrite} />
-                  <Route exact path="/board/view/:data" component={View} />
-                  <Route exact path="/board/modify/:data" component={BoardModify} />
+                  <>
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/board/list" component={BoardList} />
+                    <Route exact path="/board/newpost" component={BoardWrite} />
+                    <Route exact path="/board/view/:data" component={View} />
+                    <Route exact path="/board/modify/:data" component={BoardModify} />
+                  </>
                 </Switch>
               </Col>
             </Row>
           </Container>
           <div className="footer">
-            <div>contact : minminnn11@hanmail.net</div>
-            <div className="cr">copyright©dmchoi</div>
+            <div>CONTACT : minminnn11@hanmail.net</div>
+            <div className="cr">copyright©dmchoi 2021</div>
           </div>
         </div> //로그인안한 경우
         : <Switch>
-          <PrivateRoute exact path="/home" component={Home} />
-          <PrivateRoute exact path="/board/list" component={BoardList} />
-          <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
-          <PrivateRoute exact path="/board/view/:data" component={View} />
-          <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
-          <Route exact path="/" component={Login} />
-          <Route exact path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
+          <>
+            <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/board/list" component={BoardList} />
+            <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
+            <PrivateRoute exact path="/board/view/:data" component={View} />
+            <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
+          </>
         </Switch>
       }
     </div>

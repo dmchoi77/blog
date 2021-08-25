@@ -20,20 +20,25 @@ function View(props) {
     const history = useHistory();
 
     useEffect(async () => {
+        let isComponentMounted = true;
         try {//데이터를 호출하는 동안 대기할 수 있도록 async, await 사용
             const res = await axios.get('http://localhost:8000/api/view', {
                 params: {
                     'idx': idx
                 }
             })
-            setIndex(res.data[0].idx);
-            setTitle(res.data[0].title);
-            setContent(res.data[0].content);
-            setDate(res.data[0].date);
-            setWriter(res.data[0].writer);
-
+            if (isComponentMounted) {
+                setIndex(res.data[0].idx);
+                setTitle(res.data[0].title);
+                setContent(res.data[0].content);
+                setDate(res.data[0].date);
+                setWriter(res.data[0].writer);
+            }
         } catch (e) {
             console.error(e.message);
+        }
+        return () => {
+            isComponentMounted = false;
         }
     }, [])
 
@@ -70,41 +75,43 @@ function View(props) {
     return (
         <div className="body">
             <Switch>
-                <div className="post-view-wrapper">
-                    <hr />
-                    <div>
-                        <div className="post-view-row">
-                            <h2>{title}</h2>
-                        </div>
+                <>
+                    <div className="post-view-wrapper">
                         <hr />
-                        <div className="post-view-row">
-                            <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
-                        </div>
-                        <hr />
-                        <div className="post-view-row">
-                            <div>
-                                {ReactHtmlParser(content)}
+                        <div>
+                            <div className="post-view-row">
+                                <h2>{title}</h2>
                             </div>
-                        </div>
-                        <hr />
-                        <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
-                            전체글
+                            <hr />
+                            <div className="post-view-row">
+                                <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
+                            </div>
+                            <hr />
+                            <div className="post-view-row">
+                                <div>
+                                    {ReactHtmlParser(content)}
+                                </div>
+                            </div>
+                            <hr />
+                            <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
+                                전체글
                         </Button>
-                        <Link to={`/board/modify/${idx}`} className="link">
-                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
-                                수정
+                            <Link to={`/board/modify/${idx}`} className="link">
+                                <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
+                                    수정
                             </Button>
-                        </Link>
-                        <Link to={"/board/list"} className="link">
-                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                                삭제
+                            </Link>
+                            <Link to={"/board/list"} className="link">
+                                <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                                    삭제
                             </Button>
-                        </Link>
+                            </Link>
+                        </div>
+                        <Reply></Reply>
                     </div>
-                    <Reply></Reply>
-                </div>
-                <Route exact path="/board/modify/:data" component={BoardModify} />
-                <Route exact path="/board/list" component={BoardList} />
+                    <Route exact path="/board/modify/:data" component={BoardModify} />
+                    <Route exact path="/board/list" component={BoardList} />
+                </>
             </Switch>
         </div>
 

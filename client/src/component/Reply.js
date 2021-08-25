@@ -56,7 +56,7 @@ function Reply() {
 function ReplyList(props) {
     return (
         props.data.map(i => (
-            <div>
+            <div key={i.content}>
                 <Toast>
                     <Toast.Header closeButton={false}>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />

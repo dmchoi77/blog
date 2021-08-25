@@ -16,7 +16,8 @@ function BoardList() {
             writer: ''
         }],
         pageSize: 10, //한 페이지에 글목록 10개
-        currentPage: 1
+        currentPage: 1,
+        searchKeyword: ''
     });
 
     //검색어 상태 관리
@@ -31,9 +32,9 @@ function BoardList() {
                     data,
                     pageSize: 10,
                     currentPage: 1,
+                    searchKeyword: ''
                 });
-
-            });
+            })
     }, [])
 
     //페이징
@@ -44,23 +45,29 @@ function BoardList() {
         });
     }
 
-    const { data, pageSize, currentPage } = list;
+    const { data, pageSize, currentPage, searchKeyword } = list;
     const { length: count } = list.data;
-    const pagedList = paginate(data, currentPage, pageSize);
+    
+    const pagedList = paginate(searchKeyword ? searchKeyword : data, currentPage, pageSize);
 
     //게시글 제목 검색
     const onSearch = () => {
 
-        if (search === "" || search.includes(" ")) { //공백이나 띄어쓰기를 검색할 경우
-            alert("검색어를 입력하세요.");
-            return;
-        }
+        const filtered = data.filter(word => word.title.includes(search));
 
-        setList({
-            data: data.filter(word => word.title.includes(search)),
-            pageSize: 10,
-            currentPage: 1,
-        });
+        if (search === "") { //공백을 검색할 경우
+            alert("검색어를 입력하세요.");
+        }
+        else if (filtered.length === 0) { //검색 결과가 없을 경우
+            alert("검색결과가 없습니다.");
+        }
+        else {
+            setList({
+                ...list,
+                searchKeyword: filtered
+            })
+        }
+        setSearch("");
     }
 
     //검색어 입력값 가져오기
@@ -104,7 +111,7 @@ function BoardList() {
                     </tbody>
                 </Table>
                 <Pagination
-                    itemCount={count}
+                    itemCount={searchKeyword.length ? searchKeyword.length : count}
                     pageSize={pageSize}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
@@ -117,7 +124,7 @@ function BoardList() {
                 <Form >
                     <Row align="center" className="search-bar">
                         <Col sm={3} className="my-1">
-                            <Form.Control id="inlineFormInputName" placeholder="Search" onChange={handleInputTitle}/>
+                            <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle} />
                         </Col>
                         <Col xs={1} className="my-1">
                             <Link>

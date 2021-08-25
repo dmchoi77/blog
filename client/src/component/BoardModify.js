@@ -3,7 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function BoardModify() {
 
@@ -61,9 +61,11 @@ function BoardModify() {
                         console.log('Focus.', editor);
                     }}
                 />
-                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                    수정
-                </Button>
+                <Link to={"/board/list"} className="link">
+                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                        수정
+                    </Button>
+                </Link>
             </div>
         </div>
     )

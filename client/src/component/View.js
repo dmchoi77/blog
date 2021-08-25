@@ -42,11 +42,12 @@ function View(props) {
             alert("수정 권한이 없습니다.");
             e.preventDefault();
         }
-
-        sessionStorage.setItem('title', title);
-        sessionStorage.setItem('content', content);
-        sessionStorage.setItem('idx', idx);
-        sessionStorage.setItem('writer', writer);
+        else {
+            sessionStorage.setItem('title', title);
+            sessionStorage.setItem('content', content);
+            sessionStorage.setItem('idx', idx);
+            sessionStorage.setItem('writer', writer);
+        }
     }
 
     const onDelete = (e) => {
@@ -60,7 +61,7 @@ function View(props) {
                 content: content,
                 idx: idx
             }).then((res) => {
-                alert("삭제되었습니다.");
+                // alert("삭제되었습니다.");
             })
         }
     }

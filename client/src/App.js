@@ -40,8 +40,14 @@ function App() {
         ? <div>
           <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
             <Container>
-              <Navbar.Brand><Link to={"/home"} className="home-link">dmchoi</Link></Navbar.Brand>
-              <Nav.Link onClick={onLogout}>Log out</Nav.Link>
+              <Navbar.Brand>
+                <Link to={"/home"} className="home-link">
+                  dmchoi
+                </Link>
+              </Navbar.Brand>
+              <Nav.Link onClick={onLogout}>
+                Log out
+              </Nav.Link>
             </Container>
           </Navbar>
           <Container>

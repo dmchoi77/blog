@@ -17,7 +17,7 @@ function BoardWrite(props) {
     }
 
     const submit = (e) => {
-        console.log(title, content);
+        //console.log(title, content);
         axios.post('http://localhost:8000/api/insert', {
             title: title,
             content: content,
@@ -25,9 +25,9 @@ function BoardWrite(props) {
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
-                e.preventDefault();
+
             } else {
-                alert("게시글이 등록되었습니다.");
+               alert("게시글이 등록되었습니다.");
             }
         })
     }
@@ -54,7 +54,7 @@ function BoardWrite(props) {
                     }}
                 />
                 <Link to={"/board/list"} className="link">
-                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >
                         등록
                     </Button>
                 </Link>

@@ -40,7 +40,7 @@ function BoardList() {
         return () => {
             isComponentMounted = false
         }
-    },[])
+    }, [])
 
     //페이징
     const handlePageChange = (page) => {
@@ -78,6 +78,10 @@ function BoardList() {
     //검색어 입력값 가져오기
     const handleInputTitle = (e) => {
         setSearch(e.target.value);
+    }
+    //form에서 엔터 시 새로고침 막음
+    const handleSubmit = (e) => {
+        e.preventDefault();
     }
 
     return (
@@ -126,10 +130,11 @@ function BoardList() {
                         글쓰기
                     </Button>
                 </Link>
-                <Form >
+                <Form onSubmit={handleSubmit}>
                     <Row align="center" className="search-bar">
                         <Col sm={3} className="my-1">
-                            <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle} />
+                            <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
+                            />
                         </Col>
                         <Col xs={1} className="my-1">
                             <Button type="button" onClick={onSearch}>검색</Button>

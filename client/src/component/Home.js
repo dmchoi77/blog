@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import main from '../main.jpeg';
 import Pagination from './Pagination';
 import { paginate } from './Pagination';
 

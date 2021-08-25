@@ -1,8 +1,15 @@
+@font-face {
+  font-family: 'HangeulNuri-Bold';
+  src: url('./font/HangeulNuri-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   text-decoration: none !important;
 }
 
-.App {
+.Main {
   text-align: center;
 }
 
@@ -10,6 +17,7 @@
   margin: 0;
   height: 100%;
   margin-bottom: 100px;
+  font-family: 'HangeulNuri-Bold';
 }
 
 .body h1 {
@@ -230,3 +238,4 @@ hr {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+

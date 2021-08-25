@@ -11,7 +11,7 @@ import BoardModify from './component/BoardModify';
 import BoardList from './component/BoardList';
 import View from './component/View';
 
-function App() {
+function Main() {
   // 로그인 상태 관리
   const [isLogin, setIsLogin] = useState(false)
 
@@ -95,4 +95,4 @@ function App() {
   )
 }
 
-export default App;
+export default Main;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 function BoardWrite(props) {
@@ -10,6 +10,7 @@ function BoardWrite(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
+    const history = useHistory();
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
@@ -27,7 +28,8 @@ function BoardWrite(props) {
                 alert("내용을 입력하세요.");
 
             } else {
-               alert("게시글이 등록되었습니다.");
+                // alert("게시글이 등록되었습니다.");
+                history.push("/board/list");
             }
         })
     }
@@ -47,17 +49,15 @@ function BoardWrite(props) {
                     }}
 
                     onBlur={(event, editor) => {
-                        console.log('Blur.', editor);
+                        // console.log('Blur.', editor);
                     }}
                     onFocus={(event, editor) => {
-                        console.log('Focus.', editor);
+                        //console.log('Focus.', editor);
                     }}
                 />
-                <Link to={"/board/list"} className="link">
-                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >
-                        등록
-                    </Button>
-                </Link>
+                <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >
+                    등록
+                </Button>
             </div>
         </div>
     )

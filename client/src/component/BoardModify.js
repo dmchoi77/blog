@@ -3,7 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function BoardModify() {
 
@@ -28,7 +28,8 @@ function BoardModify() {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
             } else {
-                alert("게시글이 수정되었습니다.");
+                // alert("게시글이 수정되었습니다.");
+                history.push("/board/list");
             }
         })
         sessionStorage.removeItem('title');
@@ -61,11 +62,9 @@ function BoardModify() {
                         console.log('Focus.', editor);
                     }}
                 />
-                <Link to={"/board/list"} className="link">
-                    <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                        수정
-                    </Button>
-                </Link>
+                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                    수정
+                </Button>
             </div>
         </div>
     )

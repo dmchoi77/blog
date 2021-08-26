@@ -67,6 +67,7 @@ function View(props) {
                 idx: idx
             }).then((res) => {
                 // alert("삭제되었습니다.");
+                history.push("/board/list");
             })
         }
     }
@@ -101,11 +102,9 @@ function View(props) {
                                     수정
                             </Button>
                             </Link>
-                            <Link to={"/board/list"} className="link">
-                                <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                                    삭제
+                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                                삭제
                             </Button>
-                            </Link>
                         </div>
                         <Reply></Reply>
                     </div>

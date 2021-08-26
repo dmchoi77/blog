@@ -23,23 +23,23 @@ function BoardList() {
     //검색어 상태 관리
     const [search, setSearch] = useState('');
 
-    const fetchData = async () => {
-        try {           
-            const result = await axios.get('http://localhost:8000/api/get')
-            let data = result.data.reverse();
-            setList({
-                data,
-                pageSize: 10,
-                currentPage: 1,
-                searchKeyword: ''
-            });
-        }
-        catch {
-        }
-    }
-
     useEffect(() => {
-        fetchData();
+        let isComponentMounted = true;
+        axios.get('http://localhost:8000/api/get')
+            .then((response) => {
+                let data = response.data.reverse();
+                if (isComponentMounted) {
+                    setList({
+                        data,
+                        pageSize: 10,
+                        currentPage: 1,
+                        searchKeyword: ''
+                    });
+                }
+            })
+        return () => {
+            isComponentMounted = false
+        }
     }, [])
 
     //페이징

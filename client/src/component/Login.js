@@ -43,7 +43,7 @@ function Login() {
     return (
         <div id="container">
 
-            <h1>블로그야</h1>
+            <h1>dmchoi</h1>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />

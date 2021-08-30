@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/*eslint-disable*/
+
+import React, { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
@@ -6,53 +8,32 @@ import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 function BoardModify(props) {
+    const [index, setIndex] = useState(props.location.state.index);
+    const [title, setTitle] = useState(props.location.state.title);
+    const [content, setContent] = useState(props.location.state.content);
 
-    const [index, setIndex] = useState('');
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [date, setDate] = useState('');
-    const [writer, setWriter] = useState('');
-    
-    const { params } = props.match;
-    const idx = params.data;
-    const history = useHistory();
     const id = sessionStorage.id;
+    const history = useHistory();
+
+    if (!props.location.state) {
+        alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
+        history.goBack();
+    }
+    else if (id !== props.location.state.writer) {
+        alert("권한이 없습니다.");
+    }
+
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);
     }
 
-    useEffect(async () => {
-        let isComponentMounted = true;
-        try {//데이터를 호출하는 동안 대기할 수 있도록 async, await 사용
-            const res = await axios.get('http://localhost:8000/api/view', {
-                params: {
-                    'idx': idx
-                }
-            })
-            if (isComponentMounted) {
-                setIndex(res.data[0].idx);
-                setTitle(res.data[0].title);
-                setContent(res.data[0].content);
-                setDate(res.data[0].date);
-                setWriter(res.data[0].writer);
-            }
-        } catch (e) {
-            console.error(e.message);
-        }
-        return () => {
-            isComponentMounted = false;
-        }
-    }, [])
-
-
-
     const submit = () => {
         axios.post('http://localhost:8000/api/modify', {
             title: title,
             content: content,
-            idx: idx
+            idx: index
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");

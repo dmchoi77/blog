@@ -9,11 +9,15 @@ import Reply from './Reply';
 
 function View(props) {
 
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [date, setDate] = useState('');
-    const [writer, setWriter] = useState('');
-    const [index, setIndex] = useState('');
+    const [data, setData] = useState({
+        title: '',
+        content: '',
+        date: '',
+        writer: '',
+        index: ''
+    })
+
+    const { title, content, date, writer, index } = data;
 
     const { params } = props.match;
     const id = sessionStorage.id;
@@ -29,11 +33,18 @@ function View(props) {
                 }
             })
             if (isComponentMounted) {
-                setIndex(res.data[0].idx);
-                setTitle(res.data[0].title);
-                setContent(res.data[0].content);
-                setDate(res.data[0].date);
-                setWriter(res.data[0].writer);
+                // setIndex(res.data[0].idx);
+                // setTitle(res.data[0].title);
+                // setContent(res.data[0].content);
+                // setDate(res.data[0].date);
+                // setWriter(res.data[0].writer);
+                setData({
+                    title: res.data[0].title,
+                    content: res.data[0].content,
+                    date: res.data[0].date,
+                    writer: res.data[0].writer,
+                    index: res.data[0].idx
+                })
             }
         } catch (e) {
             console.error(e.message);
@@ -51,7 +62,7 @@ function View(props) {
     }
 
     const onDelete = (e) => {
-        if (writer !== sessionStorage.id) {
+        if (data.writer !== sessionStorage.id) {
             alert("삭제 권한이 없습니다.");
             e.preventDefault();
         }
@@ -59,13 +70,14 @@ function View(props) {
             axios.post('http://localhost:8000/api/delete', {
                 title: title,
                 content: content,
-                idx: idx
+                idx: index
             }).then((res) => {
                 // alert("삭제되었습니다.");
                 history.push("/board/list");
             })
         }
     }
+    console.log(new Date());
 
 
     return (
@@ -95,9 +107,9 @@ function View(props) {
                         pathname: `/board/modify/${idx}`,
                         state: {
                             writer: writer, //BoardModify로 props 전달
-                            index : index,
-                            title : title,
-                            content : content
+                            index: index,
+                            title: title,
+                            content: content
                         }
                     }} className="link">
                         <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
@@ -108,7 +120,7 @@ function View(props) {
                         삭제
                     </Button>
                 </div>
-                <Reply />
+                {/* <Reply /> */}
             </div>
         </div >
 

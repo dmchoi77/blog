@@ -3,16 +3,15 @@ import { useHistory, Link, Switch, Route } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import BoardList from './BoardList';
-import BoardModify from './BoardModify';
 import Reply from './Reply';
 
 function View(props) {
-    const [index, setIndex] = useState('');
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
     const [writer, setWriter] = useState('');
+    const [index, setIndex] = useState('');
 
     const { params } = props.match;
     const id = sessionStorage.id;
@@ -47,12 +46,6 @@ function View(props) {
             alert("수정 권한이 없습니다.");
             e.preventDefault();
         }
-        else {
-            sessionStorage.setItem('title', title);
-            sessionStorage.setItem('content', content);
-            sessionStorage.setItem('idx', idx);
-            sessionStorage.setItem('writer', writer);
-        }
     }
 
     const onDelete = (e) => {
@@ -75,8 +68,7 @@ function View(props) {
 
     return (
         <div className="body">
-            <Switch>
-                <>
+
                     <div className="post-view-wrapper">
                         <hr />
                         <div>
@@ -106,12 +98,8 @@ function View(props) {
                                 삭제
                             </Button>
                         </div>
-                        <Reply></Reply>
+                        <Reply/>
                     </div>
-                    <Route exact path="/board/modify/:data" component={BoardModify} />
-                    <Route exact path="/board/list" component={BoardList} />
-                </>
-            </Switch>
         </div>
 
     )

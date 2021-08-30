@@ -1,29 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-function BoardModify() {
+function BoardModify(props) {
 
-    const [title, setTitle] = useState(sessionStorage.getItem('title'));
-    const [content, setContent] = useState(sessionStorage.getItem('content'));
-    const id = sessionStorage.id;
-    const writer = sessionStorage.writer;
-    const index = sessionStorage.getItem('idx');
+    const [index, setIndex] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [date, setDate] = useState('');
+    const [writer, setWriter] = useState('');
+    
+    const { params } = props.match;
+    const idx = params.data;
     const history = useHistory();
+    const id = sessionStorage.id;
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);
     }
 
+    useEffect(async () => {
+        let isComponentMounted = true;
+        try {//데이터를 호출하는 동안 대기할 수 있도록 async, await 사용
+            const res = await axios.get('http://localhost:8000/api/view', {
+                params: {
+                    'idx': idx
+                }
+            })
+            if (isComponentMounted) {
+                setIndex(res.data[0].idx);
+                setTitle(res.data[0].title);
+                setContent(res.data[0].content);
+                setDate(res.data[0].date);
+                setWriter(res.data[0].writer);
+            }
+        } catch (e) {
+            console.error(e.message);
+        }
+        return () => {
+            isComponentMounted = false;
+        }
+    }, [])
+
+
+
     const submit = () => {
         axios.post('http://localhost:8000/api/modify', {
             title: title,
             content: content,
-            idx: index
+            idx: idx
         }).then((res) => {
             if (res.data === "null!") {
                 alert("내용을 입력하세요.");
@@ -32,10 +61,6 @@ function BoardModify() {
                 history.push("/board/list");
             }
         })
-        sessionStorage.removeItem('title');
-        sessionStorage.removeItem('content');
-        sessionStorage.removeItem('idx');
-        sessionStorage.removeItem('writer');
     }
 
     return (
@@ -56,10 +81,10 @@ function BoardModify() {
                     }}
 
                     onBlur={(event, editor) => {
-                        console.log('Blur.', editor);
+                        // console.log('Blur.', editor);
                     }}
                     onFocus={(event, editor) => {
-                        console.log('Focus.', editor);
+                        // console.log('Focus.', editor);
                     }}
                 />
                 <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >

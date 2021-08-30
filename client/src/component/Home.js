@@ -59,7 +59,9 @@ function Home() {
           pagedList.map(rowData => (
             rowData.idx !== '' &&
             <div className="summary" key={rowData.idx}>
-              <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} ><h1>{rowData.title}</h1></Link>
+              <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >
+                <h1>{rowData.title}</h1>
+              </Link>
               <h5>{rowData.date}</h5>
               <h4>Posted by {rowData.writer}</h4>
               <hr className="cover-hr" />

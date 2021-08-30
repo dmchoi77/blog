@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
@@ -30,7 +31,7 @@ function Main() {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
       // 로그인 상태 변경
       setIsLogin(true)
-      console.log('isLogin ??? :: ', isLogin)
+      //console.log('isLogin ??? :: ', isLogin)
     }
   });
 

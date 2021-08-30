@@ -1,5 +1,7 @@
+/*eslint-disable*/
+
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link, Switch, Route } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -69,38 +71,46 @@ function View(props) {
     return (
         <div className="body">
 
-                    <div className="post-view-wrapper">
-                        <hr />
-                        <div>
-                            <div className="post-view-row">
-                                <h2>{title}</h2>
-                            </div>
-                            <hr />
-                            <div className="post-view-row">
-                                <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
-                            </div>
-                            <hr />
-                            <div className="post-view-row">
-                                <div>
-                                    {ReactHtmlParser(content)}
-                                </div>
-                            </div>
-                            <hr />
-                            <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
-                                전체글
-                        </Button>
-                            <Link to={`/board/modify/${idx}`} className="link">
-                                <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
-                                    수정
-                            </Button>
-                            </Link>
-                            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                                삭제
-                            </Button>
-                        </div>
-                        <Reply/>
+            <div className="post-view-wrapper">
+                <hr />
+                <div>
+                    <div className="post-view-row">
+                        <h2>{title}</h2>
                     </div>
-        </div>
+                    <hr />
+                    <div className="post-view-row">
+                        <label>작성자 : {writer} <span className="date-before"> </span>{date}</label>
+                    </div>
+                    <hr />
+                    <div className="post-view-row">
+                        <div>
+                            {ReactHtmlParser(content)}
+                        </div>
+                    </div>
+                    <hr />
+                    <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.goBack()} >
+                        전체글
+                        </Button>
+                    <Link to={{
+                        pathname: `/board/modify/${idx}`,
+                        state: {
+                            writer: writer, //BoardModify로 props 전달
+                            index : index,
+                            title : title,
+                            content : content
+                        }
+                    }} className="link">
+                        <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
+                            수정
+                        </Button>
+                    </Link>
+                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                        삭제
+                    </Button>
+                </div>
+                <Reply />
+            </div>
+        </div >
 
     )
 }

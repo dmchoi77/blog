@@ -6,15 +6,15 @@ import Pagination from './Pagination';
 import { paginate } from './Pagination';
 
 function BoardList() {
-
+    
     const [list, setList] = useState({
-        data: [{
+        data: {
             idx: '',
             title: '',
             content: '',
             date: '',
             writer: ''
-        }],
+        },
         pageSize: 10, //한 페이지에 글목록 10개
         currentPage: 1,
         searchKeyword: ''

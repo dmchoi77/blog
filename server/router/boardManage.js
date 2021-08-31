@@ -55,4 +55,27 @@ router.post("/api/delete", (req, res) => {
     });
 });
 
+
+// //댓글 불러오기
+router.get("/api/reply", (req, res) => {
+    const content_idx = req.query.idx;
+    const sql = 'SELECT * FROM REPLY WHERE content_idx = ?';
+
+    db.query(sql, content_idx, (err, result) => {
+        res.send(result);
+    });
+})
+
+//댓글 등록
+router.post("/api/reply/insert", (req, res) => {
+    const content_idx = req.body.idx;
+    const user_name = req.body.name;
+    const content = req.body.content;
+
+    const sql = 'INSERT INTO REPLY (content_idx, user_name, content) values (?,?,?)';
+    db.query(sql, [content_idx, user_name, content], (err, result) => {
+        res.send('Success!');
+    })
+})
+
 module.exports = router;

@@ -8,7 +8,6 @@ import axios from 'axios';
 import Reply from './Reply';
 
 function View(props) {
-
     const [data, setData] = useState({
         title: '',
         content: '',
@@ -24,21 +23,16 @@ function View(props) {
     const idx = params.data;
     const history = useHistory();
 
-    useEffect(async () => {
+    useEffect(() => {
         let isComponentMounted = true;
-        try {//데이터를 호출하는 동안 대기할 수 있도록 async, await 사용
-            const res = await axios.get('http://localhost:8000/api/view', {
-                params: {
-                    'idx': idx
-                }
-            })
+        axios.get('http://localhost:8000/api/view', {
+            params: {
+                'idx': idx
+            }
+        }).then(res => {
             if (isComponentMounted) {
-                // setIndex(res.data[0].idx);
-                // setTitle(res.data[0].title);
-                // setContent(res.data[0].content);
-                // setDate(res.data[0].date);
-                // setWriter(res.data[0].writer);
                 setData({
+
                     title: res.data[0].title,
                     content: res.data[0].content,
                     date: res.data[0].date,
@@ -46,9 +40,7 @@ function View(props) {
                     index: res.data[0].idx
                 })
             }
-        } catch (e) {
-            console.error(e.message);
-        }
+        })
         return () => {
             isComponentMounted = false;
         }
@@ -77,8 +69,6 @@ function View(props) {
             })
         }
     }
-    console.log(new Date());
-
 
     return (
         <div className="body">
@@ -120,7 +110,7 @@ function View(props) {
                         삭제
                     </Button>
                 </div>
-                {/* <Reply /> */}
+                <Reply index={idx} />
             </div>
         </div >
 

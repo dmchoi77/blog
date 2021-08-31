@@ -19,9 +19,7 @@ function Reply(props) {
                 'idx': index
             }
         }).then(res => {
-            if (mount) {
-                setReply([...res.data]);
-            }
+            setReply([...res.data]);
         })
         return () => {
             setMount(false)

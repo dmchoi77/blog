@@ -2,6 +2,7 @@
 
 import React from 'react';
 import _ from 'lodash';
+import styled from 'styled-components';
 
 function Pagination(props) {
     const { itemCount, pageSize, currentPage, onPageChange } = props; // 각각 글 개수, 한 페이지에 보여줄 글 개수
@@ -13,18 +14,16 @@ function Pagination(props) {
     const pages = _.range(1, pageCount + 1); //http://_.com/docs/#range 참고
     // console.log(pages);
     return (
-        <nav>
-            <ul className="pagination">
-                {pages.map(page => (
-                    <li
-                        key={page}
-                        className={page === currentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
-                        style={{ cursor: "pointer" }}>
-                        <a className="page-link" onClick={() => onPageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
-                    </li>
-                ))}
-            </ul>
-        </nav>
+        <Paging>
+            {pages.map(page => (
+                <li
+                    key={page}
+                    className={page === currentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
+                    style={{ cursor: "pointer" }}>
+                    <a className="page-link" onClick={() => onPageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
+                </li>
+            ))}
+        </Paging>
     )
 }
 
@@ -39,3 +38,10 @@ export function paginate(items, pageNumber, pageSize) {
         .take(pageSize) //pageSize만큼 배열을 취함
         .value(); //_ wrapper 객체를 regular 배열로 변환
 }
+
+const Paging = styled.ul`
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    justify-content: center;
+`

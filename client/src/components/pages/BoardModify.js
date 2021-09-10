@@ -5,7 +5,9 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+
 
 function BoardModify(props) {
     const [index, setIndex] = useState(props.location.state.index);
@@ -45,36 +47,44 @@ function BoardModify(props) {
     }
 
     return (
-        <div className="body">
-            <div className='write-wrapper'>
-                <h2>게시글 수정</h2>
-                <input className="title-input" type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
+        <Wrapper>
+            <h2>게시글 수정</h2>
+            <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
+            <CKEditor
+                editor={ClassicEditor}
+                data={content}
+                name='content'
 
-                <CKEditor
-                    editor={ClassicEditor}
-                    data={content}
-                    name='content'
+                onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setContent(data)
+                    //console.log(content);
+                }}
 
-                    onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setContent(data)
-                        //console.log(content);
-                    }}
-
-                    onBlur={(event, editor) => {
-                        // console.log('Blur.', editor);
-                    }}
-                    onFocus={(event, editor) => {
-                        // console.log('Focus.', editor);
-                    }}
-                />
-                <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
-                    수정
-                </Button>
-            </div>
-        </div>
+                onBlur={(event, editor) => {
+                    // console.log('Blur.', editor);
+                }}
+                onFocus={(event, editor) => {
+                    // console.log('Focus.', editor);
+                }}
+            />
+            <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                수정
+            </Button>
+        </Wrapper>
     )
 }
 
+const Wrapper = styled.div`
+    padding : 3rem 0 0;
+    margin : 0 auto 7rem;
+    width : 100%;
+`;
+
+const TitleInput = styled.input`
+    width: 100%;
+    height: 40px;
+    margin: 10px 0 10px;
+`
 
 export default BoardModify;

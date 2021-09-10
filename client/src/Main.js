@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Nav, Navbar, Container, Row, Col, Card } from 'react-bootstrap';
+import styled from 'styled-components';
 import PrivateRoute from './components/modules/PrivateRoute';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
@@ -74,26 +75,36 @@ function Main() {
               </Col>
             </Row>
           </Container>
-          <div className="footer">
+          <Footer>
             <div>CONTACT : minminnn11@hanmail.net</div>
             <div className="cr">copyright©dmchoi 2021</div>
-          </div>
+          </Footer>
         </div> //로그인안한 경우
         : <Switch>
-          <>
-            <PrivateRoute exact path="/home" component={Home} />
-            <PrivateRoute exact path="/board/list" component={BoardList} />
-            <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
-            <PrivateRoute exact path="/board/view/:data" component={View} />
-            <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
-            <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={Login} />
-            <Route path="/signup" component={SignUp} />
-          </>
+          <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/board/list" component={BoardList} />
+          <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
+          <PrivateRoute exact path="/board/view/:data" component={View} />
+          <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
       }
     </div>
   )
 }
+
+const Footer = styled.div`
+  width: 100%;
+  background-color: #0d6efd!important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30px 0;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+`
 
 export default Main;

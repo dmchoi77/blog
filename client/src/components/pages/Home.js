@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
@@ -51,7 +52,7 @@ function Home() {
   const pagedList = paginate(data, currentPage, pageSize);
 
   return (
-    <div className="body">
+    <Wrapper>
       <h1>전체글</h1>
       <hr />
       <Container className="home-list-wrapper">
@@ -60,11 +61,11 @@ function Home() {
             rowData.idx !== '' &&
             <div className="summary" key={rowData.idx}>
               <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >
-                <h1>{rowData.title}</h1>
+                <Title>{rowData.title}</Title>
               </Link>
               <h5>{rowData.date}</h5>
-              <h4>Posted by {rowData.writer}</h4>
-              <hr className="cover-hr" />
+              <Writer>Posted by {rowData.writer}</Writer>
+              <CoverHr />
             </div>
           ))
         }
@@ -75,8 +76,30 @@ function Home() {
           onPageChange={handlePageChange}
         />
       </Container>
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+    padding : 3rem 0 0;
+    margin : 0 auto 7rem;
+    width : 100%;
+`;
+
+const CoverHr = styled.hr`
+    margin-top: 30px;
+    margin-bottom: 40px;
+`
+const Title = styled.h1`
+    color :rgb(14, 48, 150);
+    margin-bottom: 30px;
+    font-weight: bolder;
+`
+const Writer = styled.h4`
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+`
+
 
 export default Home;

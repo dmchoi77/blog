@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import styled from 'styled-components';
 
 function SignUp() {
 
@@ -62,29 +63,39 @@ function SignUp() {
     }
 
     return (
-        <div id="container">
-            <h1>회원가입</h1>
+        <Container>
+            <Title>회원가입</Title>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={handleInputName} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={handleInputId} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={handleInputPwd} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={handleInputPwdCheck} />
             </Form.Group>
             <Button variant="primary" type='button' onClick={_signUp}>
                 회원가입
             </Button>
-        </div >
+        </Container>
     )
 };
+
+const Container = styled.div`
+    margin-top: 170px;
+    height: 280px;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    width: 360px;
+`
+const Title = styled.h1`
+    font-weight : bold;
+    margin-bottom : 1rem;
+`
 
 
 export default SignUp;

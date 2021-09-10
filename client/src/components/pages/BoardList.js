@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Table, Container, Form, Row, Col } from 'react-bootstrap';
+import { Button, Table, Form, Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 
 function BoardList() {
-    
+
     const [list, setList] = useState({
         data: {
             idx: '',
@@ -85,66 +86,69 @@ function BoardList() {
     }
 
     return (
-        <div className="body">
-            <Container className="list-wrapper">
-                <Table responsive="sm">
-                    <thead>
-                        <tr>
-                            <th>글번호</th>
-                            <th>제목</th>
-                            <th>작성일</th>
-                            <th>작성자</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            pagedList.map(rowData => (
-                                rowData.idx !== '' &&
-                                // 최초 선언한 기본값은 나타내지 않음
-                                <tr key={rowData.idx}>
-                                    <td>
-                                        <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >{rowData.idx}</Link>
-                                    </td>
-                                    <td>
-                                        <Link to={`/board/view/${rowData.idx}`} index={rowData.idx}>{rowData.title}</Link>
-                                    </td>
-                                    <td>
-                                        {rowData.date}
-                                    </td>
-                                    <td>
-                                        {rowData.writer}
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-                <Pagination
-                    itemCount={searchKeyword.length ? searchKeyword.length : count}
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                />
-                <Link to={"/board/newpost"} className="link">
-                    <Button className="post-write-btn" variant="primary" type='button'  >
-                        글쓰기
-                    </Button>
-                </Link>
-                <Form onSubmit={handleSubmit}>
-                    <Row align="center" className="search-bar">
-                        <Col sm={3} className="my-1">
-                            <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
-                            />
-                        </Col>
-                        <Col xs={1} className="my-1">
-                            <Button type="button" onClick={onSearch}>검색</Button>
-                        </Col>
-                    </Row>
-                </Form>
-            </Container >
-        </div>
+        <Container>
+            <Table responsive="sm">
+                <thead>
+                    <tr>
+                        <th>글번호</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                        <th>작성자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        pagedList.map(rowData => (
+                            rowData.idx !== '' &&
+                            // 최초 선언한 기본값은 나타내지 않음
+                            <tr key={rowData.idx}>
+                                <td>
+                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >{rowData.idx}</Link>
+                                </td>
+                                <td>
+                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx}>{rowData.title}</Link>
+                                </td>
+                                <td>
+                                    {rowData.date}
+                                </td>
+                                <td>
+                                    {rowData.writer}
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </Table>
+            <Pagination
+                itemCount={searchKeyword.length ? searchKeyword.length : count}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+            />
+            <Link to={"/board/newpost"} className="link">
+                <Button className="post-write-btn" variant="primary" type='button'>
+                    글쓰기
+                </Button>
+            </Link>
+            <Form onSubmit={handleSubmit}>
+                <Row align="center" className="search-bar">
+                    <Col sm={3} className="my-1">
+                        <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
+                        />
+                    </Col>
+                    <Col xs={1} className="my-1">
+                        <Button type="button" onClick={onSearch}>검색</Button>
+                    </Col>
+                </Row>
+            </Form>
+        </Container>
     )
 }
 
-
+const Container = styled.div`
+    padding : 4rem 0 0 0;
+    margin : 0 auto 7rem;
+    width : 100%;
+    min-height: 100%;
+`
 export default BoardList;

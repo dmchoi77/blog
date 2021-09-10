@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -28,7 +29,7 @@ function Login() {
             if (res.data.id === undefined) {
                 //console.log('======================', res.data.msg);
                 if (res.data.msg === "비밀번호가 일치하지 않습니다.") alert("비밀번호가 일치하지 않습니다.");
-                else if(res.data.msg === "일치하는 id가 없습니다.") alert('일치하는 아이디가 존재하지 않습니다.');
+                else if (res.data.msg === "일치하는 id가 없습니다.") alert('일치하는 아이디가 존재하지 않습니다.');
 
             } else if (res.data.id === inputId) {
                 // id, pw 모두 일치 userId = userId1, msg = undefined
@@ -41,8 +42,8 @@ function Login() {
     }
 
     return (
-        <div id="container">
-            <h1>dmchoi</h1>
+        <Container>
+            <Title>dmchoi</Title>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
@@ -53,11 +54,34 @@ function Login() {
                 <Button variant="primary" type='button' onClick={_login}>
                     로그인
                 </Button>
-                <p className="sign-up">처음이면 <Link to={"/signup"}>회원가입</Link></p>
+                <SignUp>처음이면 <Link to={"/signup"} style={join}>회원가입</Link></SignUp>
             </Form>
-        </div>
+        </Container>
     )
 }
 
+const join = {
+    color : "#004282"
+}
+
+const Container = styled.div`
+    margin-top: 170px;
+    height: 280px;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    width: 360px;
+`
+const Title = styled.h1`
+    text-align : center;
+    font-weight : bold;
+    margin-bottom : 1rem;
+`
+
+const SignUp = styled.p`
+    text-align: center;
+    padding-top: 20px;
+    font-weight:bolder;
+`
 
 export default Login;

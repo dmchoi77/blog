@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Toast } from 'react-bootstrap';
+import styled from 'styled-components';
 import axios from 'axios';
 
 function Reply(props) {
@@ -54,12 +55,11 @@ function Reply(props) {
 
     }
 
-
     return (
         <div>
             <hr />
             <h4>댓글 작성하기</h4>
-            <textarea className="text-area" value={content} onChange={onHandleInput} ></textarea>
+            <TextArea value={content} onChange={onHandleInput} />
             <Button className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
                 등록
             </Button>
@@ -92,6 +92,9 @@ function ReplyList(props) {
 
 }
 
-
+const TextArea = styled.textarea`
+    width : 100%;
+    height : 70px
+`
 
 export default Reply;

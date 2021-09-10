@@ -24,7 +24,7 @@ function Login() {
                 password: inputPw
             }
         }).then((res) => {
-            console.log(res);
+            //console.log(res);
             if (res.data.id === undefined) {
                 //console.log('======================', res.data.msg);
                 if (res.data.msg === "비밀번호가 일치하지 않습니다.") alert("비밀번호가 일치하지 않습니다.");
@@ -42,7 +42,6 @@ function Login() {
 
     return (
         <div id="container">
-
             <h1>dmchoi</h1>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

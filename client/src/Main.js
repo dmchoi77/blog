@@ -3,14 +3,14 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Nav, Navbar, Container, Row, Col, Card } from 'react-bootstrap';
-import SignUp from './component/SignUp';
-import Login from './component/Login';
-import Home from './component/Home';
-import PrivateRoute from './component/PrivateRoute';
-import BoardWrite from './component/BoardWrite';
-import BoardModify from './component/BoardModify';
-import BoardList from './component/BoardList';
-import View from './component/View';
+import PrivateRoute from './components/modules/PrivateRoute';
+import SignUp from './components/pages/SignUp';
+import Login from './components/pages/Login';
+import Home from './components/pages/Home';
+import BoardWrite from './components/pages/BoardWrite';
+import BoardModify from './components/pages/BoardModify';
+import BoardList from './components/pages/BoardList';
+import View from './components/pages/View';
 
 function Main() {
   // 로그인 상태 관리

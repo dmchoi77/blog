@@ -48,7 +48,7 @@ router.post("/api/delete", (req, res) => {
     const content = req.body.content;
     const idx = req.body.idx;
 
-    const sql = `DELETE FROM table1 WHERE title = ? and content = ? and idx = ?`;
+    const sql = 'DELETE FROM table1 WHERE title = ? and content = ? and idx = ?';
 
     db.query(sql, [title, content, idx], (err, result) => {
         res.send('Success!');
@@ -56,7 +56,7 @@ router.post("/api/delete", (req, res) => {
 });
 
 
-// //댓글 불러오기
+//댓글 불러오기
 router.get("/api/reply", (req, res) => {
     const content_idx = req.query.idx;
     const sql = 'SELECT * FROM REPLY WHERE content_idx = ?';
@@ -68,12 +68,24 @@ router.get("/api/reply", (req, res) => {
 
 //댓글 등록
 router.post("/api/reply/insert", (req, res) => {
-    const content_idx = req.body.idx;
+    const content_idx = req.body.content_idx;
     const user_name = req.body.name;
     const content = req.body.content;
+    const reply_idx = req.body.replyIdx;
 
-    const sql = 'INSERT INTO REPLY (content_idx, user_name, content) values (?,?,?)';
-    db.query(sql, [content_idx, user_name, content], (err, result) => {
+    const sql = 'INSERT INTO REPLY (content_idx, reply_idx, user_name, content) values (?,?,?,?)';
+    db.query(sql, [content_idx, reply_idx, user_name, content], (err, result) => {
+        res.send('Success!');
+    })
+})
+
+//댓글 삭제
+router.post("/api/reply/delete", (req,res)=>{
+    const content_idx = req.body.content_idx;
+    const reply_Idx = req.body.replyIdx;
+
+    const sql = 'DELETE FROM reply WHERE content_idx = ? and reply_idx = ?';
+    db.query(sql,[content_idx,reply_Idx],(err,result)=>{
         res.send('Success!');
     })
 })

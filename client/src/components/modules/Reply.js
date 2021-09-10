@@ -10,7 +10,9 @@ function Reply(props) {
     const [reply, setReply] = useState('');
     const [content, setContent] = useState('');
     const index = props.index;
-    const [mount, setMount] = useState(true);
+    const [mount, setMount] = useState(false);
+    const [replyIdx, setReplyIdx] = useState(0);
+
 
     useEffect(() => {
         setMount(true);
@@ -21,6 +23,7 @@ function Reply(props) {
             }
         }).then(res => {
             setReply([...res.data]);
+            setReplyIdx(res.data.length);
         })
         return () => {
             setMount(false)
@@ -40,9 +43,10 @@ function Reply(props) {
         }
         else {
             axios.post('http://localhost:8000/api/reply/insert', {
-                idx: props.index,
+                content_idx: props.index,
                 name: sessionStorage.getItem('id'),
                 content: content,
+                replyIdx: replyIdx === 0 ? 1 : replyIdx + 1
             }).then((res) => {
                 if (res.data === "null!") {
                     alert("내용을 입력하세요.");
@@ -52,8 +56,8 @@ function Reply(props) {
             setContent('');
         }
         setMount(false);
-
     }
+
 
     return (
         <div>
@@ -64,20 +68,34 @@ function Reply(props) {
                 등록
             </Button>
             <hr />
-            <ReplyList reply={reply} />
+            <ReplyList reply={reply} index={index} setMount={setMount} />
         </div>
     )
 }
 
 function ReplyList(props) {
     let reply = props.reply;
+    const [replyIdx, setReplyIdx] = useState(0);
+
     return (
         <div>
             {reply ?
                 reply.map((rowData, i) => (
                     <div key={i}>
-                        <Toast>
-                            <Toast.Header closeButton={false}>
+                        <Toast show={true} onClose={() => {
+                            console.log(1423);
+                            if (sessionStorage.getItem('id') === reply[i].user_name) {
+                                axios.post('http://localhost:8000/api/reply/delete', {
+                                    content_idx: props.index,
+                                    replyIdx: reply[i].reply_idx,
+                                })
+                            } else {
+                                alert("삭제 권한이 없습니다.");
+
+                            }
+                            props.setMount(false);
+                        }}>
+                            <Toast.Header>
                                 <strong className="me-auto">{reply[i].user_name}</strong>
                             </Toast.Header>
                             <Toast.Body>{reply[i].content}</Toast.Body>
@@ -89,7 +107,6 @@ function ReplyList(props) {
             }
         </div>
     )
-
 }
 
 const TextArea = styled.textarea`

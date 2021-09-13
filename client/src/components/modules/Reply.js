@@ -10,13 +10,12 @@ function Reply(props) {
     const [reply, setReply] = useState('');
     const [content, setContent] = useState('');
     const index = props.index;
-    const [mount, setMount] = useState(false);
+    const [mount, setMount] = useState(true);
     const [replyIdx, setReplyIdx] = useState(0);
 
 
     useEffect(() => {
-        setMount(true);
-        console.log("component did mount")
+        //console.log("component did mount")
         axios.get('http://localhost:8000/api/reply', {
             params: {
                 'idx': index
@@ -26,8 +25,9 @@ function Reply(props) {
             setReplyIdx(res.data.length);
         })
         return () => {
-            setMount(false)
-            console.log("component will unmount")
+            setMount(true)
+            //console.log("component will unmount")
+
         };
     }, [mount])
 
@@ -52,7 +52,7 @@ function Reply(props) {
                     alert("내용을 입력하세요.");
                 }
             })
-            // alert("댓글이 작성되었습니다.");
+            alert("댓글이 작성되었습니다.");
             setContent('');
         }
         setMount(false);
@@ -75,7 +75,6 @@ function Reply(props) {
 
 function ReplyList(props) {
     let reply = props.reply;
-    const [replyIdx, setReplyIdx] = useState(0);
 
     return (
         <div>
@@ -83,7 +82,6 @@ function ReplyList(props) {
                 reply.map((rowData, i) => (
                     <div key={i}>
                         <Toast show={true} onClose={() => {
-                            console.log(1423);
                             if (sessionStorage.getItem('id') === reply[i].user_name) {
                                 axios.post('http://localhost:8000/api/reply/delete', {
                                     content_idx: props.index,

@@ -9,7 +9,7 @@ router.post("/api/insert", (req, res) => {
     const writer = req.body.writer;
     const today = new Date().toISOString().substr(0, 10);
 
-    const sql = `INSERT INTO TABLE1 (title, content, date, writer) values (?,?,"${today}", ?)`;
+    const sql = `INSERT INTO TABLE1 (title, content, date, writer,view) values (?,?,"${today}", ? , 1)`;
 
     //제목이나 본문이 공백일 경우 client로 null 전송하며 쿼리 실행X             
     if (title === "" || content === "") {

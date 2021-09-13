@@ -14,7 +14,8 @@ function BoardList() {
             title: '',
             content: '',
             date: '',
-            writer: ''
+            writer: '',
+            view: ''
         },
         pageSize: 10, //한 페이지에 글목록 10개
         currentPage: 1,
@@ -93,6 +94,7 @@ function BoardList() {
                         <th>글번호</th>
                         <th>제목</th>
                         <th>작성일</th>
+                        <th>조회수</th>
                         <th>작성자</th>
                     </tr>
                 </thead>
@@ -110,6 +112,9 @@ function BoardList() {
                                 </td>
                                 <td>
                                     {rowData.date}
+                                </td>
+                                <td>
+                                    {rowData.view}
                                 </td>
                                 <td>
                                     {rowData.writer}

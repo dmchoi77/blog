@@ -14,10 +14,11 @@ function View(props) {
         content: '',
         date: '',
         writer: '',
-        index: ''
+        index: '',
+        view: ''
     })
 
-    const { title, content, date, writer, index } = data;
+    const { title, content, date, writer, index, view } = data;
 
     const { params } = props.match;
     const id = sessionStorage.id;
@@ -28,17 +29,21 @@ function View(props) {
         let isComponentMounted = true;
         axios.get('http://localhost:8000/api/view', {
             params: {
-                'idx': idx
+                'idx': idx,
             }
         }).then(res => {
             if (isComponentMounted) {
                 setData({
-
                     title: res.data[0].title,
                     content: res.data[0].content,
                     date: res.data[0].date,
                     writer: res.data[0].writer,
-                    index: res.data[0].idx
+                    index: res.data[0].idx,
+                    view: res.data[0].view
+                })
+                axios.post('http://localhost:8000/api/view', { //조회수 증가
+                    index: res.data[0].idx,
+                    view: res.data[0].view
                 })
             }
         })
@@ -79,7 +84,7 @@ function View(props) {
             </div>
             <hr />
             <div>
-                <label>작성자 : {writer} <DateBefore />{date}</label>
+                <label>작성자 : {writer} <DateBefore /> {date} <DateBefore /> 조회수 : {view} </label>
             </div>
             <hr />
             <div>

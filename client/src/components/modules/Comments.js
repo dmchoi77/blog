@@ -1,25 +1,24 @@
 import React, { createRef, useEffect } from "react"
 
 export default function Comment({ repo }) {
-    
-  const containerRef = createRef()
+    const containerRef = createRef()
 
-  useEffect(() => {
-    const utterances = document.createElement("script")
-    const attributes = {
-      src: "https://utteranc.es/client.js",
-      repo : "Dong-min-choi/Blog",
-      "issue-term": "url",
-      label: "comment",
-      theme: "github-light",
-      crossOrigin: "anonymous",
-      async: "true",
-    }
-    Object.entries(attributes).forEach(([key, value]) => {
-      utterances.setAttribute(key, value)
-    })
-    containerRef.current.appendChild(utterances)
-  }, [repo, "github-light"])
+    useEffect(() => {
+        const utterances = document.createElement("script")
+        const attributes = {
+            src: "https://utteranc.es/client.js",
+            repo: "Dong-min-choi/Blog",
+            "issue-term": "url",
+            label: "comment",
+            theme: "github-light",
+            crossOrigin: "anonymous",
+            async: "true",
+        }
+        Object.entries(attributes).forEach(([key, value]) => {
+            utterances.setAttribute(key, value)
+        })
+        containerRef.current.appendChild(utterances)
+    }, [repo])
 
-  return <div id="comment" ref={containerRef} />
+    return <div id="comment" ref={containerRef} />
 }

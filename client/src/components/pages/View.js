@@ -116,6 +116,8 @@ function View(props) {
                 삭제
             </Button>
             <hr />
+            <h3>Comments</h3>
+            <hr />
             {/* <Reply index={idx} /> */}
             <Comment repo="Dong-min-choi/Blog" />
         </Wrapper>

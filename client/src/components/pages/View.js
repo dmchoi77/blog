@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 import Reply from '../modules/Reply';
+import Comment from '../modules/Comments';
 
 function View(props) {
     const [data, setData] = useState({
@@ -114,7 +115,9 @@ function View(props) {
             <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
                 삭제
             </Button>
-            <Reply index={idx} />
+            <hr />
+            {/* <Reply index={idx} /> */}
+            <Comment repo="Dong-min-choi/Blog" />
         </Wrapper>
     )
 }

@@ -4,7 +4,7 @@ const db = require('./db');
 const bcrypt = require('bcrypt');
 
 
-router.post('/api/onLogin', (req, res) => {
+router.post('/api/login', (req, res) => {
 
     const user_id = req.query.id;
     const user_pw = req.query.password;

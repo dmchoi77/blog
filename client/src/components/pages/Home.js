@@ -22,7 +22,7 @@ function Home() {
 
   useEffect(() => {
     let isComponentMounted = true;
-    axios.get('http://localhost:8000/api/get')
+    axios.get('http://localhost:8000/api/board/list')
       .then((response) => {
         let data = response.data.reverse();
         if (isComponentMounted) {

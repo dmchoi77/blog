@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('./db');
 
 //게시글 작성
-router.post("/api/insert", (req, res) => {
+router.post("/api/board/post", (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
     const writer = req.body.writer;
@@ -23,8 +23,7 @@ router.post("/api/insert", (req, res) => {
 });
 
 //게시글 수정
-router.post("/api/modify", (req, res) => {
-
+router.put("/api/board/modify/:index", (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
     const idx = req.body.idx;
@@ -43,7 +42,7 @@ router.post("/api/modify", (req, res) => {
 });
 
 //게시글 삭제
-router.post("/api/delete", (req, res) => {
+router.delete("/api/board/delete/:index", (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
     const idx = req.body.idx;
@@ -57,7 +56,7 @@ router.post("/api/delete", (req, res) => {
 
 
 //댓글 불러오기
-router.get("/api/reply", (req, res) => {
+router.get("/api/board/:index/replies", (req, res) => {
     const content_idx = req.query.idx;
     const sql = 'SELECT * FROM REPLY WHERE content_idx = ?';
 
@@ -67,7 +66,7 @@ router.get("/api/reply", (req, res) => {
 })
 
 //댓글 등록
-router.post("/api/reply/insert", (req, res) => {
+router.post("/api/board/:index/replies/:replyIdx", (req, res) => {
     const content_idx = req.body.content_idx;
     const user_name = req.body.name;
     const content = req.body.content;
@@ -80,7 +79,7 @@ router.post("/api/reply/insert", (req, res) => {
 })
 
 //댓글 삭제
-router.post("/api/reply/delete", (req,res)=>{
+router.delete("/api/board/:index/replies/delete/:replyIdx", (req,res)=>{
     const content_idx = req.body.content_idx;
     const reply_Idx = req.body.replyIdx;
 

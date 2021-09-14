@@ -16,7 +16,7 @@ function Reply(props) {
 
     useEffect(() => {
         //console.log("component did mount")
-        axios.get('http://localhost:8000/api/reply', {
+        axios.get(`http://localhost:8000/api/board/${index}/replies`, {
             params: {
                 'idx': index
             }
@@ -42,7 +42,7 @@ function Reply(props) {
             return;
         }
         else {
-            axios.post('http://localhost:8000/api/reply/insert', {
+            axios.post(`http://localhost:8000/api/board/${index}/replies/${replyIdx}`, {
                 content_idx: props.index,
                 name: sessionStorage.getItem('id'),
                 content: content,
@@ -75,6 +75,8 @@ function Reply(props) {
 
 function ReplyList(props) {
     let reply = props.reply;
+    let index = props.index;
+    let replyIdx = props.replyIdx;
 
     return (
         <div>
@@ -83,9 +85,11 @@ function ReplyList(props) {
                     <div key={i}>
                         <Toast show={true} onClose={() => {
                             if (sessionStorage.getItem('id') === reply[i].user_name) {
-                                axios.post('http://localhost:8000/api/reply/delete', {
-                                    content_idx: props.index,
-                                    replyIdx: reply[i].reply_idx,
+                                axios.delete(`http://localhost:8000/api/board/${index}/replies/delete/${replyIdx}`, {
+                                    data: {
+                                        content_idx: props.index,
+                                        replyIdx: reply[i].reply_idx,
+                                    }
                                 })
                             } else {
                                 alert("삭제 권한이 없습니다.");

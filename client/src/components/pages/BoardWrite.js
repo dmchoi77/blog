@@ -20,7 +20,7 @@ function BoardWrite(props) {
 
     const submit = (e) => {
         //console.log(title, content);
-        axios.post('http://localhost:8000/api/insert', {
+        axios.post('http://localhost:8000/api/board/post/', {
             title: title,
             content: content,
             writer: writer

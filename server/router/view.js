@@ -12,7 +12,7 @@ router.get("/api/view", (req, res) => {
 });
 
 //조회수 관리
-router.post("/api/view", (req, res) => {
+router.put("/api/view", (req, res) => {
     const index = req.body.index;
     const view = req.body.view + 1;
     const sql = "UPDATE TABLE1 SET view = ? WHERE idx = ?";

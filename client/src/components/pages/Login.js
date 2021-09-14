@@ -19,7 +19,7 @@ function Login() {
 
     const _login = () => {
 
-        axios.post('http://localhost:8000/api/onLogin', null, {
+        axios.post('http://localhost:8000/api/login', null, {
             params: {
                 id: inputId,
                 password: inputPw

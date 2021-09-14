@@ -41,7 +41,7 @@ function View(props) {
                     index: res.data[0].idx,
                     view: res.data[0].view
                 })
-                axios.post('http://localhost:8000/api/view', { //조회수 증가
+                axios.put('http://localhost:8000/api/view', { //조회수 증가
                     index: res.data[0].idx,
                     view: res.data[0].view
                 })
@@ -65,10 +65,12 @@ function View(props) {
             e.preventDefault();
         }
         else {
-            axios.post('http://localhost:8000/api/delete', {
-                title: title,
-                content: content,
-                idx: index
+            axios.delete(`http://localhost:8000/api/board/delete/${index}`, {
+                data: {
+                    title: title,
+                    content: content,
+                    idx: index
+                }
             }).then((res) => {
                 // alert("삭제되었습니다.");
                 history.push("/board/list");

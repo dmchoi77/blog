@@ -32,7 +32,7 @@ function BoardModify(props) {
     }
 
     const submit = () => {
-        axios.post('http://localhost:8000/api/modify', {
+        axios.put(`http://localhost:8000/api/board/modify/${index}`, {
             title: title,
             content: content,
             idx: index

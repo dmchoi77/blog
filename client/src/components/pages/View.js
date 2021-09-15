@@ -81,7 +81,7 @@ function View(props) {
 
     return (
         <Wrapper>
-            <hr />
+            <hr className="view-hr" />
             <div>
                 <h2>{title}</h2>
             </div>

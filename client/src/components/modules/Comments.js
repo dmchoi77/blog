@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React, { createRef, useEffect } from "react"
 
 export default function Comment({ repo }) {

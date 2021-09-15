@@ -89,6 +89,7 @@ const Wrapper = styled.div`
 const CoverHr = styled.hr`
     margin-top: 30px;
     margin-bottom: 40px;
+    width : 100%
 `
 const Title = styled.h1`
     color :rgb(14, 48, 150);

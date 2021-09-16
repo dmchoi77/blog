@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
+import Preview from '../modules/Preview';
 
 function Home() {
 
@@ -16,7 +17,7 @@ function Home() {
       date: '',
       writer: ''
     },
-    pageSize: 10, //한 페이지에 글목록 10개
+    pageSize: 12, //한 페이지에 글목록 10개
     currentPage: 1,
   });
 
@@ -28,7 +29,7 @@ function Home() {
         if (isComponentMounted) {
           setList({
             data,
-            pageSize: 10,
+            pageSize: 12,
             currentPage: 1,
           });
         }
@@ -55,20 +56,9 @@ function Home() {
     <Wrapper>
       <h1>전체글</h1>
       <hr />
-      <Container className="home-list-wrapper">
-        {
-          pagedList.map(rowData => (
-            rowData.idx !== '' &&
-            <div className="summary" key={rowData.idx}>
-              <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >
-                <Title>{rowData.title}</Title>
-              </Link>
-              <h5>{rowData.date}</h5>
-              <Writer>Posted by {rowData.writer}</Writer>
-              <CoverHr />
-            </div>
-          ))
-        }
+      {/* <Container className="home-list-wrapper"> */}
+      <Container >
+        <Preview list={pagedList} />
         <Pagination
           itemCount={count}
           pageSize={pageSize}

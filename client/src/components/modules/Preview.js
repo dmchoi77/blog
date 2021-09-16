@@ -10,7 +10,7 @@ function Preview(props) {
     return (
         <Articles>
             {
-                props.list.map((rowData,i) => (
+                props.list.map((rowData, i) => (
                     rowData.idx !== '' &&
                     <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} key={i}>
                         <Article>
@@ -43,7 +43,7 @@ const Articles = styled.div`
     grid-auto-rows: 280px;
     justify-items: center;
     align-items: center;
-
+    
     @media (min-width : 1400px) {
         grid-template-columns: repeat(4,1fr);
     }
@@ -67,6 +67,14 @@ const Article = styled.div`
     background-color: #fff;
     border: 1px solid #dae1e6;
     position: relative;
+
+    cursor: pointer;
+    transition: 0.5s all;
+
+    &:hover {
+      background-color: rgba($bg-color-dark-0, 0.1);
+      transform: translateY(-5px);
+    }
 `
 
 const Thunmbnail = styled.div`

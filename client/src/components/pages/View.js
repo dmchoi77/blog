@@ -2,12 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
-import Reply from '../modules/Reply';
 import Comment from '../modules/Comments';
+import ReactMarkdown from 'react-markdown';
 
 function View(props) {
     const [data, setData] = useState({
@@ -92,7 +91,9 @@ function View(props) {
             <hr />
             <div>
                 <div>
-                    {ReactHtmlParser(content)}
+                    <ReactMarkdown>
+                        {content}
+                    </ReactMarkdown>
                 </div>
             </div>
             <hr />
@@ -121,8 +122,10 @@ function View(props) {
             {/* <Reply index={idx} /> */}
             <Comment repo="Dong-min-choi/Blog" />
         </Wrapper>
+
     )
 }
+
 
 const Wrapper = styled.div`
     padding : 30px 0 0 0;
@@ -140,4 +143,5 @@ const DateBefore = styled.span`
     margin: 0 10px 0 6px;
     vertical-align: -2px;
 `
+
 export default View;

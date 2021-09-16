@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MDEditor from "@uiw/react-md-editor"
 
 function Preview(props) {
 
@@ -21,6 +22,9 @@ function Preview(props) {
                                     alt='thumbnail' />
                             </Thunmbnail>
                             <Title>{rowData.title}</Title>
+                            <Content>
+                                <MDEditor.Markdown source={rowData.content} />
+                            </Content>
                             <Date>{rowData.date}</Date>
                         </Article>
                     </Link>
@@ -58,8 +62,8 @@ const Articles = styled.div`
 
 const Article = styled.div`
 
-    width: 80%px;
-    height: 200px;
+    width: 240px;
+    height: 260px;
     background-color: #fff;
     border: 1px solid #dae1e6;
     position: relative;
@@ -68,7 +72,7 @@ const Article = styled.div`
         width: 100%;
     }
 
-    @media (max-width : 977px){
+    @media (max-width : 976px){
         width: 100%;
     }
 `
@@ -94,8 +98,8 @@ const Title = styled.div`
     white-space: nowrap;
     text-align: left;
 `
-const content = styled.div`
-
+const Content = styled.div`
+   
     height: 50px;
     padding: 2px 10px;
     overflow: hidden;
@@ -105,6 +109,73 @@ const content = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
+
+    div,
+    span,
+    object,
+    iframe,
+    figure,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    code,
+    em,
+    img,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    b,
+    u,
+    i,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    main,
+    canvas,
+    embed,
+    footer,
+    header,
+    nav,
+    section,
+    video {
+      font-size: 0.75rem !important;
+      font-weight: normal !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      padding-right: 1px !important;
+      border: 0 !important;
+      display: inline !important;
+      word-break: break-all !important;
+    }
+    img,
+    hr,
+    br,
+    pre,
+    code {
+      display: none !important;
+    }
+
 `
 
 const Date = styled.div`

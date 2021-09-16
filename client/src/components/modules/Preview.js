@@ -10,9 +10,9 @@ function Preview(props) {
     return (
         <Articles>
             {
-                props.list.map(rowData => (
+                props.list.map((rowData,i) => (
                     rowData.idx !== '' &&
-                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >
+                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} key={i}>
                         <Article>
                             <Thunmbnail>
                                 <img

@@ -67,14 +67,6 @@ const Article = styled.div`
     background-color: #fff;
     border: 1px solid #dae1e6;
     position: relative;
-
-    @media (max:width: 1399px) {
-        width: 100%;
-    }
-
-    @media (max-width : 976px){
-        width: 100%;
-    }
 `
 
 const Thunmbnail = styled.div`

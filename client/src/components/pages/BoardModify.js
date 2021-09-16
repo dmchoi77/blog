@@ -1,13 +1,19 @@
 /*eslint-disable*/
 
-import React, { useState } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React, { useState, createRef } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 
 function BoardModify(props) {
     const [index, setIndex] = useState(props.location.state.index);
@@ -16,6 +22,7 @@ function BoardModify(props) {
 
     const id = sessionStorage.id;
     const history = useHistory();
+    const editorRef = createRef();
 
     if (!props.location.state) {
         alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
@@ -50,22 +57,15 @@ function BoardModify(props) {
         <Wrapper>
             <h2>게시글 수정</h2>
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
-            <CKEditor
-                editor={ClassicEditor}
-                data={content}
+            <Editor
+                previewStyle='vertical'
+                plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+                initialValue={content}
                 name='content'
-
-                onChange={(event, editor) => {
-                    const data = editor.getData();
+                ref={editorRef}
+                onChange={() => {
+                    const data = editorRef.current.getInstance().getMarkdown();
                     setContent(data)
-                    //console.log(content);
-                }}
-
-                onBlur={(event, editor) => {
-                    // console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                    // console.log('Focus.', editor);
                 }}
             />
             <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >

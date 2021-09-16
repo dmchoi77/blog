@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React, { useState, createRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 
 function BoardWrite(props) {
 
@@ -12,6 +19,7 @@ function BoardWrite(props) {
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
     const history = useHistory();
+    const editorRef = createRef();
 
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
@@ -39,21 +47,16 @@ function BoardWrite(props) {
         <Wrapper>
             <h1>게시글 작성</h1>
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
-            <CKEditor
-                editor={ClassicEditor}
+            <Editor
+                previewStyle='vertical'
+                plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'
+                ref={editorRef}
 
-                onChange={(event, editor) => {
-                    const data = editor.getData();
+                onChange={() => {
+                    const data = editorRef.current.getInstance().getMarkdown();
                     setContent(data)
-                }}
-
-                onBlur={(event, editor) => {
-                    // console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                    //console.log('Focus.', editor);
                 }}
             />
             <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >

@@ -56,7 +56,6 @@ function Home() {
     <Wrapper>
       <h1>전체글</h1>
       <hr />
-      {/* <Container className="home-list-wrapper"> */}
       <Container >
         <Preview list={pagedList} />
         <Pagination

@@ -76,21 +76,4 @@ const Wrapper = styled.div`
     width : 100%;
 `;
 
-const CoverHr = styled.hr`
-    margin-top: 30px;
-    margin-bottom: 40px;
-    width : 100%
-`
-const Title = styled.h1`
-    color :rgb(14, 48, 150);
-    margin-bottom: 30px;
-    font-weight: bolder;
-`
-const Writer = styled.h4`
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-`
-
-
 export default Home;

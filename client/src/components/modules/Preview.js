@@ -79,8 +79,7 @@ const Thunmbnail = styled.div`
 
 const Title = styled.div`
 
-    font-size: .85rem;
-    line-height: 1.2;
+    font-size: .95rem;
     height: 20px;
     padding: 2px 10px;
     margin: 5px 0;
@@ -92,14 +91,14 @@ const Title = styled.div`
 `
 const Content = styled.div`
    
-    height: 50px;
+    height:42px;
     padding: 2px 10px;
     overflow: hidden;
     text-align: left;
     text-overflow: ellipsis;
     line-height: 14px;
     display: -webkit-box;
-    -webkit-line-clamp: 10;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 
     div,
@@ -173,7 +172,7 @@ const Content = styled.div`
 const Date = styled.div`
 
     height: 20px;
-    padding: 2px 10px;
+    padding: 20px 10px;
     font-size: .65em;
     display: flex;
     justify-content: space-between;

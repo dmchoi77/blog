@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 import Comment from '../modules/Comments';
-import ReactMarkdown from 'react-markdown';
+import MDEditor from "@uiw/react-md-editor"
 
 function View(props) {
     const [data, setData] = useState({
@@ -46,6 +46,9 @@ function View(props) {
                     view: res.data[0].view
                 })
             }
+        }).catch((error) => {
+            alert("잘못된 경로입니다.");
+            history.push("/board/list");
         })
         return () => {
             isComponentMounted = false;
@@ -82,7 +85,7 @@ function View(props) {
         <Wrapper>
             <hr className="view-hr" />
             <div>
-                <h2>{title}</h2>
+                <h1>{title}</h1>
             </div>
             <hr />
             <div>
@@ -91,15 +94,13 @@ function View(props) {
             <hr />
             <div>
                 <div>
-                    <ReactMarkdown>
-                        {content}
-                    </ReactMarkdown>
+                    <MDEditor.Markdown source={content} />
                 </div>
             </div>
             <hr />
             <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.push('/board/list')} >
                 전체글
-                        </Button>
+            </Button>
             <Link to={{
                 pathname: `/board/modify/${idx}`,
                 state: {

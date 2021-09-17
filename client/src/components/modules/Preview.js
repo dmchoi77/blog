@@ -1,36 +1,40 @@
 /*eslint-disable*/
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import MDEditor from "@uiw/react-md-editor"
 
 function Preview(props) {
+
+    const history = useHistory();
 
     return (
         <Articles>
             {
                 props.list.map((rowData, i) => (
                     rowData.idx !== '' &&
-                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} key={i}>
-                        <Article>
-                            <Thunmbnail>
-                                <img
-                                    src="https://reactjs-kr.firebaseapp.com/logo-og.png"
-                                    width='100%'
-                                    height='100%'
-                                    alt='thumbnail' />
-                            </Thunmbnail>
-                            <Title>{rowData.title}</Title>
-                            <Content>
-                                <MDEditor.Markdown source={rowData.content} />
-                            </Content>
-                            <Date>{rowData.date}</Date>
-                        </Article>
-                    </Link>
+                    <Article onClick={() => history.push(`/board/view/${rowData.idx}`)} key={i}>
+                        <Thunmbnail>
+                            <img
+                                src="https://reactjs-kr.firebaseapp.com/logo-og.png"
+                                width='100%'
+                                height='100%'
+                                alt='thumbnail' />
+                        </Thunmbnail>
+                        <Title>
+                            {rowData.title}
+                        </Title>
+                        <Content>
+                            <MDEditor.Markdown source={rowData.content} />
+                        </Content>
+                        <Date>
+                            {rowData.date}
+                        </Date>
+                    </Article>
                 ))
             }
-        </Articles>
+        </Articles >
 
     )
 }

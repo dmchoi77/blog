@@ -15,6 +15,7 @@
     "@toast-ui/editor-plugin-uml": "^3.0.1",
     "@toast-ui/react-editor": "^3.1.0",
     "@uiw/react-md-editor": "^3.6.3",
+    "aws-sdk": "^2.990.0",
     "axios": "^0.21.1",
     "bootstrap": "5.0.2",
     "lodash": "^4.17.21",

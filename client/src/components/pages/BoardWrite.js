@@ -5,13 +5,13 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import 'tui-color-picker/dist/tui-color-picker.css';
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
 function BoardWrite(props) {
 
@@ -43,16 +43,44 @@ function BoardWrite(props) {
         })
     }
 
+    const uploadImage = async (blob) => {
+
+        let formData = new FormData();
+
+        formData.append('image', blob);
+        const result = await axios.post('http://localhost:8000/api/image', formData, {
+            data: formData,
+            headers: { 'Content-type': 'multipart/form-data' }
+        });
+        //console.log(result);
+
+        return result.data;
+    };
+
     return (
         <Wrapper>
             <h1>게시글 작성</h1>
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
             <Editor
                 previewStyle='vertical'
+                height = '800px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'
                 ref={editorRef}
+                hooks={{
+                    addImageBlobHook: async (blob, callback) => {
+                        if (blob.size > 5 * 1024 * 1024) {
+                            alert('용량 초과');
+                        }
+                        else {
+                            const upload = await uploadImage(blob);
+                            callback(upload, "alt-text");
+                        }
+                        return false;
+
+                    }
+                }}
 
                 onChange={() => {
                     const data = editorRef.current.getInstance().getMarkdown();

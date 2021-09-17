@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
+const upload = require('../fileupload');
+const multer = require('multer');
 
 //게시글 작성
 router.post("/api/board/post", (req, res) => {
@@ -54,7 +56,6 @@ router.delete("/api/board/delete/:index", (req, res) => {
     });
 });
 
-
 //댓글 불러오기
 router.get("/api/board/:index/replies", (req, res) => {
     const content_idx = req.query.idx;
@@ -79,14 +80,28 @@ router.post("/api/board/:index/replies/:replyIdx", (req, res) => {
 })
 
 //댓글 삭제
-router.delete("/api/board/:index/replies/delete/:replyIdx", (req,res)=>{
+router.delete("/api/board/:index/replies/delete/:replyIdx", (req, res) => {
     const content_idx = req.body.content_idx;
     const reply_Idx = req.body.replyIdx;
 
     const sql = 'DELETE FROM reply WHERE content_idx = ? and reply_idx = ?';
-    db.query(sql,[content_idx,reply_Idx],(err,result)=>{
+    db.query(sql, [content_idx, reply_Idx], (err, result) => {
         res.send('Success!');
     })
 })
+
+//s3에 업로드한 url을 클라이언트로 전송
+router.post("/api/image", (req, res, next) => {
+
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return next(err);
+        } else if (err) {
+            return next(err);
+        }
+
+        return res.send(req.file.location);
+    });
+});
 
 module.exports = router;

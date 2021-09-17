@@ -30,5 +30,3 @@ app.use('/', userInform);
 app.listen(PORT, () => {
     console.log(`running on PORT ${PORT}`);
 });
-
-

@@ -4,22 +4,32 @@ const db = require('./db');
 const upload = require('../fileupload');
 const multer = require('multer');
 
+//인덱스 조회
+router.get("/api/board/index", [], (req, res) => {
+    const sql = `SELECT MAX(idx) AS 'index' FROM table1`;
+
+    db.query(sql, (err, result) => {
+        res.send(result);
+    })
+})
+
 //게시글 작성
 router.post("/api/board/post", (req, res) => {
+    const index = req.body.index;
     const title = req.body.title;
     const content = req.body.content;
     const writer = req.body.writer;
     const today = new Date().toISOString().substr(0, 10);
 
-    const sql = `INSERT INTO TABLE1 (title, content, date, writer,view) values (?,?,"${today}", ? , 1)`;
+    const sql = `INSERT INTO TABLE1 values (?,?,?,"${today}", ? , 1)`;
 
     //제목이나 본문이 공백일 경우 client로 null 전송하며 쿼리 실행X             
     if (title === "" || content === "") {
-        res.send("null!");
+        res.send("null");
         return;
     }
 
-    db.query(sql, [title, content, writer], (err, result) => {
+    db.query(sql, [index, title, content, writer], (err, result) => {
         res.send('Success!');
     });
 });

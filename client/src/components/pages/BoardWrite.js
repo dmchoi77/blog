@@ -27,20 +27,23 @@ function BoardWrite(props) {
     }
 
     const submit = (e) => {
-        //console.log(title, content);
-        axios.post('http://localhost:8000/api/board/post/', {
-            title: title,
-            content: content,
-            writer: writer
-        }).then((res) => {
-            if (res.data === "null!") {
-                alert("내용을 입력하세요.");
+        axios.get('http://localhost:8000/api/board/index') //인덱스 조회
+            .then((response) => {
+                axios.post('http://localhost:8000/api/board/post', {
+                    index: null ? 1 : response.data[0].index + 1, //첫 번째 게시글일 경우 indx가 null이므로 1로 설정
+                    title: title,
+                    content: content,
+                    writer: writer
+                }).then((res) => {
+                    if (res.data === "null") {
+                        alert("내용을 입력하세요.");
 
-            } else {
-                // alert("게시글이 등록되었습니다.");
-                history.push("/board/list");
-            }
-        })
+                    } else {
+                        // alert("게시글이 등록되었습니다.");
+                        history.push("/board/list");
+                    }
+                }).catch(error => console.log(error));
+            });
     }
 
     const uploadImage = async (blob) => {
@@ -63,7 +66,7 @@ function BoardWrite(props) {
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
             <Editor
                 previewStyle='vertical'
-                height = '800px'
+                height='800px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'

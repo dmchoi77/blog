@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Table, Form, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 
@@ -24,7 +24,8 @@ function BoardList() {
 
     //검색어 상태 관리
     const [search, setSearch] = useState('');
-
+    const history = useHistory();
+    
     useEffect(() => {
         let isComponentMounted = true;
         axios.get('http://localhost:8000/api/board/list')
@@ -130,11 +131,19 @@ function BoardList() {
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
             />
-            <Link to={"/board/newpost"} className="link">
-                <Button className="post-write-btn" variant="primary" type='button'>
-                    글쓰기
-                </Button>
-            </Link>
+            <Button className="post-write-btn" variant="primary" type='button'
+                onClick={() => {
+                    if (!sessionStorage.id) {
+                        alert("로그인이 필요합니다.");
+                        document.location.href = '/login'
+
+                    } else {
+                        history.push('/board/newpost');
+
+                    }
+                }}>
+                글쓰기
+            </Button>
             <Form onSubmit={handleSubmit}>
                 <Row align="center" className="search-bar">
                     <Col sm={3} className="my-1">

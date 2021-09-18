@@ -15,6 +15,11 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 
 function BoardWrite(props) {
 
+    if (!sessionStorage.id) {
+        document.location.href = '/login'
+        alert("로그인이 필요합니다.");
+    }
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
@@ -22,6 +27,7 @@ function BoardWrite(props) {
     const editorRef = createRef();
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
+
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);

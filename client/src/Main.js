@@ -1,10 +1,9 @@
 /*eslint-disable*/
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { Nav, Navbar, Container, Row, Col, Card } from 'react-bootstrap';
 import styled from 'styled-components';
-import PrivateRoute from './components/modules/PrivateRoute';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
 import Home from './components/pages/Home';
@@ -24,10 +23,17 @@ function Main() {
     document.location.href = '/'
   }
 
+  const onLogin = () => {
+    // sessionStorage 에 user_id 로 저장되어있는 아이템을 삭제한다.
+    sessionStorage.removeItem('id')
+    // App 으로 이동(새로고침)
+    document.location.href = '/login'
+  }
+
   useEffect(() => {
     if (sessionStorage.getItem('id') === null) {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
-      console.log('isLogin ?? :: ', isLogin)
+      // console.log('isLogin ?? :: ', isLogin)
     } else {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
       // 로그인 상태 변경
@@ -36,63 +42,65 @@ function Main() {
     }
   });
 
-  return (
-    <div>
-      {isLogin //로그인한 경우
-        ? <div>
-          <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-            <Container>
-              <Navbar.Brand>
-                <Link to={"/home"} className="home-link">
-                  dmchoi
+  //로그인 페이지 렌더링
+  if (document.location.href == 'http://localhost:3000/login') {
+    return (
+      <Login />
+    )
+  }
+  //회원가입 페이지 렌더링
+  else if (document.location.href == 'http://localhost:3000/signup') {
+    return (
+      <SignUp />
+    )
+  }
+
+  else
+    return (
+      <div>
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+          <Container>
+            <Navbar.Brand>
+              <Link to={"/home"} className="home-link">
+                dmchoi
                 </Link>
-              </Navbar.Brand>
+            </Navbar.Brand>
+            {isLogin ?
               <Nav.Link onClick={onLogout}>
                 Log out
+                </Nav.Link>
+              : <Nav.Link onClick={onLogin}>
+                Log In
               </Nav.Link>
-            </Container>
-          </Navbar>
-          <Container>
-            <Row>
-              <Col className="category">
-                <Card.Body>
-                  <Card.Header as="h5">Categories</Card.Header>
-                  <Card.Text>
-                    <li><Link to={"/board/list"} className="link">Board</Link></li>
-                  </Card.Text>
-                </Card.Body>
-              </Col>
-              <Col xs={10}>
-                <Switch>
-                  <>
-                    <Route exact path="/home" component={Home} />
-                    <Route exact path="/board/list" component={BoardList} />
-                    <Route exact path="/board/newpost" component={BoardWrite} />
-                    <Route exact path="/board/view/:data" component={View} />
-                    <Route exact path="/board/modify/:data" component={BoardModify} />
-                  </>
-                </Switch>
-              </Col>
-            </Row>
+            }
           </Container>
-          <Footer>
-            <div>CONTACT : minminnn11@hanmail.net</div>
-            <div className="cr">copyright©dmchoi 2021</div>
-          </Footer>
-        </div> //로그인안한 경우
-        : <Switch>
-          <PrivateRoute exact path="/home" component={Home} />
-          <PrivateRoute exact path="/board/list" component={BoardList} />
-          <PrivateRoute exact path="/board/newpost" component={BoardWrite} />
-          <PrivateRoute exact path="/board/view/:data" component={View} />
-          <PrivateRoute exact path="/board/modify/:data" component={BoardModify} />
-          <Route exact path="/" component={Login} />
-          <Route exact path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-        </Switch>
-      }
-    </div>
-  )
+        </Navbar>
+        <Container>
+          <Row>
+            <Col className="category">
+              <Card.Body>
+                <Card.Header as="h5">Categories</Card.Header>
+                <Card.Text>
+                  <li><Link to={"/board/list"} className="link">Board</Link></li>
+                </Card.Text>
+              </Card.Body>
+            </Col>
+            <Col xs={10}>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/board/newpost" component={BoardWrite} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/board/list" component={BoardList} />
+              <Route exact path="/board/view/:data" component={View} />
+              <Route exact path="/board/modify/:data" component={BoardModify} />
+            </Col>
+          </Row>
+        </Container>
+        <Footer>
+          <div>Contact - minminnn11@daum.net</div>
+          <div className="cr">Copyright©dmchoi 2021</div>
+        </Footer>
+      </div >
+    )
 }
 
 const Footer = styled.div`

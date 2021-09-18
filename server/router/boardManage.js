@@ -22,7 +22,7 @@ router.post("/api/board/post", (req, res) => {
     const url = req.body.url;
     const today = new Date().toISOString().substr(0, 10);
 
-    const sql = `INSERT INTO TABLE1 values (?,?,?,"${today}",?,?,1)`;
+    const sql = `INSERT INTO TABLE1 values (?,?,?,"${today}",?,?,1,1)`;
 
     //제목이나 본문이 공백일 경우 client로 null 전송하며 쿼리 실행X             
     if (title === "" || content === "") {
@@ -60,7 +60,7 @@ router.delete("/api/board/delete/:index", (req, res) => {
     const content = req.body.content;
     const idx = req.body.idx;
 
-    const sql = 'DELETE FROM table1 WHERE title = ? and content = ? and idx = ?';
+    const sql = 'UPDATE TABLE1 SET visible = 0 WHERE title = ? and content = ? and idx = ?';
 
     db.query(sql, [title, content, idx], (err, result) => {
         res.send('Success!');

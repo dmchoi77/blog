@@ -20,7 +20,8 @@ function BoardWrite(props) {
     const writer = sessionStorage.id;
     const history = useHistory();
     const editorRef = createRef();
-
+    const [imgURL, setImgURL] = useState([]);
+    let temp = [];
     const handleInputTitle = (e) => {
         setTitle(e.target.value);
         //console.log(title);
@@ -33,7 +34,8 @@ function BoardWrite(props) {
                     index: null ? 1 : response.data[0].index + 1, //첫 번째 게시글일 경우 indx가 null이므로 1로 설정
                     title: title,
                     content: content,
-                    writer: writer
+                    writer: writer,
+                    url: imgURL ? imgURL[0] : null
                 }).then((res) => {
                     if (res.data === "null") {
                         alert("내용을 입력하세요.");
@@ -44,6 +46,7 @@ function BoardWrite(props) {
                     }
                 }).catch(error => console.log(error));
             });
+        // console.log(imgURL);
     }
 
     const uploadImage = async (blob) => {
@@ -55,7 +58,10 @@ function BoardWrite(props) {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });
-        //console.log(result);
+
+        temp.push(...imgURL);
+        temp.push(result.data);
+        setImgURL(temp);
 
         return result.data;
     };

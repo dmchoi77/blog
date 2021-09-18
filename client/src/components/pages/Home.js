@@ -15,7 +15,8 @@ function Home() {
       title: '',
       content: '',
       date: '',
-      writer: ''
+      writer: '',
+      url : ''
     },
     pageSize: 12, //한 페이지에 글목록 10개
     currentPage: 1,

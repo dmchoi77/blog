@@ -17,7 +17,7 @@ function Preview(props) {
                     <Article onClick={() => history.push(`/board/view/${rowData.idx}`)} key={i}>
                         <Thunmbnail>
                             <img
-                                src="https://reactjs-kr.firebaseapp.com/logo-og.png"
+                                src={rowData.url ? rowData.url : `https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png`}
                                 width='100%'
                                 height='100%'
                                 alt='thumbnail' />

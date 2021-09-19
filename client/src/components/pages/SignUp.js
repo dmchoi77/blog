@@ -80,6 +80,9 @@ function SignUp() {
             <Button variant="primary" type='button' onClick={_signUp}>
                 회원가입
             </Button>
+            <Button variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
+                뒤로 가기
+            </Button>
         </Container>
     )
 };

@@ -44,32 +44,36 @@ const Articles = styled.div`
     height: auto;
     background-color: #fff;
     display: grid;
+
     grid-auto-rows: 280px;
     align-items: center;
-    
+
     @media (min-width : 1941px) {
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(6,1fr);
     }
+
     @media (max-width: 1940px){
         grid-template-columns: repeat(3,1fr);
     }
-    @media (max-width : 1541px) {
-        grid-template-columns: repeat(2,1fr);
-    }
+
     @media (max-width : 1022px){
+        grid-template-columns: repeat(2,1fr);
+        justify-items: center
+    }
+
+    @media (max-width : 600px){
         grid-template-columns: repeat(1,1fr);
         justify-items: center
     }
 `
 
 const Article = styled.div`
-
     width: 240px;
     height: 260px;
     background-color: #fff;
     border: 1px solid #dae1e6;
     position: relative;
-
+    margin : 10px;
     cursor: pointer;
     transition: 0.5s all;
 

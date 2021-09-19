@@ -58,7 +58,7 @@ function Main() {
 
   else
     return (
-      <Container>
+      <>
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ zIndex: "999" }}>
           <Navbar.Brand>
             <Link to={"/home"} className="home-link">
@@ -74,29 +74,41 @@ function Main() {
               </Nav.Link>
           }
         </Navbar>
-        <Contents>
-          <Col xs={1}>
-            <LeftNav style={{ padding: "3rem" }}>
-            </LeftNav>
-          </Col>
-          <Col xs={6}>
+        <LeftNav />
+        <Container>
+          <Contents>
             <Route exact path="/" component={Home} />
             <Route exact path="/board/newpost" component={BoardWrite} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/board/list" component={BoardList} />
             <Route exact path="/board/view/:data" component={View} />
             <Route exact path="/board/modify/:data" component={BoardModify} />
-          </Col>
-        </Contents>
+          </Contents>
+        </Container >
         <Footer>
           <div>Contact - minminnn11@daum.net</div>
           <div className="cr">Copyright©dmchoi 2021</div>
         </Footer>
-      </Container >
+      </>
     )
 }
+
 const Container = styled.div`
-  width : 100%;
+  padding-top : 50px;
+  display: flex;
+  margin : 0;
+  display : flex;
+  justify-content : center;
+`
+
+const Contents = styled.div`
+  padding : 10px;
+  width : 820px;
+  z-index : 1;
+
+  @media (min-width : 1941px) {
+  width : 1500px;
+  }
 `
 
 const Footer = styled.div`
@@ -110,13 +122,5 @@ const Footer = styled.div`
   color: white;
   font-weight: 600;
 `
-
-const Contents = styled.div`
-  width : 100%;
-  padding-top : 3rem;
-  display:flex;
-  justify-content: center;
-`
-
 
 export default Main;

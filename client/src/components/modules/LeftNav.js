@@ -12,7 +12,7 @@ function LeftNav() {
                 </Link>
                 <li>프로필</li>
                 <li>포트폴리오</li>
-                <hr style={{ margin: ".5rem" }} />
+                {/* <hr style={{ margin: ".5rem", width : "6rem" }} /> */}
                 <Link to={"/board/list"}>
                     <li>게시판</li>
                 </Link>
@@ -22,20 +22,27 @@ function LeftNav() {
 }
 
 const Wrapper = styled.div`
-    width : auto;
-    padding : 4rem 0rem ;
+    display : flex;
+    margin-top : 110px;
+    overflow-y: auto;
+    width: 120%;
+    height: 100%;
     position : fixed;
-    margin-left : -5.5em;
+
+
+
     // 800px 이하는 반응형
     @media (max-width : 800px) { 
-        // display :flex;
-        // width : 0px
+    
     }
 `
 
 const Contents = styled.div`
-    display : inline-block;    
-    width : 100%;
+    height: 100%;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    text-align : center;
 `
 
 export default LeftNav;

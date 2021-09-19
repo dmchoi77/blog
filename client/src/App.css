@@ -8,7 +8,6 @@
     * {
       text-decoration: none !important;
       font-family: 'SpoqaHanSansNeo-Regular';
-      box-sizing: content-box;
     }
     
     .Main {
@@ -17,7 +16,7 @@
     
     .btn {
       border-radius: 0;
-      width: 100%;
+      width: 100px;
     }
     
     .category {
@@ -61,11 +60,7 @@
       width : 100%;
       padding : 10px 0 10px;
     }
-      
-    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-      min-height: 500px;
-    }
-    
+
     .link {
       color : #000a1a
     }
@@ -89,13 +84,13 @@
     .navbar { 
       width: 100%;
       position: fixed ;
+      top  : 0;
       margin-bottom: 10px;
       justify-content: space-around;
+      z-index: 999;
     }
 
     .navbar-brand {
-      padding-top: .3125rem;
-      padding-bottom: .3125rem;
       margin-right: 11rem;
       font-size: 1.25rem;
       white-space: nowrap;

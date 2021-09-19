@@ -73,7 +73,7 @@ function BoardModify(props) {
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
             <Editor
                 previewStyle='vertical'
-                height='800px'
+                height='400px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 initialValue={content}
                 name='content'

@@ -73,7 +73,6 @@ function Home() {
 const Wrapper = styled.div`
     padding : 3rem 0 0;
     margin : 0 auto 7rem;
-    width : 100%;
 `;
 
 export default Home;

@@ -1,141 +1,3 @@
-@media (max-width: 1399px){
-  @font-face {
-    font-family: 'SpoqaHanSansNeo-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    }
-  
-  * {
-    text-decoration: none !important;
-    font-family: 'SpoqaHanSansNeo-Regular';
-    font-size: 0.4rem;
-  }
-  
-  .Main {
-    text-align: center;
-  }
-  
-  .btn {
-    border-radius: 0;
-    width: 100px;
-  }
-  
-  .category {
-    width: 100%;
-  }
-  
-  .card-header {
-    color : white;
-    padding: .75rem 1.25rem;
-    background-color: #0047b1c2;
-    border-bottom: 1px solid;
-  }
-  
-  .card-body {
-    padding : 0 ;
-    border: 1px solid rgba(0,0,0,.125);
-  }
-  
-  .card-text {
-    padding : 15px;
-    font-weight: 500;
-    color :rgb(104, 104, 104)
-  }
-
-  .col-1   {
-    display : inline-block;
-    padding : 3%
-  }
-
-  .col-10 {
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 0 10%;
-  }
-  
-  .form {
-    display : block;
-  }
-  
-  .form-control {
-    display :block;
-    align-items: center;
-    padding : 0, 0 , 0 ,0;
-  }
-  
-  .toast {
-    width : 100%;
-    padding : 10px 0 10px;
-  }
-    
-  .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    min-height: 500px;
-  }
-  
-  .link {
-    color : #000a1a
-  }
-  
-  .home-link {
-    color : #ffff;
-    font-weight:700;
-    font-size: x-large;
-  }
-  
-  .home-list-wrapper {
-    width: 100%;
-    min-height: 100%;
-
-  }
-
-  .my-1 {
-    margin-top: .25rem!important;
-    margin-bottom: .25rem!important;
-    width: 80%;
-}
-  
-  .nav-link {
-    color :#ffff;
-  }
-  
-  .navbar-expand-lg .navbar-collapse {
-    display: flex!important;
-    flex-basis: auto;
-    align-items: flex-end;
-    flex-direction: column;
-  }
-  
-  .search-bar {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center
-  }
-  
-  .post-view-go-list-btn, .post-write-btn, .post-view-go-modify-btn, .reply-btn {
-    width :100px;
-    margin: 5px 5px;
-  }
-
-  .view-hr {
-    display: none;
-  }
-  
-  a {
-    color : black;
-  }
-  
-  li {
-    list-style:none;
-    padding : .5em;
-  }
-  
-  hr {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }	
-}
-
 @font-face {
     font-family: 'SpoqaHanSansNeo-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
@@ -146,6 +8,7 @@
     * {
       text-decoration: none !important;
       font-family: 'SpoqaHanSansNeo-Regular';
+      box-sizing: content-box;
     }
     
     .Main {
@@ -175,6 +38,7 @@
       padding : 0 ;
       border: 1px solid rgba(0,0,0,.125);
       margin-bottom: 100px;
+      width : 500px
     }
     
     .card-text {
@@ -220,6 +84,21 @@
     
     .nav-link {
       color :#ffff;
+    }
+    
+    .navbar { 
+      width: 100%;
+      position: fixed ;
+      margin-bottom: 10px;
+      justify-content: space-around;
+    }
+
+    .navbar-brand {
+      padding-top: .3125rem;
+      padding-bottom: .3125rem;
+      margin-right: 11rem;
+      font-size: 1.25rem;
+      white-space: nowrap;
     }
     
     .navbar-expand-lg .navbar-collapse {

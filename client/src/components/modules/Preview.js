@@ -45,22 +45,20 @@ const Articles = styled.div`
     background-color: #fff;
     display: grid;
     grid-auto-rows: 280px;
-    justify-items: center;
     align-items: center;
     
-    @media (min-width : 1400px) {
+    @media (min-width : 1941px) {
         grid-template-columns: repeat(4,1fr);
     }
-    @media (max-width: 1399px){
+    @media (max-width: 1940px){
         grid-template-columns: repeat(3,1fr);
     }
-
-    @media (max-width : 976px){
+    @media (max-width : 1541px) {
         grid-template-columns: repeat(2,1fr);
     }
-
-    @media (max-width : 753px){
+    @media (max-width : 1022px){
         grid-template-columns: repeat(1,1fr);
+        justify-items: center
     }
 `
 

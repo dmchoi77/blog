@@ -17,7 +17,7 @@ function Preview(props) {
                     <Article onClick={() => history.push(`/board/view/${rowData.idx}`)} key={i}>
                         <Thunmbnail>
                             <img
-                                src={rowData.url ? rowData.url : `https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png`}
+                                src={rowData.url ? rowData.url : `https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png`}
                                 width='100%'
                                 height='100%'
                                 alt='thumbnail' />
@@ -44,31 +44,15 @@ const Articles = styled.div`
     height: auto;
     background-color: #fff;
     display: grid;
-
     grid-auto-rows: 280px;
     align-items: center;
-
-    @media (min-width : 1941px) {
-        grid-template-columns: repeat(6,1fr);
-    }
-
-    @media (max-width: 1940px){
-        grid-template-columns: repeat(3,1fr);
-    }
-
-    @media (max-width : 1022px){
-        grid-template-columns: repeat(2,1fr);
-        justify-items: center
-    }
-
-    @media (max-width : 600px){
-        grid-template-columns: repeat(1,1fr);
-        justify-items: center
-    }
+    justify-items: center;
+    grid-template-columns: repeat(4,1fr);
+    
 `
 
 const Article = styled.div`
-    width: 240px;
+    width: 200px;
     height: 260px;
     background-color: #fff;
     border: 1px solid #dae1e6;

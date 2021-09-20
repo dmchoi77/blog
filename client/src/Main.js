@@ -2,7 +2,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Nav, Navbar, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
@@ -11,25 +10,13 @@ import BoardWrite from './components/pages/BoardWrite';
 import BoardModify from './components/pages/BoardModify';
 import BoardList from './components/pages/BoardList';
 import View from './components/pages/View';
+import Header from './components/modules/Header';
 import LeftNav from './components/modules/LeftNav';
+import Footer from './components/modules/Footer';
 
 function Main() {
   // 로그인 상태 관리
   const [isLogin, setIsLogin] = useState(false)
-
-  const onLogout = () => {
-    // sessionStorage 에 user_id 로 저장되어있는 아이템을 삭제한다.
-    sessionStorage.removeItem('id')
-    // App 으로 이동(새로고침)
-    document.location.href = '/'
-  }
-
-  const onLogin = () => {
-    // sessionStorage 에 user_id 로 저장되어있는 아이템을 삭제한다.
-    sessionStorage.removeItem('id')
-    // App 으로 이동(새로고침)
-    document.location.href = '/login'
-  }
 
   useEffect(() => {
     if (sessionStorage.getItem('id') === null) {
@@ -59,23 +46,9 @@ function Main() {
   else
     return (
       <>
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ zIndex: "999" }}>
-          <Navbar.Brand>
-            <Link to={"/home"} className="home-link">
-              dmchoi
-                </Link>
-          </Navbar.Brand>
-          {isLogin ?
-            <Nav.Link onClick={onLogout}>
-              Log out
-                </Nav.Link>
-            : <Nav.Link onClick={onLogin}>
-              Log In
-              </Nav.Link>
-          }
-        </Navbar>
-        <LeftNav />
+        <Header isLogin={isLogin} />
         <Container>
+          <LeftNav />
           <Contents>
             <Route exact path="/" component={Home} />
             <Route exact path="/board/newpost" component={BoardWrite} />
@@ -85,42 +58,24 @@ function Main() {
             <Route exact path="/board/modify/:data" component={BoardModify} />
           </Contents>
         </Container >
-        <Footer>
-          <div>Contact - minminnn11@daum.net</div>
-          <div className="cr">Copyright©dmchoi 2021</div>
-        </Footer>
+        <Footer />
       </>
     )
 }
 
 const Container = styled.div`
-  padding-top : 50px;
+  width : 1340px;
   display: flex;
-  margin : 0;
+  margin : 0 auto;
   display : flex;
   justify-content : center;
 `
 
 const Contents = styled.div`
-  padding : 10px;
-  width : 820px;
+  margin : 0 auto;
+  margin-top : 50px;
+  width : 1040px;
   z-index : 1;
-
-  @media (min-width : 1941px) {
-  width : 1500px;
-  }
-`
-
-const Footer = styled.div`
-  width: 100%;
-  background-color: #0d6efd!important;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 30px 0;
-  text-align: center;
-  color: white;
-  font-weight: 600;
 `
 
 export default Main;

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 import Preview from '../modules/Preview';
-
+import Comments from '../modules/Comments'
 
 function Home() {
 
@@ -16,7 +15,7 @@ function Home() {
       content: '',
       date: '',
       writer: '',
-      url : ''
+      url: ''
     },
     pageSize: 12, //한 페이지에 글목록 10개
     currentPage: 1,
@@ -54,10 +53,10 @@ function Home() {
   const pagedList = paginate(data, currentPage, pageSize);
 
   return (
-    <Wrapper>
+    <Container>
       <h1>전체글</h1>
       <hr />
-      <Container >
+      <div>
         <Preview list={pagedList} />
         <Pagination
           itemCount={count}
@@ -65,14 +64,18 @@ function Home() {
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
-      </Container>
-    </Wrapper>
+      </div>
+      <div style={{ paddingTop: "50px" }}>
+        <h3>방명록</h3>
+        <hr />
+        <Comments repo="Dong-min-choi/Blog" />
+      </div>
+    </Container>
   )
 }
-
-const Wrapper = styled.div`
-    padding : 3rem 0 0;
-    margin : 0 auto 7rem;
-`;
+const Container = styled.div`
+  padding : 3rem 0 0;
+  margin : 0 auto 7rem;
+`
 
 export default Home;

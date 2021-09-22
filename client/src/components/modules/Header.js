@@ -19,7 +19,7 @@ function Header(props) {
     }
 
     return (
-        <Wrapper>
+        <Container>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ zIndex: "999", width: "1340px", margin: "0 auto", position: "fixed", top: 0, left: 0, right: 0 }}>
                 <Navbar.Brand>
                     <Link to={"/home"} className="home-link">
@@ -36,11 +36,11 @@ function Header(props) {
                 </Nav.Link>
                 }
             </Navbar>
-        </Wrapper>
+        </Container>
     )
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     width : 100%;
     height : 62px;
     background-color: #0d6efd;

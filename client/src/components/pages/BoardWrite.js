@@ -73,7 +73,7 @@ function BoardWrite(props) {
     };
 
     return (
-        <Wrapper>
+        <Container>
             <h1>게시글 작성</h1>
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
             <Editor
@@ -105,11 +105,11 @@ function BoardWrite(props) {
             <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >
                 등록
             </Button>
-        </Wrapper>
+        </Container>
     )
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     padding : 3rem 0 0;
     margin : 0 auto 7rem;
     width : 100%;

@@ -4,17 +4,16 @@ import styled from 'styled-components';
 function Footer() {
 
     return (
-        <Wrapper>
+        <Container>
             <Content>
                 <div>Contact - minminnn11@daum.net</div>
                 <div className="cr">Copyright©dmchoi 2021</div>
             </Content>
-
-        </Wrapper>
+        </Container>
     )
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     width : 100%;
     background-color: #0d6efd;
 `
@@ -23,7 +22,6 @@ const Content = styled.div`
     margin : 0 auto;
     width: 1340px;
     height : 70px;
-    background-color: #0d6efd!important;
     left: 0;
     right: 0;
     bottom: 0;

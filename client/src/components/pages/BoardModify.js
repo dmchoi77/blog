@@ -68,7 +68,7 @@ function BoardModify(props) {
     };
 
     return (
-        <Wrapper>
+        <Container>
             <h2>게시글 수정</h2>
             <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
             <Editor
@@ -100,11 +100,11 @@ function BoardModify(props) {
             <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
                 수정
             </Button>
-        </Wrapper>
+        </Container>
     )
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     padding : 3rem 0 0;
     margin : 0 auto 7rem;
     width : 100%;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function LeftNav() {
 
     return (
-        <Wrapper>
+        <Container>
             <Contents>
                 <Link to={"/home"}>
                     <li>HOME</li>
@@ -16,13 +16,12 @@ function LeftNav() {
                 <Link to={"/board/list"}>
                     <li>게시판</li>
                 </Link >
-
             </Contents>
-        </Wrapper>
+        </Container>
     )
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     margin : 0 auto;
     font-size : 1.1em;
     display : flex;

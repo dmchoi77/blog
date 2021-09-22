@@ -82,7 +82,7 @@ function View(props) {
     }
 
     return (
-        <Wrapper>
+        <Container>
             <hr className="view-hr" />
             <div>
                 <h1>{title}</h1>
@@ -122,13 +122,13 @@ function View(props) {
             <hr />
             {/* <Reply index={idx} /> */}
             <Comment repo="Dong-min-choi/Blog" />
-        </Wrapper>
+        </Container>
 
     )
 }
 
 
-const Wrapper = styled.div`
+const Container = styled.div`
     padding : 30px 0 0 0;
     margin : 0 auto 7rem;
     width : 100%;

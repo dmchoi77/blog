@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -24,7 +24,7 @@ function BoardWrite(props) {
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
     const history = useHistory();
-    const editorRef = createRef();
+    const editorRef = useRef();
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
@@ -82,7 +82,6 @@ function BoardWrite(props) {
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'
-                ref={editorRef}
                 hooks={{
                     addImageBlobHook: async (blob, callback) => {
                         if (blob.size > 5 * 1024 * 1024) {

@@ -1,6 +1,6 @@
 /*eslint-disable*/
 
-import React, { useState, createRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -18,7 +18,7 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 function BoardModify(props) {
 
     const history = useHistory();
-    const editorRef = createRef();
+    const editorRef = useRef();
     const id = sessionStorage.id;
 
     if (!props.location.state) {

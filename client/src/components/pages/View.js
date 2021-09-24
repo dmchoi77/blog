@@ -119,7 +119,6 @@ function View(props) {
             </Button>
             <hr />
             <h3>Comments</h3>
-            <hr />
             <Reply index={idx} />
             {/* <Comment repo="Dong-min-choi/Blog" /> */}
         </Container>

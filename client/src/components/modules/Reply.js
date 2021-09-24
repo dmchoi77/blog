@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function Reply(props) {
 
-    const [reply, setReply] = useState('');
+    const [reply, setReply] = useState();
     const [content, setContent] = useState('');
     const index = props.index;
     const [mount, setMount] = useState(true);
@@ -26,9 +26,8 @@ function Reply(props) {
             setReplyIdx(res.data.length);
         })
         return () => {
-            setMount(true)
+            setMount(false)
             //console.log("component will unmount")
-
         };
     }, [mount])
 
@@ -74,6 +73,7 @@ function Reply(props) {
             </Button>
             <hr />
             <RefreshButton onClick={refresh} src="/img/refresh.png"></RefreshButton>
+            <hr />
             <ReplyList reply={reply} index={index} setMount={setMount} />
         </div>
     )
@@ -86,7 +86,9 @@ function ReplyList(props) {
 
     return (
         <div>
-            {reply ?
+            {reply === undefined || reply.length === 0 ?
+                "아직 작성된 댓글이 없습니다."
+                :
                 reply.map((rowData, i) => (
                     <div key={i}>
                         <Toast show={true} onClose={() => {
@@ -109,7 +111,6 @@ function ReplyList(props) {
                         </Toast>
                     </div>
                 ))
-                : null
             }
         </div>
     )
@@ -122,8 +123,8 @@ const TextArea = styled.textarea`
 const RefreshButton = styled.img`
     display :flex;
     justify-content : end;
-    width : 30px;
-    height : 30px;
+    width : 25px;
+    height : 25px;
     margin-top : -10px;
     margin-bottom : 20px;
 `

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Comment from '../modules/Comments';
 import MDEditor from "@uiw/react-md-editor"
+import Reply from '../modules/Reply'
 
 function View(props) {
     const [data, setData] = useState({
@@ -19,7 +20,6 @@ function View(props) {
     })
 
     const { title, content, date, writer, index, view } = data;
-
     const { params } = props.match;
     const id = sessionStorage.id;
     const idx = params.data;
@@ -120,8 +120,8 @@ function View(props) {
             <hr />
             <h3>Comments</h3>
             <hr />
-            {/* <Reply index={idx} /> */}
-            <Comment repo="Dong-min-choi/Blog" />
+            <Reply index={idx} />
+            {/* <Comment repo="Dong-min-choi/Blog" /> */}
         </Container>
 
     )

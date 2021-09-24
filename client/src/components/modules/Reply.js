@@ -12,9 +12,10 @@ function Reply(props) {
     const index = props.index;
     const [mount, setMount] = useState(true);
     const [replyIdx, setReplyIdx] = useState(0);
-
+    const name = sessionStorage.getItem('id');
 
     useEffect(() => {
+        setMount(true)
         //console.log("component did mount")
         axios.get(`http://localhost:8000/api/board/${index}/replies`, {
             params: {
@@ -44,9 +45,10 @@ function Reply(props) {
         else {
             axios.post(`http://localhost:8000/api/board/${index}/replies/${replyIdx}`, {
                 content_idx: props.index,
-                name: sessionStorage.getItem('id'),
+                name: name ? name : "익명",
                 content: content,
-                replyIdx: replyIdx === 0 ? 1 : replyIdx + 1
+                replyIdx: replyIdx === 0 ? 1 : replyIdx + 1,
+
             }).then((res) => {
                 if (res.data === "null!") {
                     alert("내용을 입력하세요.");
@@ -55,9 +57,12 @@ function Reply(props) {
             alert("댓글이 작성되었습니다.");
             setContent('');
         }
-        setMount(false);
+        setMount(!mount);
     }
 
+    const refresh = () => {
+        setMount(!mount);
+    }
 
     return (
         <div>
@@ -68,6 +73,7 @@ function Reply(props) {
                 등록
             </Button>
             <hr />
+            <RefreshButton onClick={refresh} src="/img/refresh.png"></RefreshButton>
             <ReplyList reply={reply} index={index} setMount={setMount} />
         </div>
     )
@@ -93,7 +99,6 @@ function ReplyList(props) {
                                 })
                             } else {
                                 alert("삭제 권한이 없습니다.");
-
                             }
                             props.setMount(false);
                         }}>
@@ -105,7 +110,6 @@ function ReplyList(props) {
                     </div>
                 ))
                 : null
-
             }
         </div>
     )
@@ -114,6 +118,14 @@ function ReplyList(props) {
 const TextArea = styled.textarea`
     width : 100%;
     height : 70px
+`
+const RefreshButton = styled.img`
+    display :flex;
+    justify-content : end;
+    width : 30px;
+    height : 30px;
+    margin-top : -10px;
+    margin-bottom : 20px;
 `
 
 export default Reply;

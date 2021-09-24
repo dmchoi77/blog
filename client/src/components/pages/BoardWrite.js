@@ -82,6 +82,7 @@ function BoardWrite(props) {
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'
+                ref={editorRef}
                 hooks={{
                     addImageBlobHook: async (blob, callback) => {
                         if (blob.size > 5 * 1024 * 1024) {

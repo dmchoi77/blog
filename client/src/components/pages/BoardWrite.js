@@ -24,12 +24,14 @@ function BoardWrite(props) {
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
     const history = useHistory();
-    const editorRef = useRef();
+    const editTitle = useRef();
+    const editContent = useRef();
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
-    const handleInputTitle = (e) => {
-        setTitle(e.target.value);
+    const handleInputTitle = () => {
+        const data = editTitle.current.value;
+        setTitle(data);
         //console.log(title);
     }
 
@@ -75,14 +77,14 @@ function BoardWrite(props) {
     return (
         <Container>
             <h1>게시글 작성</h1>
-            <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} />
+            <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} />
             <Editor
                 previewStyle='vertical'
                 height='400px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 data=""
                 name='content'
-                ref={editorRef}
+                ref={editContent}
                 hooks={{
                     addImageBlobHook: async (blob, callback) => {
                         if (blob.size > 5 * 1024 * 1024) {
@@ -98,7 +100,7 @@ function BoardWrite(props) {
                 }}
 
                 onChange={() => {
-                    const data = editorRef.current.getInstance().getMarkdown();
+                    const data = editContent.current.getInstance().getMarkdown();
                     setContent(data)
                 }}
             />

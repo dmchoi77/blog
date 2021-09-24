@@ -18,7 +18,8 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 function BoardModify(props) {
 
     const history = useHistory();
-    const editorRef = useRef();
+    const editTitle = useRef();
+    const editContent = useRef();
     const id = sessionStorage.id;
 
     if (!props.location.state) {
@@ -33,8 +34,9 @@ function BoardModify(props) {
     const [title, setTitle] = useState(props.location.state.title);
     const [content, setContent] = useState(props.location.state.content);
 
-    const handleInputTitle = (e) => {
-        setTitle(e.target.value);
+    const handleInputTitle = () => {
+        const data = editTitle.current.value;
+        setTitle(data);
         //console.log(title);
     }
 
@@ -70,14 +72,14 @@ function BoardModify(props) {
     return (
         <Container>
             <h2>게시글 수정</h2>
-            <TitleInput type='text' placeholder='제목' name='title' onChange={handleInputTitle} value={title} />
+            <TitleInput type='text' placeholder='제목' name='title' ref= {editTitle} onChange={handleInputTitle} value={title} />
             <Editor
                 previewStyle='vertical'
                 height='400px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                 initialValue={content}
                 name='content'
-                ref={editorRef}
+                ref={editContent}
                 hooks={{
                     addImageBlobHook: async (blob, callback) => {
                         if (blob.size > 5 * 1024 * 1024) {
@@ -93,7 +95,7 @@ function BoardModify(props) {
                 }}
 
                 onChange={() => {
-                    const data = editorRef.current.getInstance().getMarkdown();
+                    const data = editContent.current.getInstance().getMarkdown();
                     setContent(data)
                 }}
             />

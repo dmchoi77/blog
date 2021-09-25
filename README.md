@@ -74,10 +74,10 @@
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134781197-85423890-19dd-4bf7-9030-65321171f62e.gif)
 
 ### 8. 페이징
-* 글 목록을 깔끔하게 보여주기 위해 페이징 기능 구현 페이지당 10개의 글이 조회되도록 구현
 
 ![Hnet-image (3)](https://user-images.githubusercontent.com/76215166/134781352-7dfd189c-aecc-46f1-94b2-8b3bd385a31b.gif)
 
+* 글 목록을 깔끔하게 보여주기 위해 페이징 기능 구현 페이지당 10개의 글이 조회되도록 구현
 
 ### 9. 댓글 기능
 * 댓글 등록 및 삭제를 기능을 구현

@@ -72,14 +72,21 @@
 
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134781197-85423890-19dd-4bf7-9030-65321171f62e.gif)
 
-#### 8. 페이징
+### 8. 페이징
 * 글 목록을 깔끔하게 보여주기 위해 페이징 기능 구현 페이지당 10개의 글이 조회되도록 구현
 
+![Hnet-image (3)](https://user-images.githubusercontent.com/76215166/134781352-7dfd189c-aecc-46f1-94b2-8b3bd385a31b.gif)
 
 
-##### 9. 댓글 기능
+### 9. 댓글 기능
 * 댓글 등록 및 삭제를 기능을 구현
 * 가끔씩 댓글을 등록하거나 삭제했는데 컴포넌트가 리렌더링 되지 않는 현상이 생김
 * 아직 해결 방법을 찾고 있고, 임시방편으로 새로고침 버튼을 배치
 
-##### 10. 조회수 기능
+![Hnet-image (4)](https://user-images.githubusercontent.com/76215166/134781555-e90b7de9-5de7-46cc-ba83-2d587d2c808a.gif)
+
+
+### 10. 조회수 기능
+
+![Hnet com-image (3)](https://user-images.githubusercontent.com/76215166/134781639-c5574668-270f-4b77-8ca0-20561f2e56fb.gif)
+

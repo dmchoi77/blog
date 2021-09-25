@@ -54,14 +54,10 @@ function Login() {
                 <Button variant="primary" type='button' onClick={_login}>
                     로그인
                 </Button>
-                <SignUp>처음이면 <Link onClick={() => { document.location.href = '/signup' }} style={join}>회원가입</Link></SignUp>
+                <SignUp>처음이면 <Link onClick={() => { document.location.href = '/signup' }} style={{ color: "#004282" }}>회원가입</Link></SignUp>
             </Form>
         </Container>
     )
-}
-
-const join = {
-    color: "#004282"
 }
 
 const Container = styled.div`

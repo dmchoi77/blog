@@ -55,7 +55,8 @@ function SignUp() {
                 if (res.data === "ER_DUP_ENTRY") return alert("이미 가입되어 있는 아이디 입니다.");
                 else if (res.data === "complete") {
                     alert("회원가입 완료");
-                    return history.push('/');
+                    document.location.href = '/login';
+                    return               
                 }
             })
         })();

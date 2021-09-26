@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
@@ -69,13 +69,23 @@ const Container = styled.div`
   margin : 0 auto;
   display : flex;
   justify-content : center;
+
+  @media(max-width : 811px) {
+    width : 100vw;
+  }
 `
 
 const Contents = styled.div`
-  margin : 0 auto;
+  margin : 0 150px;
   margin-top : 50px;
   width : 1040px;
   z-index : 1;
+
+  @media(max-width : 811px) {
+    width : 100vw;
+    padding : 20px;
+    margin : 25px auto;
+  }
 `
 
 export default Main;

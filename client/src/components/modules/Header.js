@@ -24,7 +24,7 @@ function Header(props) {
                 <Navbar.Brand>
                     <Link to={"/home"} className="home-link">
                         dmchoi
-                </Link>
+                    </Link>
                 </Navbar.Brand>
                 {props.isLogin ?
                     <Nav.Link onClick={onLogout}>
@@ -45,7 +45,7 @@ const Container = styled.div`
     height : 62px;
     background-color: #0d6efd;
     position : fixed;
-    z-index : 999
+    z-index : 999;
 `
 
 export default Header;

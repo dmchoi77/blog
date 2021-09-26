@@ -76,6 +76,10 @@ function Home() {
 const Container = styled.div`
   padding : 3rem 0 0;
   margin : 0 auto 7rem;
+
+  @media(max-width : 811px) {
+    width : 100%;
+}
 `
 
 export default Home;

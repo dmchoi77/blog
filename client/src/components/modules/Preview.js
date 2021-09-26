@@ -48,6 +48,11 @@ const Articles = styled.div`
     align-items: center;
     justify-items: center;
     grid-template-columns: repeat(4,1fr);
+
+    @media(max-width : 811px) {
+        grid-template-columns: repeat(1,1fr);
+
+    }
     
 `
 

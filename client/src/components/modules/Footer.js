@@ -16,6 +16,11 @@ function Footer() {
 const Container = styled.div`
     width : 100%;
     background-color: #0d6efd;
+
+    @media(max-width : 811px) {
+        display : none;
+        left : cal(-240px);
+    }
 `
 
 const Content = styled.div`

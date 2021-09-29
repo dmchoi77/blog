@@ -44,6 +44,10 @@ const Container = styled.div`
     background-color: #0d6efd;
     position : fixed;
     z-index : 999;
+
+    @media(max-width : 811px) {
+        height : 1vw;   
+    }
 `
 
 export default Header;

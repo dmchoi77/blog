@@ -18,7 +18,10 @@ function Login() {
     }
 
     const _login = () => {
-
+        //만약 로그인 정보가 이미 있으면 삭제
+        if (sessionStorage.getItem('id')) {
+            sessionStorage.removeItem('id')
+        }
         axios.post('http://localhost:8000/api/login', null, {
             params: {
                 id: inputId,

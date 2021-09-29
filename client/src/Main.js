@@ -30,20 +30,6 @@ function Main() {
     }
   });
 
-  //로그인 페이지 렌더링
-  if (document.location.href == 'http://localhost:3000/login') {
-    return (
-      <Login />
-    )
-  }
-  //회원가입 페이지 렌더링
-  else if (document.location.href == 'http://localhost:3000/signup') {
-    return (
-      <SignUp />
-    )
-  }
-
-  else
     return (
       <>
         <Header isLogin={isLogin} />
@@ -56,6 +42,8 @@ function Main() {
             <Route exact path="/board/list" component={BoardList} />
             <Route exact path="/board/view/:data" component={View} />
             <Route exact path="/board/modify/:data" component={BoardModify} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
           </Contents>
         </Container >
         <Footer />
@@ -78,6 +66,7 @@ const Container = styled.div`
 const Contents = styled.div`
   margin : 0 150px;
   margin-top : 50px;
+  min-height : 700px;
   width : 1040px;
   z-index : 1;
 

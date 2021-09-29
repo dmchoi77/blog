@@ -16,7 +16,7 @@
     
     .btn {
       border-radius: 0;
-      width: 100%;
+      width: 100px;
     }
     
     .category {
@@ -140,6 +140,9 @@
 
     /* 반응형 */
     @media(max-width : 811px) {
+      * {
+        font-size: 2vw;
+      }
 
       @keyframes slidein {
         0% {

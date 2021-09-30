@@ -133,9 +133,9 @@ function BoardList() {
             />
             <Button className="post-write-btn" variant="primary" type='button'
                 onClick={() => {
-                    if (!sessionStorage.id) {
-                        alert("로그인이 필요합니다.");
-                        document.location.href = '/login'
+                    if (sessionStorage.id !== 'admin') {
+                        alert("글쓰기 권한이 없습니다.");
+                        // document.location.href = '/login'
 
                     } else {
                         history.push('/board/newpost');

@@ -24,11 +24,11 @@ function BoardWrite(props) {
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
-    if (!sessionStorage.id === 'admin') {
-        // document.location.href = '/login'
-        // alert("로그인이 필요합니다.");
-        alert("글쓰기 권한이 없습니다.");
-    }
+    // if (!sessionStorage.id === 'admin') {
+    //     // document.location.href = '/login'
+    //     // alert("로그인이 필요합니다.");
+    //     alert("글쓰기 권한이 없습니다.");
+    // }
 
     if (!props.location.state) {
         alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우

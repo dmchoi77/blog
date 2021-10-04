@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Login() {
 
     const [inputId, setInputId] = useState('');
     const [inputPw, setInputPw] = useState('');
+    const history = useHistory();
 
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -49,15 +50,15 @@ function Login() {
             <Title>dmchoi</Title>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control className ="form" type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
+                    <Form.Control className="form" type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control className ="form" type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
+                    <Form.Control className="form" type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
                 </Form.Group>
                 <Button className="loginBtn" variant="primary" type='button' onClick={_login}>
                     로그인
                 </Button>
-                <SignUp>처음이면 <Link onClick={() => { document.location.href = '/signup' }} style={{ color: "#004282" }}>회원가입</Link></SignUp>
+                <SignUp>처음이면 <Link to={"/signup"} style={{ color: "#004282" }}>회원가입</Link></SignUp>
             </Form>
         </Container>
     )

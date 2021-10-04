@@ -51,7 +51,7 @@
     }
     
     .my-1.col-1 {
-      margin-left : 10px;
+      /* margin-left : 10px; */
     }
 
     .mb-3 {
@@ -187,7 +187,7 @@
       }
 
       .nav-link {
-        margin-right: -18vw;
+        margin-right: 3px;
       }
 
       .home-link {
@@ -195,16 +195,19 @@
       }
 
       .col-1 {
-        flex: 0 0 auto;
+        width : 100%;
       }
 
       .col-sm-3 {
         flex: 0 0 auto;
-        width: 250px;
+        width: 100%;
+        display: grid;
+        place-content: center;
       }
 
       .my-1.col-1 {
-        margin-left : 65px;
+        display: grid;
+        place-content: center;
       }
 
       .form {

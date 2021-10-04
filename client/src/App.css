@@ -16,7 +16,7 @@
     
     .btn {
       border-radius: 0;
-      width: 100%;
+      width: 100px;
     }
     
     .category {
@@ -50,10 +50,15 @@
       display : block;
     }
     
+    .my-1.col-1 {
+      margin-left : 65px;
+    }
+
     .form-control {
       display :block;
       align-items: center;
       padding : 0, 0 , 0 ,0;
+      width : 300px;
     }
     
     .toast {
@@ -122,9 +127,9 @@
       display : none;
     }
     
-    .row>* {
-      width : 50vw;
-    }
+    /* .row>* {
+      width : 27vw;
+    } */
     a {
       color : black;
     }
@@ -179,6 +184,24 @@
 
       .col-1 {
         flex: 0 0 auto;
+      }
+
+      .col-sm-3 {
+        flex: 0 0 auto;
+        width: 250px;
+      }
+
+      .form-control {
+      
+        width : 200px !important;
+      }
+
+      .search-bar {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-content: center;
       }
 
       .toggle-bg {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Table, Form, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 
@@ -25,7 +25,7 @@ function BoardList() {
     //검색어 상태 관리
     const [search, setSearch] = useState('');
     const history = useHistory();
-    
+
     useEffect(() => {
         let isComponentMounted = true;
         axios.get('http://localhost:8000/api/board/list')
@@ -151,7 +151,7 @@ function BoardList() {
                         />
                     </Col>
                     <Col xs={1} className="my-1">
-                        <Button type="button" onClick={onSearch}>검색</Button>
+                        <Button className="search-button" type="button" onClick={onSearch}>검색</Button>
                     </Col>
                 </Row>
             </Form>

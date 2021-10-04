@@ -66,8 +66,8 @@ const Button = styled.img`
     }
 
     @media(max-width : 811px){
-        width : 20px;
-        height : 20px;
+        width : 4vw;
+        height : 4vw;
         position : absolute;
         top : 9px;
         left : 15px;

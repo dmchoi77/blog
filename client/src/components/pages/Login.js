@@ -49,12 +49,12 @@ function Login() {
             <Title>dmchoi</Title>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
+                    <Form.Control className ="form" type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
+                    <Form.Control className ="form" type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
                 </Form.Group>
-                <Button variant="primary" type='button' onClick={_login}>
+                <Button className="loginBtn" variant="primary" type='button' onClick={_login}>
                     로그인
                 </Button>
                 <SignUp>처음이면 <Link onClick={() => { document.location.href = '/signup' }} style={{ color: "#004282" }}>회원가입</Link></SignUp>
@@ -70,6 +70,10 @@ const Container = styled.div`
     left: 50%;
     margin-left: -180px;
     width: 360px;
+
+    @media(max-width : 811px) {
+        padding: 5rem;
+    }
 `
 const Title = styled.h1`
     text-align : center;

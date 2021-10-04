@@ -56,7 +56,7 @@ function SignUp() {
                 else if (res.data === "complete") {
                     alert("회원가입 완료");
                     document.location.href = '/login';
-                    return               
+                    return
                 }
             })
         })();
@@ -67,21 +67,21 @@ function SignUp() {
         <Container>
             <Title>회원가입</Title>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={handleInputName} />
+                <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={handleInputName} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={handleInputId} />
+                <Form.Control className="form" type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={handleInputId} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={handleInputPwd} />
+                <Form.Control className="form" type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={handleInputPwd} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={handleInputPwdCheck} />
+                <Form.Control className="form" type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={handleInputPwdCheck} />
             </Form.Group>
-            <Button variant="primary" type='button' onClick={_signUp}>
+            <Button className="signupBtn" variant="primary" type='button' onClick={_signUp}>
                 회원가입
             </Button>
-            <Button variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
+            <Button className="backBtn" variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
                 뒤로 가기
             </Button>
         </Container>
@@ -95,10 +95,15 @@ const Container = styled.div`
     left: 50%;
     margin-left: -180px;
     width: 360px;
+
+    @media(max-width : 811px) {
+        padding: 5rem;
+    }
 `
 const Title = styled.h1`
     font-weight : bold;
     margin-bottom : 1rem;
+    text-align : center;
 `
 
 

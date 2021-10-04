@@ -73,6 +73,7 @@ const Container = styled.div`
     width: 360px;
 
     @media(max-width : 811px) {
+        margin-top: 20px;
         padding: 5rem;
     }
 `

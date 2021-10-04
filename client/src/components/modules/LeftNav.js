@@ -39,7 +39,7 @@ function LeftNav() {
 
 function List() {
     return (
-        <div className="togle-menu" style={{ marginTop: "20px" }}>
+        <div className="toggle-menu" style={{ marginTop: "58px" }}>
             <Link to={"/home"}>
                 <li>HOME</li>
             </Link>
@@ -66,8 +66,8 @@ const Button = styled.img`
     }
 
     @media(max-width : 811px){
-        width : 4vw;
-        height : 4vw;
+        width : 19px;
+        height : 19px;
         position : absolute;
         top : 9px;
         left : 15px;

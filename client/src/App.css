@@ -240,7 +240,6 @@
       .show-toggle-menu {
         margin : 0 auto;
         font-size : 1.1em;
-        top : 30px;
         width: 150px;
         height : 100%;
         z-index : 100;
@@ -258,7 +257,6 @@
       .disappear-toggle-menu {
         margin : 0 auto;
         font-size : 1.1em;
-        top : 30px;
         width: 150px;
         height : 100%;
         z-index : 100;

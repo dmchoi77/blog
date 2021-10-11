@@ -100,8 +100,7 @@
     }
 
     .navbar-brand {
-      margin-right: 11rem;
-      font-size: 1.25rem;
+      margin-right: 180px;
       white-space: nowrap;
     }
     
@@ -153,9 +152,9 @@
 
     /* 반응형 */
     @media(max-width : 811px) {
-      * {
-        font-size: 0.7rem;
-      }
+      /* * {
+        font-size: 1rem;
+      } */
 
       @keyframes slidein {
         0% {
@@ -240,7 +239,6 @@
       .show-toggle-menu {
         margin : 0 auto;
         top : -1px;
-        font-size : 1.1em;
         width: 150px;
         height : 100%;
         z-index : 100;
@@ -258,7 +256,6 @@
       .disappear-toggle-menu {
         margin : 0 auto;
         top : -1px;
-        font-size : 1.1em;
         width: 150px;
         height : 100%;
         z-index : 100;

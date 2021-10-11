@@ -28,7 +28,7 @@ function Header(props) {
         <Container>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ zIndex: "999", width: "1340px", margin: "0 auto", position: "fixed", top: 0, left: 0, right: 0 }}>
                 <HeaderToggle className="Header-Toggle" onClick={toggleMenu}>
-                    <Button src="img/menu.png"></Button>
+                    <Button src="/img/menu.png"></Button>
                     <div>
                         {toggle === null ?
                             null :
@@ -79,7 +79,6 @@ const HeaderToggle = styled.div`
   position : fixed;
   z-index : 1001;
   left : -5px;
-
 `
 
 const Button = styled.img`

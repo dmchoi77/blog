@@ -148,7 +148,7 @@ function BoardList() {
                 <Row align="center" className="search-bar">
                     <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
                     />
-                    <Search src="img/search.png" onClick={onSearch}></Search>
+                    <Search src="/img/search.png" onClick={onSearch}></Search>
                 </Row>
             </Form>
         </Container >
@@ -165,7 +165,7 @@ const Container = styled.div`
 const Search = styled.img`
     width : 38px;
     height : 38px;
-    padding : 0px 0px 0px 0px;
+    padding : 5px;
 `
 
 export default BoardList;

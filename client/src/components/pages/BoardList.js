@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Table, Form, Row, Col } from 'react-bootstrap';
+import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
@@ -146,23 +146,26 @@ function BoardList() {
             </Button>
             <Form onSubmit={handleSubmit}>
                 <Row align="center" className="search-bar">
-                    <Col sm={3} className="my-1">
-                        <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
-                        />
-                    </Col>
-                    <Col xs={1} className="my-1">
-                        <Button className="search-button" type="button" onClick={onSearch}>검색</Button>
-                    </Col>
+                    <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
+                    />
+                    <Search src="img/search.png" onClick={onSearch}></Search>
                 </Row>
             </Form>
-        </Container>
+        </Container >
     )
 }
 
 const Container = styled.div`
     padding : 4rem 0 0 0;
-    margin : 0 auto 7rem;
+    margin : 0 auto 4rem;
     width : 100%;
     min-height: 100%;
 `
+
+const Search = styled.img`
+    width : 38px;
+    height : 38px;
+    padding : 0px 0px 0px 0px;
+`
+
 export default BoardList;

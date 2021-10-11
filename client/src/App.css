@@ -49,12 +49,8 @@
     .form {
       display : block;
     }
-    
-    .my-1.col-1 {
-      /* margin-left : 10px; */
-    }
-
-    .mb-3 {
+ 
+   .mb-3 {
       width: 100%;
     }
 
@@ -66,7 +62,7 @@
       display :block;
       align-items: center;
       padding : 0, 0 , 0 ,0;
-      width : 100%;
+      /* width : 280px; */
     }
     
     .toast {
@@ -117,9 +113,11 @@
     }
     
     .search-bar {
-      margin-top: 30px;
       display: flex;
-      justify-content: center
+      justify-content: center;
+      flex-wrap: nowrap;
+      width: 280px;
+      margin : 0 auto;
     }
     
     .post-view-go-list-btn, .post-write-btn, .post-view-go-modify-btn, .reply-btn {
@@ -139,9 +137,6 @@
       display : none;
     }
     
-    /* .row>* {
-      width : 27vw;
-    } */
     a {
       color : black;
     }
@@ -156,12 +151,10 @@
       margin-bottom: 30px;
     }
 
-
-
     /* 반응형 */
     @media(max-width : 811px) {
       * {
-        font-size: 15px;
+        font-size: 0.7rem;
       }
 
       @keyframes slidein {
@@ -169,13 +162,13 @@
           left: -40%;
         }
         100% {
-          left: 0%;
+          left: -1%;
         }
       }
       
       @keyframes slideout {
         0% {
-          left : 0%;
+          left : -1%;
         }
         100% {
           left :-40%;
@@ -183,11 +176,8 @@
       }
 
       .navbar {
-        width : 100vw !important;
-      }
-
-      .nav-link {
-        margin-right: 3px;
+        width : 100% !important;
+        justify-content: end;
       }
 
       .home-link {
@@ -214,20 +204,19 @@
         width : 100% !important;
       }
 
+      .form-control {
+        width : 200px;
+      }
+
       .loginBtn, .signupBtn, .backBtn {
         width : 100% !important;
       }
 
-      .form-control {
-      
-        width : 200px;
-      }
-      
       .search-bar {
+        width: 100%;
         margin-top: 30px;
         display: flex;
         justify-content: center;
-        flex-direction: column;
         align-content: center;
       }
 
@@ -282,7 +271,7 @@
         align-items: center; 
         
         animation-name: slideout;
-        animation-duration: 1s;
+        animation-duration: 0.8s;
       }
 
       .show-toggle-menu li, .disappear-toggle-menu li {

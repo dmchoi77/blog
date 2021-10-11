@@ -51,11 +51,11 @@ function Header(props) {
                 {props.isLogin ?
                     <Nav.Link onClick={onLogout}>
                         Log out
-                </Nav.Link>
+                      </Nav.Link>
                     :
                     <Nav.Link onClick={onLogin}>
                         Log In
-                </Nav.Link>
+                      </Nav.Link>
                 }
             </Navbar>
         </Container>

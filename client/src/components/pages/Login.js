@@ -2,13 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
     const [inputId, setInputId] = useState('');
     const [inputPw, setInputPw] = useState('');
-    const history = useHistory();
 
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -31,17 +30,13 @@ function Login() {
         }).then((res) => {
             //console.log(res);
             if (res.data.id === undefined) {
-                //console.log('======================', res.data.msg);
                 if (res.data.msg === "비밀번호가 일치하지 않습니다.") alert("비밀번호가 일치하지 않습니다.");
                 else if (res.data.msg === "일치하는 id가 없습니다.") alert('일치하는 아이디가 존재하지 않습니다.');
 
             } else if (res.data.id === inputId) {
-                // id, pw 모두 일치 userId = userId1, msg = undefined
-                console.log('======================', '로그인 성공');
                 sessionStorage.setItem('id', inputId); //로그인 성공하면 세션스토리지에 정보저장
                 document.location.href = '/home';
             }
-            //작업 완료 되면 페이지 이동(새로고침)
         }).catch()
     }
 

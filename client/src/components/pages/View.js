@@ -5,7 +5,6 @@ import { useHistory, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
-import Comment from '../modules/Comments';
 import MDEditor from "@uiw/react-md-editor"
 import Reply from '../modules/Reply'
 
@@ -27,7 +26,7 @@ function View(props) {
 
     useEffect(() => {
         let isComponentMounted = true;
-        axios.get('http://localhost:8000/api/view', {
+        axios.get('http://13.124.169.57:8000/api/view', {
             params: {
                 'idx': idx,
             }
@@ -41,7 +40,7 @@ function View(props) {
                     index: res.data[0].idx,
                     view: res.data[0].view
                 })
-                axios.put('http://localhost:8000/api/view', { //조회수 증가
+                axios.put('http://13.124.169.57:8000/api/view', { //조회수 증가
                     index: res.data[0].idx,
                     view: res.data[0].view
                 })
@@ -68,7 +67,7 @@ function View(props) {
             e.preventDefault();
         }
         else {
-            axios.delete(`http://localhost:8000/api/board/delete/${index}`, {
+            axios.delete(`http://13.124.169.57:8000/api/board/delete/${index}`, {
                 data: {
                     title: title,
                     content: content,

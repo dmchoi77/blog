@@ -41,7 +41,7 @@ function BoardModify(props) {
     }
 
     const submit = () => {
-        axios.put(`http://localhost:8000/api/board/modify/${index}`, {
+        axios.put(`http://13.124.169.57:8000/api/board/modify/${index}`, {
             title: title,
             content: content,
             idx: index

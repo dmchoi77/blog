@@ -14,7 +14,7 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
 function BoardWrite(props) {
-    
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const writer = sessionStorage.id;
@@ -24,19 +24,20 @@ function BoardWrite(props) {
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
-    // if (!sessionStorage.id === 'admin') {
-    //     // document.location.href = '/login'
-    //     // alert("로그인이 필요합니다.");
-    //     alert("글쓰기 권한이 없습니다.");
-    // }
-
-    if (!props.location.state) {
-        alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
+    if (!sessionStorage.id) {
+        // document.location.href = '/login'
+        // alert("로그인이 필요합니다.");
+        alert("글쓰기 권한이 없습니다.");
         history.goBack();
     }
-    else if (props.location.state.writer === 'admin') {
-        alert("권한이 없습니다.");
-    }
+
+    // if (!props.location.state) {
+    //     alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
+    //     history.goBack();
+    // }
+    // else if (!props.location.state) {
+    //     alert("권한이 없습니다.");
+    // }
 
     const handleInputTitle = () => {
         const data = editTitle.current.value;
@@ -45,9 +46,9 @@ function BoardWrite(props) {
     }
 
     const submit = (e) => {
-        axios.get('http://localhost:8000/api/board/index') //인덱스 조회
+        axios.get('http://13.124.169.57:8000/api/board/index') //인덱스 조회
             .then((response) => {
-                axios.post('http://localhost:8000/api/board/post', {
+                axios.post('http://13.124.169.57:8000/api/board/post', {
                     index: null ? 1 : response.data[0].index + 1, //첫 번째 게시글일 경우 indx가 null이므로 1로 설정
                     title: title,
                     content: content,
@@ -71,7 +72,7 @@ function BoardWrite(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('http://localhost:8000/api/image', formData, {
+        const result = await axios.post('http://13.124.169.57:8000/api/image', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });

@@ -46,7 +46,7 @@ function SignUp() {
         }
 
         (() => {
-            axios.post('http://localhost:8000/api/signup', {
+            axios.post('http://13.124.169.57:8000/api/signup', {
                 name: name,
                 id: id,
                 password: pwd,

@@ -17,7 +17,7 @@ function Reply(props) {
     useEffect(() => {
         setMount(true)
         //console.log("component did mount")
-        axios.get(`http://localhost:8000/api/board/${index}/replies`, {
+        axios.get(`http://13.124.169.57:8000/api/board/${index}/replies`, {
             params: {
                 'idx': index
             }
@@ -42,7 +42,7 @@ function Reply(props) {
             return;
         }
         else {
-            axios.post(`http://localhost:8000/api/board/${index}/replies/${replyIdx}`, {
+            axios.post(`http://13.124.169.57:8000/api/board/${index}/replies/${replyIdx}`, {
                 content_idx: props.index,
                 name: name ? name : "익명",
                 content: content,
@@ -93,7 +93,7 @@ function ReplyList(props) {
                     <div key={i}>
                         <Toast show={true} onClose={() => {
                             if (sessionStorage.getItem('id') === reply[i].user_name) {
-                                axios.delete(`http://localhost:8000/api/board/${index}/replies/delete/${replyIdx}`, {
+                                axios.delete(`http://13.124.169.57:8000/api/board/${index}/replies/delete/${replyIdx}`, {
                                     data: {
                                         content_idx: props.index,
                                         replyIdx: reply[i].reply_idx,

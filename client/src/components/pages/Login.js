@@ -22,7 +22,7 @@ function Login() {
         if (sessionStorage.getItem('id')) {
             sessionStorage.removeItem('id')
         }
-        axios.post('http://localhost:8000/api/login', null, {
+        axios.post('http://13.124.169.57:8000/api/login', null, {
             params: {
                 id: inputId,
                 password: inputPw

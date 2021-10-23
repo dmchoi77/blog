@@ -28,7 +28,7 @@ function BoardList() {
 
     useEffect(() => {
         let isComponentMounted = true;
-        axios.get('http://localhost:8000/api/board/list')
+        axios.get('http://13.124.169.57:8000/api/board/list')
             .then((response) => {
                 let data = response.data.reverse();
                 if (isComponentMounted) {
@@ -133,7 +133,7 @@ function BoardList() {
             />
             <Button className="post-write-btn" variant="primary" type='button'
                 onClick={() => {
-                    if (sessionStorage.id !== 'admin') {
+                    if (!sessionStorage.id) {
                         alert("글쓰기 권한이 없습니다.");
                         // document.location.href = '/login'
 

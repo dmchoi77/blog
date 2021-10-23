@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
@@ -13,6 +13,7 @@ import View from './components/pages/View';
 import Header from './components/modules/Header';
 import LeftNav from './components/modules/LeftNav';
 import Footer from './components/modules/Footer';
+import NotFound from './components/pages/NotFound';
 
 function Main() {
   // 로그인 상태 관리
@@ -28,12 +29,13 @@ function Main() {
     }
   });
 
-    return (
-      <>
-        <Header isLogin={isLogin}/>
-        <Container>
-          <LeftNav/>
-          <Contents>
+  return (
+    <>
+      <Header isLogin={isLogin} />
+      <Container>
+        <LeftNav />
+        <Contents>
+          <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/board/newpost" component={BoardWrite} />
             <Route exact path="/home" component={Home} />
@@ -42,11 +44,13 @@ function Main() {
             <Route exact path="/board/modify/:data" component={BoardModify} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
-          </Contents>
-        </Container >
-        <Footer />
-      </>
-    )
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Contents>
+      </Container >
+      <Footer />
+    </>
+  )
 }
 
 const Container = styled.div`

@@ -176,7 +176,7 @@
 
       .navbar {
         width : 100% !important;
-        justify-content: end;
+        justify-content: space-between;
       }
 
       .home-link {

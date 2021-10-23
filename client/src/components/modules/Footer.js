@@ -16,11 +16,6 @@ function Footer() {
 const Container = styled.div`
     width : 100%;
     background-color: #0d6efd;
-
-    @media(max-width : 811px) {
-        display : none;
-        left : cal(-240px);
-    }
 `
 
 const Content = styled.div`
@@ -34,7 +29,12 @@ const Content = styled.div`
     text-align: center;
     color: white;
     font-weight: 600;
-    font-size : 0.3rem
+    font-size : 0.3rem;
+
+    @media(max-width : 811px) {
+        width: 100%;
+        height : 4rem;
+    }
 `
 
 export default Footer;

@@ -14,6 +14,7 @@ import Header from './components/modules/Header';
 import LeftNav from './components/modules/LeftNav';
 import Footer from './components/modules/Footer';
 import NotFound from './components/pages/NotFound';
+import Portfolio from './components/pages/Portfolio';
 
 function Main() {
   // 로그인 상태 관리
@@ -44,6 +45,7 @@ function Main() {
             <Route exact path="/board/modify/:data" component={BoardModify} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/portfolio" component={Portfolio}/>
             <Route path="*" component={NotFound} />
           </Switch>
         </Contents>

@@ -76,9 +76,9 @@ const Container = styled.div`
 `
 
 const HeaderToggle = styled.div`
-  position : fixed;
-  z-index : 1001;
-  left : -5px;
+    position : fixed;
+    z-index : 1001;
+    left : -5px;
 `
 
 const Button = styled.img`

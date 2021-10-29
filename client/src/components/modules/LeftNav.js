@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +22,9 @@ export function List() {
                 <li>HOME</li>
             </Link>
             <li>프로필</li>
-            <li>포트폴리오</li>
+            <Link to={"/portfolio"}>
+                <li>포트폴리오</li>
+            </Link>
             <hr style={{ margin: ".5rem", width: "6rem" }} />
             <Link to={"/board/list"}>
                 <li>게시판</li>

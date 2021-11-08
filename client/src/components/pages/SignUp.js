@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../_actions/user_action';
 
 function SignUp() {
 
@@ -11,25 +12,28 @@ function SignUp() {
     const [pwd, setPwd] = useState('');
     const [pwdCheck, setPwdCheck] = useState('');
 
-    const handleInputName = (e) => {
+    const dispatch = useDispatch();
+
+    const nameHandler = (e) => {
         setName(e.target.value.trim());
     }
 
-    const handleInputId = (e) => {
+    const idHandler = (e) => {
         setId(e.target.value.trim());
     }
 
-    const handleInputPwd = (e) => {
+    const pwdHandler = (e) => {
         setPwd(e.target.value.trim());
     }
 
-    const handleInputPwdCheck = (e) => {
+    const pwdCheckHandler = (e) => {
         setPwdCheck(e.target.value.trim());
     }
 
     const history = useHistory();
 
-    const _signUp = () => {
+    const loginHandler = (e) => {
+        e.preventDefault();
 
         const eng_check = /^[a-z]+[a-z0-9]{5,19}$/g;
         const pw_check = /^[a-z]+[a-z0-9]{5,19}$/g;
@@ -45,47 +49,46 @@ function SignUp() {
             return alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.')
         }
 
-        (() => {
-            axios.post('http://13.124.169.57:8000/api/signup', {
-                name: name,
-                id: id,
-                password: pwd,
-                psw_check: pwdCheck
-            }).then((res) => {
-                if (res.data === "ER_DUP_ENTRY") return alert("이미 가입되어 있는 아이디 입니다.");
-                else if (res.data === "complete") {
-                    alert("회원가입 완료");
-                    document.location.href = '/login';
-                    return
+        let body = {
+            name: name,
+            id: id,
+            pwd: pwd
+        }
+
+        dispatch(registerUser(body))
+            .then(res => {
+                if (res.payload.success) {
+                    alert("회원가입에 성공했습니다.");
+                    history.push('/login');
+                } else {
+                    alert("회원가입에 실패했습니다.")
                 }
             })
-        })();
+}
 
-    }
-
-    return (
-        <Container>
-            <Title>회원가입</Title>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={handleInputName} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control className="form" type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={handleInputId} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control className="form" type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={handleInputPwd} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control className="form" type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={handleInputPwdCheck} />
-            </Form.Group>
-            <Button className="signupBtn" variant="primary" type='button' onClick={_signUp}>
-                회원가입
+return (
+    <Container>
+        <Title>회원가입</Title>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={nameHandler} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Control className="form" type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={idHandler} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Control className="form" type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={pwdHandler} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Control className="form" type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={pwdCheckHandler} />
+        </Form.Group>
+        <Button className="signupBtn" variant="primary" type='button' onClick={loginHandler}>
+            회원가입
             </Button>
-            <Button className="backBtn" variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
-                뒤로 가기
+        <Button className="backBtn" variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
+            뒤로 가기
             </Button>
-        </Container>
-    )
+    </Container>
+)
 };
 
 const Container = styled.div`

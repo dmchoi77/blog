@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import SignUp from './components/pages/SignUp';
@@ -15,38 +15,27 @@ import LeftNav from './components/modules/LeftNav';
 import Footer from './components/modules/Footer';
 import NotFound from './components/pages/NotFound';
 import Portfolio from './components/pages/Portfolio';
+import Auth from './hoc/auth';
 
 function Main() {
-  // 로그인 상태 관리
-  const [isLogin, setIsLogin] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem('id') === null) {
-      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
-    } else {
-      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
-      // 로그인 상태 변경
-      setIsLogin(true)
-    }
-  });
 
   return (
     <>
-      <Header isLogin={isLogin} />
+      <Header/>
       <Container>
         <LeftNav />
         <Contents>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/board/newpost" component={BoardWrite} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/board/list" component={BoardList} />
-            <Route exact path="/board/view/:data" component={View} />
-            <Route exact path="/board/modify/:data" component={BoardModify} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/portfolio" component={Portfolio}/>
-            <Route path="*" component={NotFound} />
+            <Route exact path="/" component={Auth(Home,null)} />
+            <Route exact path="/board/newpost" component={Auth(BoardWrite,true)} />
+            <Route exact path="/home" component={Auth(Home,null)} />
+            <Route exact path="/board/list" component={Auth(BoardList,null)} />
+            <Route exact path="/board/view/:data" component={Auth(View,null)} />
+            <Route exact path="/board/modify/:data" component={Auth(BoardModify,true)} />
+            <Route exact path="/login" component={Auth(Login,false)} />
+            <Route exact path="/signup" component={Auth(SignUp,null)} />
+            <Route exact path="/portfolio" component={Auth(Portfolio,null)}/>
+            <Route path="*" component={Auth(NotFound,null)} />
           </Switch>
         </Contents>
       </Container >

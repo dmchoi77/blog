@@ -1,56 +1,52 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../_actions/user_action';
 
 function Login() {
 
-    const [inputId, setInputId] = useState('');
-    const [inputPw, setInputPw] = useState('');
+    const [id, setId] = useState('');
+    const [pwd, setPwd] = useState('');
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-    const handleInputId = (e) => {
-        setInputId(e.target.value);
+    const idHandler = (e) => {
+        setId(e.target.value);
     }
 
-    const handleInputPw = (e) => {
-        setInputPw(e.target.value);
+    const passwordHandler = (e) => {
+        setPwd(e.target.value);
     }
 
-    const _login = () => {
-        //만약 로그인 정보가 이미 있으면 삭제
-        if (sessionStorage.getItem('id')) {
-            sessionStorage.removeItem('id')
+    const loginHandler = (e) => {
+        e.preventDefault();
+        let body = {
+            id: id,
+            pwd: pwd
         }
-        axios.post('http://13.124.169.57:8000/api/login', null, {
-            params: {
-                id: inputId,
-                password: inputPw
-            }
-        }).then((res) => {
-            //console.log(res);
-            if (res.data.id === undefined) {
-                if (res.data.msg === "비밀번호가 일치하지 않습니다.") alert("비밀번호가 일치하지 않습니다.");
-                else if (res.data.msg === "일치하는 id가 없습니다.") alert('일치하는 아이디가 존재하지 않습니다.');
 
-            } else if (res.data.id === inputId) {
-                sessionStorage.setItem('id', inputId); //로그인 성공하면 세션스토리지에 정보저장
-                document.location.href = '/home';
-            }
-        }).catch()
+        dispatch(loginUser(body))
+            .then(res => {
+                if (res.payload.loginSuccess === false || res.payload.message === "해당하는 아이디가 없습니다.") alert("아이디와 비밀번호를 확인해 주세요.");
+                else if (res.payload.loginSuccess === true) {
+                    history.push('/home');
+                }
+            })
     }
 
     return (
         <Container>
             <Title>dmchoi</Title>
-            <Form>
+            <Form >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control className="form" type="text" name='input_id' value={inputId} onChange={handleInputId} placeholder="아이디" />
+                    <Form.Control className="form" type="text" name='input_id' value={id} onChange={idHandler} placeholder="아이디" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control className="form" type='password' name='input_pw' value={inputPw} onChange={handleInputPw} placeholder="비밀번호" />
+                    <Form.Control className="form" type='password' name='input_pw' value={pwd} onChange={passwordHandler} placeholder="비밀번호" />
                 </Form.Group>
-                <Button className="loginBtn" variant="primary" type='button' onClick={_login}>
+                <Button className="loginBtn" variant="primary" type='button' onClick={loginHandler}>
                     로그인
                 </Button>
                 <SignUp>처음이면 <Link to={"/signup"} style={{ color: "#004282" }}>회원가입</Link></SignUp>

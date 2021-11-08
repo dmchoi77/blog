@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Prism from 'prismjs';
@@ -17,16 +18,18 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 
 function BoardModify(props) {
 
+    const user = useSelector(state => state.user)
     const history = useHistory();
     const editTitle = useRef();
     const editContent = useRef();
-    const id = sessionStorage.id;
+    const writer = user.length > 0 ? user.userData.name : null;
+    console.log(props.location.state.writer)
 
     if (!props.location.state) {
         alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
         history.goBack();
     }
-    else if (id !== props.location.state.writer) {
+    else if (writer !== props.location.state.writer) {
         alert("권한이 없습니다.");
     }
 
@@ -72,7 +75,7 @@ function BoardModify(props) {
     return (
         <Container>
             <h2>게시글 수정</h2>
-            <TitleInput type='text' placeholder='제목' name='title' ref= {editTitle} onChange={handleInputTitle} value={title} />
+            <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} value={title} />
             <Editor
                 previewStyle='vertical'
                 height='400px'

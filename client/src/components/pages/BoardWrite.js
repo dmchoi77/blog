@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -17,27 +18,19 @@ function BoardWrite(props) {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const writer = sessionStorage.id;
+    const user = useSelector(state => state.user)
+    const writer = user.length > 0 ? user.userData.name : null;
     const history = useHistory();
     const editTitle = useRef();
     const editContent = useRef();
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
-    if (!sessionStorage.id) {
-        // document.location.href = '/login'
-        // alert("로그인이 필요합니다.");
+    //관리자만 글쓰기 가능(role = 1)
+    if (user.userData.role === 0) {
         alert("글쓰기 권한이 없습니다.");
-        history.goBack();
+        props.history.push('/');
     }
-
-    // if (!props.location.state) {
-    //     alert("잘못된 접근입니다."); //url로 직접 접근을 시도할 경우
-    //     history.goBack();
-    // }
-    // else if (!props.location.state) {
-    //     alert("권한이 없습니다.");
-    // }
 
     const handleInputTitle = () => {
         const data = editTitle.current.value;

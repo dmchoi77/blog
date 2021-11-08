@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 
-function BoardList() {
+function BoardList(props) {
 
     const [list, setList] = useState({
         data: {
@@ -24,7 +24,6 @@ function BoardList() {
 
     //검색어 상태 관리
     const [search, setSearch] = useState('');
-    const history = useHistory();
 
     useEffect(() => {
         let isComponentMounted = true;
@@ -133,14 +132,15 @@ function BoardList() {
             />
             <Button className="post-write-btn" variant="primary" type='button'
                 onClick={() => {
-                    if (!sessionStorage.id) {
-                        alert("글쓰기 권한이 없습니다.");
-                        // document.location.href = '/login'
+                    props.history.push('/board/newpost')
+                    // if (!sessionStorage.id) {
+                    //     alert("글쓰기 권한이 없습니다.");
+                    //     // document.location.href = '/login'
 
-                    } else {
-                        history.push('/board/newpost');
+                    // } else {
+                    //     history.push('/board/newpost');
 
-                    }
+                    // }
                 }}>
                 글쓰기
             </Button>

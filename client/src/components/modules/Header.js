@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { List } from './LeftNav';
+import { useSelector } from "react-redux";
 
-function Header(props) {
-
+function Header() {
     const [toggle, setToggle] = useState(null);
+    const user = useSelector(state => state.user)
     const history = useHistory();
+
     const onLogout = () => {
-        // sessionStorage 에 user_id 로 저장되어있는 아이템을 삭제한다.
-        sessionStorage.removeItem('id')
-        // App 으로 이동(새로고침)
-        history.push('/');
+        axios.get('/api/user/logout')
+            .then(res => {
+                if (res.status === 200) {
+                    history.push('/login');
+                } else {
+                    alert("로그아웃 실패");
+                }
+            })
     }
 
     const onLogin = () => {
@@ -48,17 +55,17 @@ function Header(props) {
                         dmchoi
                     </Link>
                 </Navbar.Brand>
-                {props.isLogin ?
+                {user.userData && !user.userData.isAuth ?
+                    < Nav.Link onClick={onLogin}>
+                        Log In
+              </Nav.Link>
+                    :
                     <Nav.Link onClick={onLogout}>
                         Log out
-                      </Nav.Link>
-                    :
-                    <Nav.Link onClick={onLogin}>
-                        Log In
-                      </Nav.Link>
+                    </Nav.Link>
                 }
             </Navbar>
-        </Container>
+        </Container >
     )
 }
 

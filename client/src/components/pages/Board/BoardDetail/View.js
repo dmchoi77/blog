@@ -6,77 +6,70 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 import MDEditor from "@uiw/react-md-editor"
-import Reply from '../modules/Reply'
+import { useSelector } from 'react-redux';
+import Comment from './Sections/Comment'
+
 
 function View(props) {
-    const [data, setData] = useState({
-        title: '',
-        content: '',
-        date: '',
-        writer: '',
-        index: '',
-        view: ''
-    })
 
-    const { title, content, date, writer, index, view } = data;
-    const { params } = props.match;
-    const id = sessionStorage.id;
-    const idx = params.data;
+    const user = useSelector(state => state.user);
+    const [post, setPost] = useState([])
+    const { title, content, date, writer, index, view, _id } = post;
+    const [comments, setComments] = useState([])
+    const idx = props.match.params.data
     const history = useHistory();
 
     useEffect(() => {
-        let isComponentMounted = true;
-        axios.get('http://13.124.169.57:8000/api/view', {
+        
+        axios.get('http://localhost:8000/api/view', {
             params: {
                 'idx': idx,
             }
         }).then(res => {
-            if (isComponentMounted) {
-                setData({
-                    title: res.data[0].title,
-                    content: res.data[0].content,
-                    date: res.data[0].date,
-                    writer: res.data[0].writer,
-                    index: res.data[0].idx,
-                    view: res.data[0].view
-                })
-                axios.put('http://13.124.169.57:8000/api/view', { //조회수 증가
-                    index: res.data[0].idx,
-                    view: res.data[0].view
-                })
-            }
-        }).catch((error) => {
-            alert("잘못된 경로입니다.");
-            history.push("/board/list");
+            setPost(res.data[0])
+            axios.put('http://localhost:8000/api/view', { //조회수 증가
+                index: res.data[0].index
+            })
+
+            axios.get('http://localhost:8000/api/comment/getComment', {
+                params: {
+                    'idx': idx,
+                }
+            }).then(res => {
+                if (res.data.success) {
+                    setComments(res.data.comments)
+                } else {
+                    // alert("댓글 정보를 가져오는 것에 실패했습니다.")
+                }
+            })
         })
-        return () => {
-            isComponentMounted = false;
-        }
     }, [])
 
-    const onModify = (e) => {
-        if (id !== writer) {
-            alert("수정 권한이 없습니다.");
-            e.preventDefault();
+    const refreshFunction = (variables) => {
+
+        if (typeof (variables) === 'object') { //댓글 등록 시
+            setComments(comments.concat(variables))
+        }
+
+        else { //댓글 삭제 시
+            setComments(comments => comments.filter(comment => comment._id !== variables))
         }
     }
 
     const onDelete = (e) => {
-        if (data.writer !== sessionStorage.id) {
-            alert("삭제 권한이 없습니다.");
-            e.preventDefault();
-        }
-        else {
-            axios.delete(`http://13.124.169.57:8000/api/board/delete/${index}`, {
+        if (user.userData.role) {
+            axios.delete(`http://localhost:8000/api/board/${index}`, {
                 data: {
-                    title: title,
-                    content: content,
-                    idx: index
+                    idx: idx
                 }
             }).then((res) => {
-                // alert("삭제되었습니다.");
+                alert("삭제되었습니다.");
                 history.push("/board/list");
             })
+        }
+        else {
+            alert("삭제 권한이 없습니다.");
+            e.preventDefault();
         }
     }
 
@@ -104,12 +97,12 @@ function View(props) {
                 pathname: `/board/modify/${idx}`,
                 state: {
                     writer: writer, //BoardModify로 props 전달
-                    index: index,
+                    index: idx,
                     title: title,
                     content: content
                 }
             }} className="link">
-                <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onModify}>
+                <Button className="post-view-go-modify-btn" variant="primary" type='button'>
                     수정
                 </Button>
             </Link>
@@ -117,9 +110,7 @@ function View(props) {
                 삭제
             </Button>
             <hr />
-            <h3>Comments</h3>
-            <Reply index={idx} />
-            {/* <Comment repo="Dong-min-choi/Blog" /> */}
+            <Comment idx={idx} commentList={comments} refreshFunction={refreshFunction} />
         </Container>
 
     )

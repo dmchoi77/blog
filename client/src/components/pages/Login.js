@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../_actions/user_action';
+import { loginUser } from '../../actions/user_action';
 
 function Login() {
 

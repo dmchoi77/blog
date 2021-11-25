@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import Pagination from '../modules/Pagination';
-import { paginate } from '../modules/Pagination';
+import Pagination from '../../modules/Pagination';
+import { paginate } from '../../modules/Pagination';
 
 function BoardList(props) {
 
     const [list, setList] = useState({
         data: {
-            idx: '',
+            index: '',
             title: '',
             content: '',
             date: '',
@@ -27,7 +27,7 @@ function BoardList(props) {
 
     useEffect(() => {
         let isComponentMounted = true;
-        axios.get('http://13.124.169.57:8000/api/board/list')
+        axios.get('http://localhost:8000/api/board/list')
             .then((response) => {
                 let data = response.data.reverse();
                 if (isComponentMounted) {
@@ -103,12 +103,12 @@ function BoardList(props) {
                         pagedList.map(rowData => (
                             rowData.idx !== '' &&
                             // 최초 선언한 기본값은 나타내지 않음
-                            <tr key={rowData.idx}>
+                            <tr key={rowData.index}>
                                 <td>
-                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx} >{rowData.idx}</Link>
+                                    <Link to={`/board/view/${rowData.index}`} index={rowData.index} >{rowData.index}</Link>
                                 </td>
                                 <td>
-                                    <Link to={`/board/view/${rowData.idx}`} index={rowData.idx}>{rowData.title}</Link>
+                                    <Link to={`/board/view/${rowData.index}`} index={rowData.index}>{rowData.title}</Link>
                                 </td>
                                 <td>
                                     {rowData.date}
@@ -148,7 +148,7 @@ function BoardList(props) {
                 <Row align="center" className="search-bar">
                     <Form.Control id="inlineFormInputName" placeholder="Search" value={search} onChange={handleInputTitle}
                     />
-                    <Search src="/img/search.png" onClick={onSearch}></Search>
+                    <Search src="/img/search.png" onClick={onSearch} />
                 </Row>
             </Form>
         </Container >

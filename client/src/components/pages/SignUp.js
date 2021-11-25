@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../_actions/user_action';
+import { registerUser } from '../../actions/user_action';
 
 function SignUp() {
 

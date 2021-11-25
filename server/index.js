@@ -5,13 +5,12 @@ const PORT = 8000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { urlencoded } = require('body-parser');
-const db = require('./router/db');
-// const boardManage = require('./router/boardManage');
-// const boardList = require('./router/boardList');
-// const signUp = require('./router/signUp');
-// const view = require('./router/view');
-// const userInform = require('./router/userInform');
-const router = require('./router/router')
+
+const board = require('./router/board');
+const login = require('./router/login');
+const view = require('./router/view');
+const image = require('./router/image');
+const comment = require('./router/comment');
 const mongoose = require('mongoose');
 const config = require('./config/key');
 const cookieParser = require('cookie-parser')
@@ -30,13 +29,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use('/',router)
-// app.use('/', boardManage);
-// app.use('/', boardList);
-// app.use('/', signUp);
-// app.use('/', view);
-// app.use('/', userInform);
-
+app.use('/', board);
+app.use('/', login);
+app.use('/', view);
+app.use('/', comment);
+app.use('/', image);
 app.listen(PORT, () => {
     console.log(`running on PORT ${PORT}`);
 });

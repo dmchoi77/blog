@@ -1,7 +1,9 @@
+/*eslint-disable*/
+
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Prism from 'prismjs';
@@ -14,23 +16,16 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
-function BoardWrite(props) {
+function BoardModify(props) {
 
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
     const user = useSelector(state => state.user)
-    const writer = user.length > 0 ? user.userData.name : null;
     const history = useHistory();
     const editTitle = useRef();
     const editContent = useRef();
-    const [imgURL, setImgURL] = useState([]);
-    let temp = [];
-
-    //관리자만 글쓰기 가능(role = 1)
-    if (user.userData.role === 0) {
-        alert("글쓰기 권한이 없습니다.");
-        props.history.push('/');
-    }
+    const writer = user.length > 0 ? user.userData.name : null;
+    const [index, setIndex] = useState(props.location.state.index);
+    const [title, setTitle] = useState(props.location.state.title);
+    const [content, setContent] = useState(props.location.state.content);
 
     const handleInputTitle = () => {
         const data = editTitle.current.value;
@@ -38,26 +33,19 @@ function BoardWrite(props) {
         //console.log(title);
     }
 
-    const submit = (e) => {
-        axios.get('http://13.124.169.57:8000/api/board/index') //인덱스 조회
-            .then((response) => {
-                axios.post('http://13.124.169.57:8000/api/board/post', {
-                    index: null ? 1 : response.data[0].index + 1, //첫 번째 게시글일 경우 indx가 null이므로 1로 설정
-                    title: title,
-                    content: content,
-                    writer: writer,
-                    url: imgURL ? imgURL[0] : null
-                }).then((res) => {
-                    if (res.data === "null") {
-                        alert("내용을 입력하세요.");
+    const submit = () => {
+        if (title !== "" && content !== "") {
+            axios.put(`http://localhost:8000/api/board/${index}`, {
+                title: title,
+                content: content,
+                index: index
+            }).then(() => {
+                // alert("게시글이 수정되었습니다.");
+                history.push("/board/list");
+            })
+        }
 
-                    } else {
-                        // alert("게시글이 등록되었습니다.");
-                        history.push("/board/list");
-                    }
-                }).catch(error => console.log(error));
-            });
-        // console.log(imgURL);
+        else alert("내용을 입력하세요.");
     }
 
     const uploadImage = async (blob) => {
@@ -65,27 +53,24 @@ function BoardWrite(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('http://13.124.169.57:8000/api/image', formData, {
+        const result = await axios.post('http://localhost:8000/api/image', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });
-
-        temp.push(...imgURL);
-        temp.push(result.data);
-        setImgURL(temp);
+        //console.log(result);
 
         return result.data;
     };
 
     return (
         <Container>
-            <h1>게시글 작성</h1>
-            <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} />
+            <h2>게시글 수정</h2>
+            <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} value={title} />
             <Editor
                 previewStyle='vertical'
                 height='400px'
                 plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
-                data=""
+                initialValue={content}
                 name='content'
                 ref={editContent}
                 hooks={{
@@ -107,8 +92,8 @@ function BoardWrite(props) {
                     setContent(data)
                 }}
             />
-            <Button className="post-write-btn" variant="primary" type='button' onClick={submit} >
-                등록
+            <Button className="post-write-btn" variant="primary" type='button' onClick={submit}  >
+                수정
             </Button>
         </Container>
     )
@@ -126,4 +111,4 @@ const TitleInput = styled.input`
     margin: 10px 0 10px;
 `
 
-export default BoardWrite;
+export default BoardModify;

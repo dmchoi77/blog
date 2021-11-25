@@ -8,13 +8,13 @@ import MDEditor from "@uiw/react-md-editor"
 function Preview(props) {
 
     const history = useHistory();
-
+    console.log(props)
     return (
         <Articles>
             {
                 props.list.map((rowData, i) => (
                     rowData.idx !== '' &&
-                    <Article onClick={() => history.push(`/board/view/${rowData.idx}`)} key={i}>
+                    <Article onClick={() => history.push(`/board/view/${rowData.index}`)} key={i}>
                         <Thunmbnail>
                             <img
                                 src={rowData.url ? rowData.url : `https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png`}

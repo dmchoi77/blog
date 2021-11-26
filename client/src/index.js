@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware,createStore } from 'redux'
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import Reducer from './_reducer';
+import Reducer from './reducer';
 
 const createStoreWitdhMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
 

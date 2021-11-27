@@ -27,7 +27,7 @@ function BoardList(props) {
 
     useEffect(() => {
         let isComponentMounted = true;
-        axios.get('http://localhost:8000/api/board/list')
+        axios.get('/api/articles')
             .then((response) => {
                 let data = response.data.reverse();
                 if (isComponentMounted) {
@@ -133,14 +133,6 @@ function BoardList(props) {
             <Button className="post-write-btn" variant="primary" type='button'
                 onClick={() => {
                     props.history.push('/board/newpost')
-                    // if (!sessionStorage.id) {
-                    //     alert("글쓰기 권한이 없습니다.");
-                    //     // document.location.href = '/login'
-
-                    // } else {
-                    //     history.push('/board/newpost');
-
-                    // }
                 }}>
                 글쓰기
             </Button>

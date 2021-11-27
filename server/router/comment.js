@@ -4,7 +4,7 @@ const router = express.Router();
 const { Comment } = require("../models/Comment");
 
 //댓글 저장
-router.post("/api/comment", (req, res) => {
+router.post("/api/comments", (req, res) => {
     const comment = new Comment(req.body);
 
     comment.save((err, comment) => {
@@ -20,7 +20,7 @@ router.post("/api/comment", (req, res) => {
     })
 })
 //댓글 조회
-router.get("/api/comment/getComment", (req, res) => {
+router.get("/api/comments", (req, res) => {
     const params = req.query.idx;
     Comment.find({ 'postId': params })
         .populate("writer")
@@ -31,7 +31,7 @@ router.get("/api/comment/getComment", (req, res) => {
 })
 
 //댓글 삭제
-router.delete("/api/comment", (req, res) => {
+router.delete("/api/comments", (req, res) => {
 
     Comment.deleteMany({ $or: [{ "_id": req.body._id }, { "responseTo": req.body._id }] }
         , (err, data) => {

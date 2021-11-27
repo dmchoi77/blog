@@ -21,17 +21,17 @@ function View(props) {
 
     useEffect(() => {
         
-        axios.get('http://localhost:8000/api/view', {
+        axios.get(`/api/articles/${idx}`, {
             params: {
                 'idx': idx,
             }
         }).then(res => {
             setPost(res.data[0])
-            axios.put('http://localhost:8000/api/view', { //조회수 증가
+            axios.put(`/api/articles/views/${idx}`, { //조회수 증가
                 index: res.data[0].index
             })
 
-            axios.get('http://localhost:8000/api/comment/getComment', {
+            axios.get('/api/comments', {
                 params: {
                     'idx': idx,
                 }
@@ -58,7 +58,7 @@ function View(props) {
 
     const onDelete = (e) => {
         if (user.userData.role) {
-            axios.delete(`http://localhost:8000/api/board/${index}`, {
+            axios.delete(`/api/articles/${index}`, {
                 data: {
                     idx: idx
                 }

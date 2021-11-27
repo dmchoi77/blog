@@ -8,7 +8,7 @@ import MDEditor from "@uiw/react-md-editor"
 function Preview(props) {
 
     const history = useHistory();
-    console.log(props)
+
     return (
         <Articles>
             {

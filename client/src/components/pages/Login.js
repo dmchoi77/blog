@@ -31,7 +31,7 @@ function Login() {
             .then(res => {
                 if (res.payload.loginSuccess === false || res.payload.message === "해당하는 아이디가 없습니다.") alert("아이디와 비밀번호를 확인해 주세요.");
                 else if (res.payload.loginSuccess === true) {
-                    history.push('/home');
+                    history.push('/');
                 }
             })
     }

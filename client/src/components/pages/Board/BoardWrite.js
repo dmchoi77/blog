@@ -38,27 +38,26 @@ function BoardWrite(props) {
         //console.log(title);
     }
 
-    const submit = (e) => {
-        axios.get('http://localhost:8000/api/board') //인덱스 조회
+    const submit = () => {
+
+        if (title === '' || content === '') {
+            alert("내용을 입력하세요.")
+            return
+        }
+
+        axios.get('/api/articles/idxs') //인덱스 조회
             .then((response) => {
-                // console.log(response.data);
-                axios.post('http://localhost:8000/api/board/post', {
+
+                axios.post(`/api/articles/${Number(response.data) + 1}`, {
                     index: Number(response.data) + 1,
                     title: title,
                     content: content,
                     writer: writer,
                     url: imgURL ? imgURL[0] : null
                 }).then((res) => {
-                    if (res.data === "null") {
-                        alert("내용을 입력하세요.");
-
-                    } else {
-                        // alert("게시글이 등록되었습니다.");
-                        history.push("/board/list");
-                    }
-                }).catch(error => console.log(error));
+                    if (res.data.success) history.push("/board/list");
+                })
             });
-        // console.log(imgURL);
     }
 
     const uploadImage = async (blob) => {
@@ -66,7 +65,7 @@ function BoardWrite(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('http://localhost:8000/api/image', formData, {
+        const result = await axios.post('/api/images', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });

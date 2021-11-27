@@ -4,7 +4,7 @@ const { Board } = require('../models/Board');
 const cookieParser = require('cookie-parser')
 
 
-router.get("/api/board/list", (req, res) => {
+router.get("/api/articles", (req, res) => {
     Board.find({})
         .exec((err, data) => {
             // console.log(data)
@@ -13,7 +13,7 @@ router.get("/api/board/list", (req, res) => {
 });
 
 //게시글 작성
-router.post("/api/board/post", (req, res) => {
+router.post("/api/articles/:index", (req, res) => {
     const board = new Board(req.body)
 
     board.save((err, boardInfo) => {
@@ -25,7 +25,7 @@ router.post("/api/board/post", (req, res) => {
 });
 
 //인덱스 조회
-router.get('/api/board', (req, res) => {
+router.get('/api/articles/idxs', (req, res) => {
     Board.find().sort({ index: -1 })
         .exec(function (err, data) {
             if (data.length > 0) return res.json(data[0].index)
@@ -34,7 +34,7 @@ router.get('/api/board', (req, res) => {
 })
 
 //게시글 수정
-router.put("/api/board/:index", (req, res) => {
+router.put("/api/articles/:index", (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
     const idx = req.body.index;
@@ -52,7 +52,7 @@ router.put("/api/board/:index", (req, res) => {
 });
 
 // //게시글 삭제
-router.delete("/api/board/:index", (req, res) => {
+router.delete("/api/articles/:index", (req, res) => {
     const idx = req.body.idx;
 
     Board.remove({ "index": idx }

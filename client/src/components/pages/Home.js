@@ -22,21 +22,16 @@ function Home() {
   });
 
   useEffect(() => {
-    let isComponentMounted = true;
-    axios.get('http://localhost:8000/api/board/list')
+
+    axios.get('/api/articles')
       .then((response) => {
         let data = response.data.reverse();
-        if (isComponentMounted) {
-          setList({
-            data,
-            pageSize: 12,
-            currentPage: 1,
-          });
-        }
+        setList({
+          data,
+          pageSize: 12,
+          currentPage: 1,
+        });
       })
-    return () => {
-      isComponentMounted = false
-    }
   }, [])
 
   //페이징

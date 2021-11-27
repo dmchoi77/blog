@@ -17,6 +17,7 @@ router.post("/api/signup", (req, res) => {
     })
 })
 
+
 router.post('/api/login', (req, res) => {
 
     //요청된 아이디를 DB에 있는지 찾는다
@@ -46,18 +47,18 @@ router.post('/api/login', (req, res) => {
     })
 });
 
-router.get('/api/user/auth', auth, (req, res) => {
+router.get('/api/users/auth', auth, (req, res) => {
     //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 true
     res.status(200).json({
         _id: req.user._id,
-        isAdmin: req.user.role === 0 ? false : true, //role = 1 일반 유저, 0 관리자
+        isAdmin: req.user.role === 0 ? false : true, //role = 1 관리자, 유저 0
         isAuth: true,
         name: req.user.name,
         role: req.user.role,
     })
 })
 
-router.get('/api/user/logout', auth, (req, res) => {
+router.get('/api/logout', auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id },
         { token: "" }
         , (err, user) => {

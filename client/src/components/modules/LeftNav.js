@@ -18,7 +18,7 @@ function LeftNav() {
 export function List() {
     return (
         <div className="toggle-menu">
-            <Link to={"/home"}>
+            <Link to={"/"}>
                 <li>HOME</li>
             </Link>
             <li>프로필</li>

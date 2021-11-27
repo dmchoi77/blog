@@ -4,7 +4,7 @@ const upload = require('../fileupload');
 const multer = require('multer');
 
 //s3에 업로드한 url을 클라이언트로 전송
-router.post("/api/image", (req, res, next) => {
+router.post("/api/images", (req, res, next) => {
 
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {

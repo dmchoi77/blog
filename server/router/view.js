@@ -2,7 +2,7 @@ const express = require('express');
 const { Board } = require('../models/Board');
 const router = express.Router();
 
-router.get("/api/view", (req, res) => {
+router.get("/api/articles/:idx", (req, res) => {
     const params = req.query.idx; //전달 받은 parameter 값
 
     Board.find({ index: params })
@@ -13,7 +13,7 @@ router.get("/api/view", (req, res) => {
 });
 
 //조회수 관리
-router.put("/api/view", (req, res) => {
+router.put("/api/articles/views/:idx", (req, res) => {
     const params = req.body;
 
     Board.findOneAndUpdate({ "index": params.index },

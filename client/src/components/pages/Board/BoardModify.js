@@ -34,14 +34,15 @@ function BoardModify(props) {
     }
 
     const submit = () => {
+        
         if (title !== "" && content !== "") {
-            axios.put(`http://localhost:8000/api/board/${index}`, {
+
+            axios.put(`/api/articles/${index}`, {
                 title: title,
                 content: content,
                 index: index
-            }).then(() => {
-                // alert("게시글이 수정되었습니다.");
-                history.push("/board/list");
+            }).then((res) => {
+                if (res.data.success) history.push("/board/list");
             })
         }
 
@@ -53,7 +54,7 @@ function BoardModify(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('http://localhost:8000/api/image', formData, {
+        const result = await axios.post('/api/images', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });

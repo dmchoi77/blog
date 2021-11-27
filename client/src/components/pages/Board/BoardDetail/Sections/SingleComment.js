@@ -39,7 +39,7 @@ function SingleComment(props) {
             responseTo: props.comment._id
         }
 
-        axios.post('http://localhost:8000/api/comment', variables)
+        axios.post('/api/comments', variables)
             .then(res => {
                 if (res.data.success) {
                     setCommentValue('')
@@ -53,7 +53,7 @@ function SingleComment(props) {
 
     const onDelete = (e) => {
         if (user.userData._id === props.comment.writer._id) {
-            axios.delete('http://localhost:8000/api/comment', {
+            axios.delete('/api/comments', {
                 data: {
                     _id: props.comment._id
                 }

@@ -34,7 +34,7 @@ export default function Comment(props) {
             content: commentValue,
         }
 
-        axios.post('http://localhost:8000/api/comment', variables)
+        axios.post('/api/comments', variables)
             .then(res => {
                 if (res.data.success) {
                     setCommentValue('')

@@ -28,7 +28,6 @@ function Main() {
           <Switch>
             <Route exact path="/" component={Auth(Home,null)} />
             <Route exact path="/board/newpost" component={Auth(BoardWrite,true)} />
-            <Route exact path="/home" component={Auth(Home,null)} />
             <Route exact path="/board/list" component={Auth(BoardList,null)} />
             <Route exact path="/board/view/:data" component={Auth(View,null)} />
             <Route exact path="/board/modify/:data" component={Auth(BoardModify,true)} />

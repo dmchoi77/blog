@@ -12,7 +12,7 @@ function Header() {
     const history = useHistory();
 
     const onLogout = () => {
-        axios.get('/api/user/logout')
+        axios.get('/api/logout')
             .then(res => {
                 if (res.status === 200) {
                     history.push('/login');
@@ -23,7 +23,6 @@ function Header() {
     }
 
     const onLogin = () => {
-        // App 으로 이동(새로고침)
         history.push('/login');
     }
 
@@ -58,7 +57,7 @@ function Header() {
                 {user.userData && !user.userData.isAuth ?
                     < Nav.Link onClick={onLogin}>
                         Log In
-              </Nav.Link>
+                    </Nav.Link>
                     :
                     <Nav.Link onClick={onLogout}>
                         Log out

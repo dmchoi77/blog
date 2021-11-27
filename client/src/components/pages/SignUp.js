@@ -63,32 +63,33 @@ function SignUp() {
                 } else {
                     alert("회원가입에 실패했습니다.")
                 }
+                return
             })
-}
+    }
 
-return (
-    <Container>
-        <Title>회원가입</Title>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={nameHandler} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control className="form" type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={idHandler} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control className="form" type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={pwdHandler} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control className="form" type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={pwdCheckHandler} />
-        </Form.Group>
-        <Button className="signupBtn" variant="primary" type='button' onClick={loginHandler}>
-            회원가입
+    return (
+        <Container>
+            <Title>회원가입</Title>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={nameHandler} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control className="form" type='text' maxLength='20' name='signup_id' placeholder="아이디" onChange={idHandler} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control className="form" type='password' maxLength='15' name='signup_password' placeholder="비밀번호" onChange={pwdHandler} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control className="form" type='password' maxLength='15' name='signup_pswCheck' placeholder="비밀번호 확인" onChange={pwdCheckHandler} />
+            </Form.Group>
+            <Button className="signupBtn" variant="primary" type='button' onClick={loginHandler}>
+                회원가입
             </Button>
-        <Button className="backBtn" variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
-            뒤로 가기
+            <Button className="backBtn" variant="primary" type='button' style={{ marginTop: "1.0rem" }} onClick={() => { history.goBack() }}>
+                뒤로 가기
             </Button>
-    </Container>
-)
+        </Container>
+    )
 };
 
 const Container = styled.div`

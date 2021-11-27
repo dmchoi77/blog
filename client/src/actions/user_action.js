@@ -7,7 +7,7 @@ export function loginUser(body) {
         .then(res => res.data)
     return {
         type: LOGIN_USER,
-        payload: request
+        payload: request,
     }
 }
 
@@ -23,7 +23,7 @@ export function registerUser(body) {
 
 export function auth() {
 
-    const request = axios.get('/api/user/auth', )
+    const request = axios.get('/api/users/auth')
         .then(res => res.data)
 
     return {

@@ -1,7 +1,7 @@
 # 프로젝트 소개
 리액트를 기반으로 나만의 블로그(게시판) 구축
 
-https://dmchoi.herokuapp.com/
+http://15.164.220.78/
 
 ## 주요 서비스
 * 게시글 작성, 수정, 삭제, 검색, 조회수
@@ -21,9 +21,8 @@ https://dmchoi.herokuapp.com/
 * Javascript
 * React / Hooks
 * Node.js / Express
-* Mysql
-* Amazon S3
-* Heroku
+* MongoDB
+* AWS S3,EC2
 * Styled-component
 * Bootstrap
 
@@ -33,7 +32,7 @@ https://dmchoi.herokuapp.com/
 
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134780138-9fb1c129-116d-4fd4-91a5-94b294e9e313.gif)
 
-* SessionStorage를 이용하여 로그인 기능 구현
+* JWT와 localStorage를 이용하여 로그인 기능 구현
 
 ### 2. 회원가입
 
@@ -47,8 +46,7 @@ https://dmchoi.herokuapp.com/
 
 ![Hnet com-image (3)](https://user-images.githubusercontent.com/76215166/134780523-a348809c-748f-448e-9074-dd03391b77d4.gif)
 
-* 로그아웃하면 SessionStorage에 저장되어있는 로그인 정보 제거
-
+* 로그아웃하면 저장되어 있는 JWT와 localStorage 정보 제거
 
 
 ### 4.메인화면
@@ -81,14 +79,12 @@ https://dmchoi.herokuapp.com/
 
 * 글 목록을 깔끔하게 보여주기 위해 페이징 기능 구현 페이지당 10개의 글이 조회되도록 구현
 
-### 9. 댓글 기능
 
+### 9. 댓글 기능
 
 ![Hnet-image (4)](https://user-images.githubusercontent.com/76215166/134781555-e90b7de9-5de7-46cc-ba83-2d587d2c808a.gif)
 
 * 댓글 등록 및 삭제를 기능을 구현
-* 가끔씩 댓글을 등록하거나 삭제했는데 컴포넌트가 리렌더링 되지 않는 현상이 생김
-* 아직 해결 방법을 찾고 있고, 임시방편으로 새로고침 버튼을 배치
 
 ### 10. 조회수 기능
 

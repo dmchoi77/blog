@@ -39,7 +39,7 @@ function SingleComment(props) {
             responseTo: props.comment._id
         }
 
-        axios.post('/api/comments', variables)
+        axios.post('http://15.164.220.78:8000/api/comments', variables)
             .then(res => {
                 if (res.data.success) {
                     setCommentValue('')
@@ -53,7 +53,7 @@ function SingleComment(props) {
 
     const onDelete = (e) => {
         if (user.userData._id === props.comment.writer._id) {
-            axios.delete('/api/comments', {
+            axios.delete('http://15.164.220.78:8000/api/comments', {
                 data: {
                     _id: props.comment._id
                 }

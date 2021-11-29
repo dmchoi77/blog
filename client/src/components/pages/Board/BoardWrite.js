@@ -19,18 +19,18 @@ function BoardWrite(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const user = useSelector(state => state.user)
-    const writer = "dmchoi";
+    const writer = user.userData ? user.userData.name : null;
     const history = useHistory();
     const editTitle = useRef();
     const editContent = useRef();
     const [imgURL, setImgURL] = useState([]);
     let temp = [];
 
-    //관리자만 글쓰기 가능(role = 1)
-    if (user.userData.role === 0) {
-        alert("글쓰기 권한이 없습니다.");
-        props.history.push('/');
-    }
+    // if (user && !user.userData.role) {
+    //     alert("잘못된 접근입니다.")
+    //     props.history.push('/')
+    //     return
+    // }
 
     const handleInputTitle = () => {
         const data = editTitle.current.value;
@@ -40,15 +40,19 @@ function BoardWrite(props) {
 
     const submit = () => {
 
+        if (!user.userData.role) {
+            alert('권한이 없습니다.');
+        }
+
         if (title === '' || content === '') {
             alert("내용을 입력하세요.")
             return
         }
 
-        axios.get('/api/articles/idxs') //인덱스 조회
+        axios.get('http://15.164.220.78:8000/api/articles/idxs') //인덱스 조회
             .then((response) => {
 
-                axios.post(`/api/articles/${Number(response.data) + 1}`, {
+                axios.post(`http://15.164.220.78:8000/api/articles/${Number(response.data) + 1}`, {
                     index: Number(response.data) + 1,
                     title: title,
                     content: content,
@@ -65,7 +69,7 @@ function BoardWrite(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('/api/images', formData, {
+        const result = await axios.post('http://15.164.220.78:8000/api/images', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });

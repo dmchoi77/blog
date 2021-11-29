@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { List } from './LeftNav';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../actions/user_action";
 
 function Header() {
     const [toggle, setToggle] = useState(null);
     const user = useSelector(state => state.user)
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const onLogout = () => {
-        axios.get('/api/logout')
-            .then(res => {
-                if (res.status === 200) {
-                    history.push('/login');
+
+        dispatch(logoutUser())
+            .then(response => {
+                if (response.payload.success) {
+                    localStorage.removeItem('x_auth');
+                    window.location.reload();
                 } else {
-                    alert("로그아웃 실패");
+                    alert('Failed to log out')
                 }
             })
     }
@@ -50,18 +53,19 @@ function Header() {
                     </div>
                 </HeaderToggle>
                 <Navbar.Brand>
-                    <Link to={"/home"} className="home-link">
+                    <Link to={"/"} className="home-link">
                         dmchoi
                     </Link>
                 </Navbar.Brand>
                 {user.userData && !user.userData.isAuth ?
+
                     < Nav.Link onClick={onLogin}>
                         Log In
                     </Nav.Link>
                     :
                     <Nav.Link onClick={onLogout}>
                         Log out
-                    </Nav.Link>
+                   </Nav.Link>
                 }
             </Navbar>
         </Container >

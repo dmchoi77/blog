@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../actions/user_action';
+import cookie from 'react-cookies';
 
-function Login() {
+function Login(props) {
 
     const [id, setId] = useState('');
     const [pwd, setPwd] = useState('');
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const idHandler = (e) => {
@@ -29,9 +29,17 @@ function Login() {
 
         dispatch(loginUser(body))
             .then(res => {
-                if (res.payload.loginSuccess === false || res.payload.message === "해당하는 아이디가 없습니다.") alert("아이디와 비밀번호를 확인해 주세요.");
-                else if (res.payload.loginSuccess === true) {
-                    history.push('/');
+
+                if (!res.payload.loginSuccess || res.payload.message === "해당하는 아이디가 없습니다.") {
+                    alert("아이디와 비밀번호를 확인해 주세요.");
+                    return
+                }
+
+                if (res.payload.loginSuccess) {
+                    cookie.save('x_auth', res.payload.token,)
+                    localStorage.removeItem('x_auth');
+                    localStorage.setItem("x_auth", res.payload.token);
+                    window.location.replace("/")
                 }
             })
     }

@@ -20,18 +20,18 @@ function View(props) {
     const history = useHistory();
 
     useEffect(() => {
-        
-        axios.get(`/api/articles/${idx}`, {
+
+        axios.get(`http://15.164.220.78:8000/api/articles/${idx}`, {
             params: {
                 'idx': idx,
             }
         }).then(res => {
             setPost(res.data[0])
-            axios.put(`/api/articles/views/${idx}`, { //조회수 증가
+            axios.put(`http://15.164.220.78:8000/api/articles/views/${idx}`, { //조회수 증가
                 index: res.data[0].index
             })
 
-            axios.get('/api/comments', {
+            axios.get('http://15.164.220.78:8000/api/comments', {
                 params: {
                     'idx': idx,
                 }
@@ -57,7 +57,7 @@ function View(props) {
     }
 
     const onDelete = (e) => {
-        if (user.userData.role) {
+        if (user.userData.isAdmin) {
             axios.delete(`/api/articles/${index}`, {
                 data: {
                     idx: idx
@@ -93,25 +93,32 @@ function View(props) {
             <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.push('/board/list')} >
                 전체글
             </Button>
-            <Link to={{
-                pathname: `/board/modify/${idx}`,
-                state: {
-                    writer: writer, //BoardModify로 props 전달
-                    index: idx,
-                    title: title,
-                    content: content
-                }
-            }} className="link">
-                <Button className="post-view-go-modify-btn" variant="primary" type='button'>
-                    수정
-                </Button>
-            </Link>
+            <Button className="post-view-go-modify-btn" variant="primary" type='button'
+                onClick={() => {
+                    if (user.userData.isAdmin) {
+                        history.push({
+
+                            pathname: '/board/newpost',
+                            state: {
+                                writer: writer, //BoardModify로 props 전달
+                                index: idx,
+                                title: title,
+                                content: content
+                            }
+                        })
+                    }
+                    else {
+                        alert('글쓰기 권한이 없습니다.')
+                    }
+                }}>
+                수정
+            </Button>
             <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
                 삭제
             </Button>
             <hr />
             <Comment idx={idx} commentList={comments} refreshFunction={refreshFunction} />
-        </Container>
+        </Container >
 
     )
 }

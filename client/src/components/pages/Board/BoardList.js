@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -7,6 +8,8 @@ import Pagination from '../../modules/Pagination';
 import { paginate } from '../../modules/Pagination';
 
 function BoardList(props) {
+
+    const user = useSelector(state => state.user)
 
     const [list, setList] = useState({
         data: {
@@ -26,22 +29,16 @@ function BoardList(props) {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        let isComponentMounted = true;
-        axios.get('/api/articles')
+        axios.get('http://15.164.220.78:8000/api/articles')
             .then((response) => {
                 let data = response.data.reverse();
-                if (isComponentMounted) {
-                    setList({
-                        data,
-                        pageSize: 10,
-                        currentPage: 1,
-                        searchKeyword: ''
-                    });
-                }
+                setList({
+                    data,
+                    pageSize: 10,
+                    currentPage: 1,
+                    searchKeyword: ''
+                });
             })
-        return () => {
-            isComponentMounted = false
-        }
     }, [])
 
     //페이징
@@ -132,7 +129,13 @@ function BoardList(props) {
             />
             <Button className="post-write-btn" variant="primary" type='button'
                 onClick={() => {
-                    props.history.push('/board/newpost')
+                    if (user.userData.isAdmin) {
+                        props.history.push('/board/newpost')
+                    }
+                    else {
+                        alert('글쓰기 권한이 없습니다.')
+                    }
+                    return
                 }}>
                 글쓰기
             </Button>

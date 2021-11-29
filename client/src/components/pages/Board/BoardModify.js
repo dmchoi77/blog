@@ -22,7 +22,7 @@ function BoardModify(props) {
     const history = useHistory();
     const editTitle = useRef();
     const editContent = useRef();
-    const writer = user.length > 0 ? user.userData.name : null;
+    const writer = props.location.state.writer;
     const [index, setIndex] = useState(props.location.state.index);
     const [title, setTitle] = useState(props.location.state.title);
     const [content, setContent] = useState(props.location.state.content);
@@ -35,9 +35,13 @@ function BoardModify(props) {
 
     const submit = () => {
         
+        if(!user.userData.role) {
+            alert('권한이 없습니다.');
+        }
+
         if (title !== "" && content !== "") {
 
-            axios.put(`/api/articles/${index}`, {
+            axios.put(`http://15.164.220.78:8000/api/articles/${index}`, {
                 title: title,
                 content: content,
                 index: index
@@ -54,7 +58,7 @@ function BoardModify(props) {
         let formData = new FormData();
 
         formData.append('image', blob);
-        const result = await axios.post('/api/images', formData, {
+        const result = await axios.post('http://15.164.220.78:8000/api/images', formData, {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' }
         });

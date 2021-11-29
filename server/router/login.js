@@ -37,17 +37,18 @@ router.post('/api/login', (req, res) => {
             //비밀번호 일치하면 토큰을 생성
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
-
-                //token을 쿠키에 저장한다. 
-                res.cookie("x_auth", user.token)
-                    .status(200)
-                    .json({ loginSuccess: true, userId: user._id })
+                return res.status(200).json({
+                    loginSuccess: true,
+                    userId: user._id,
+                    token: user.token
+                })
             })
         })
     })
 });
 
 router.get('/api/users/auth', auth, (req, res) => {
+
     //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 true
     res.status(200).json({
         _id: req.user._id,

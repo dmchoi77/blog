@@ -9,7 +9,7 @@ export default function Comment({ repo }) {
         const utterances = document.createElement("script")
         const attributes = {
             src: "https://utteranc.es/client.js",
-            repo: "Dong-min-choi/Blog",
+            repo: "dmchoi77/Blog",
             "issue-term": "url",
             label: "comment",
             theme: "github-light",

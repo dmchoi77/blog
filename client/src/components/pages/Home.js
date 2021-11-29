@@ -23,7 +23,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get('/api/articles')
+    axios.get('http://15.164.220.78:8000/api/articles')
       .then((response) => {
         let data = response.data.reverse();
         setList({

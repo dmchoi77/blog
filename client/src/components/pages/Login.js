@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../actions/user_action';
 import cookie from 'react-cookies';
+import { Helmet } from 'react-helmet'
 
 function Login(props) {
 
@@ -46,6 +47,9 @@ function Login(props) {
 
     return (
         <Container>
+            <Helmet>
+                <title>로그인 - dmchoi blog</title>
+            </Helmet>
             <Title>dmchoi</Title>
             <Form >
                 <Form.Group className="mb-3" controlId="formBasicEmail">

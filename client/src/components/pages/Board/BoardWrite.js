@@ -13,6 +13,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import { Helmet } from 'react-helmet'
 
 function BoardWrite(props) {
 
@@ -83,6 +84,9 @@ function BoardWrite(props) {
 
     return (
         <Container>
+            <Helmet>
+                <title>글 작성 - dmchoi blog</title>
+            </Helmet>
             <h1>게시글 작성</h1>
             <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} />
             <Editor

@@ -8,7 +8,7 @@ import axios from 'axios';
 import MDEditor from "@uiw/react-md-editor"
 import { useSelector } from 'react-redux';
 import Comment from './Sections/Comment'
-
+import { Helmet } from 'react-helmet'
 
 function View(props) {
 
@@ -58,7 +58,7 @@ function View(props) {
 
     const onDelete = (e) => {
         if (user.userData.isAdmin) {
-            axios.delete(`/api/articles/${index}`, {
+            axios.delete(`http://15.164.220.78:8000/api/articles/${index}`, {
                 data: {
                     idx: idx
                 }
@@ -75,6 +75,9 @@ function View(props) {
 
     return (
         <Container>
+            <Helmet>
+                <title>{`${title} - dmchoi blog`}</title>
+            </Helmet>
             <hr className="view-hr" />
             <div>
                 <h1>{title}</h1>

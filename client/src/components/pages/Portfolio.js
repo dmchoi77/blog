@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
 
 function PortfoListo() {
 
@@ -7,6 +8,9 @@ function PortfoListo() {
 
     return (
         <Container>
+            <Helmet>
+                <title>포트폴리오 - dmchoi blog</title>
+            </Helmet>
             <List>
                 <a href="http://dmchoi.herokuapp.com/" target='_blank'>개인 블로그 구축 프로젝트 (현재 사이트)</a>
                 <a href="https://github.com/Dong-min-choi/blog" target='_blank' ><Image src="/img/github.png" /></a>

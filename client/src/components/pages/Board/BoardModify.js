@@ -15,6 +15,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import { Helmet } from 'react-helmet'
 
 function BoardModify(props) {
 
@@ -34,8 +35,8 @@ function BoardModify(props) {
     }
 
     const submit = () => {
-        
-        if(!user.userData.role) {
+
+        if (!user.userData.role) {
             alert('권한이 없습니다.');
         }
 
@@ -69,6 +70,9 @@ function BoardModify(props) {
 
     return (
         <Container>
+            <Helmet>
+                <title>게시글 수정 - dmchoi blog</title>
+            </Helmet>
             <h2>게시글 수정</h2>
             <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} value={title} />
             <Editor

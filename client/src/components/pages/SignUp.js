@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../actions/user_action';
+import { Helmet } from 'react-helmet'
 
 function SignUp() {
 
@@ -69,6 +70,9 @@ function SignUp() {
 
     return (
         <Container>
+            <Helmet>
+                <title>회원가입 - dmchoi blog</title>
+            </Helmet>
             <Title>회원가입</Title>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control className="form" type='text' maxLength='10' name='signup_name' placeholder="이름" onChange={nameHandler} />

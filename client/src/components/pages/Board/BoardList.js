@@ -6,6 +6,7 @@ import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import Pagination from '../../modules/Pagination';
 import { paginate } from '../../modules/Pagination';
+import { Helmet } from 'react-helmet'
 
 function BoardList(props) {
 
@@ -85,6 +86,9 @@ function BoardList(props) {
 
     return (
         <Container>
+            <Helmet>
+                <title>글 목록 - dmchoi blog</title>
+            </Helmet>
             <Table responsive="sm">
                 <thead>
                     <tr>

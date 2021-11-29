@@ -27,11 +27,13 @@
     "react-bootstrap": "^2.0.0-beta.4",
     "react-cookies": "^0.1.1",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-html-parser": "^2.0.2",
     "react-markdown": "^7.0.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-snap": "^1.23.0",
     "redux": "^4.1.2",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.0",
@@ -44,7 +46,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": [

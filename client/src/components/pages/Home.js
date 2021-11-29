@@ -5,6 +5,7 @@ import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
 import Preview from '../modules/Preview';
 import Comments from '../modules/Comments'
+import { Helmet } from 'react-helmet'
 
 function Home() {
 
@@ -49,6 +50,9 @@ function Home() {
 
   return (
     <Container>
+      <Helmet>
+        <title>dmchoi blog</title>
+      </Helmet>
       <h1>전체글</h1>
       <hr />
       <div>

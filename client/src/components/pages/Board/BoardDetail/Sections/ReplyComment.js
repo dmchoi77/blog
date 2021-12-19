@@ -24,9 +24,8 @@ function ReplyComment(props) {
             <>
                 {
                     comment.responseTo === parentCommentId &&
-                    <div style={{ width: '100%', marginLeft: '40px' }}>
+                    <div style={{ width: '100%', marginLeft: '40px', marginBottom: '15px' }}>
                         <SingleComment isReply={isReply} comment={comment} idx={props.idx} commentList={props.commentList} refreshFunction={props.refreshFunction} />
-                        {/* <ReplyComment parentCommentId={comment._id} idx={props.idx} commentList={props.commentList} refreshFunction={props.refreshFunction} /> */}
                     </div>
                 }
             </>

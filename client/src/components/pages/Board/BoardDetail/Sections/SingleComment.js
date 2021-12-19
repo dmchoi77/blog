@@ -58,6 +58,7 @@ function SingleComment(props) {
                     _id: props.comment._id
                 }
             }).then((res) => {
+
                 props.refreshFunction(props.comment._id)
                 alert("삭제되었습니다.");
             })
@@ -70,7 +71,7 @@ function SingleComment(props) {
 
     return (
         <div>
-            <Toast onClose={onDelete} style={{ margin: '5px' }}>
+            <Toast onClose={onDelete}>
                 <Toast.Header>
                     <strong className="me-auto">{props.comment.writer.name}</strong>
                 </Toast.Header>
@@ -80,17 +81,17 @@ function SingleComment(props) {
                 }
             </Toast >
             {openReply &&
-                <form style={{ display: 'flex', marginTop: '15px' }} onSubmit={onSubmit}>
+                <form style={{ display: 'flex', flexDirection: "column", marginTop: '15px' }} onSubmit={onSubmit}>
                     <textarea
-                        style={{ width: '100%', height: '40px', marginTop: '5px' }}
+                        style={{ padding: "10px", width: '100%', height: '70px', marginTop: '5px', resize: "none", border: "1px solid rgb(233, 236, 239)" }}
                         onChange={onHandleChange}
                         value={commentValue}
                         placeholder="댓글을 작성해주세요."
                     />
                     <br />
-                    <Button style={{ width: '15%', height: '40px' }} className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
+                    <Button style={{ width: '15%', height: '40px', marginBottom: '15px' }} className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
                         등록
-                    </Button>
+             </Button>
                 </form>
             }
         </div>

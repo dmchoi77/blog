@@ -40,50 +40,65 @@ function Preview(props) {
 }
 
 const Articles = styled.div`
-    
     height: auto;
     background-color: #fff;
     display: grid;
-    grid-auto-rows: 280px;
-    align-items: center;
     justify-items: center;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;  
 
-    @media(max-width : 811px) {
-        grid-template-columns: repeat(1,1fr);
-
+    @media(max-width : 987px) {
+        grid-template-columns: repeat(2,2fr);
     }
-    
+
+    @media(max-width : 691px) {
+        width : 100%;
+        grid-template-columns: repeat(1,2fr);
+        margin-top : 1rem;
+    }
+  
 `
 
 const Article = styled.div`
-    width: 200px;
-    height: 260px;
+    margin-top : 2rem;
+    width: 300px;
     background-color: #fff;
     border: 1px solid #dae1e6;
     position: relative;
-    margin : 10px;
     cursor: pointer;
     transition: 0.5s all;
+    border-radius : 10px;
+    border : none;
+    box-shadow: 0 2px 16px 0 rgb(0 0 0 / 5%);
 
     &:hover {
       background-color: rgba($bg-color-dark-0, 0.1);
-      transform: translateY(-5px);
+      transform: translateY(-20px);
+    }
+
+    @media(max-width : 987px) {
+        width : 90%;
+        margin ; 0.5rem 0 1.5rem 0;
+    }
+
+    @media(max-width : 691px) {
+        width : 100%;
     }
 `
 
 const Thunmbnail = styled.div`
-
     position: relative;
-    width: 100%;
-    height: 140px;
+    height: 300px;
     overflow-y: hidden;
+    border-radius : 10px 10px 0 0;
+    border : none;
+
 `
 
 const Title = styled.div`
 
-    font-size: .95rem;
-    height: 20px;
+    font-size: 1.5rem;
+    height: 45px;
     padding: 2px 10px;
     margin: 5px 0;
     font-weight: 700;

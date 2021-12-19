@@ -45,11 +45,8 @@ export default function Comment(props) {
             })
     }
 
-
     return (
         <div style={{ width: '100%' }}>
-            <h3>Comment</h3>
-            <hr />
             {props.commentList && props.commentList.map((comment, index) => (
                 (!comment.responseTo &&
                     <>
@@ -58,18 +55,26 @@ export default function Comment(props) {
                     </>
                 )
             ))}
-            <form style={{ display: 'flex', marginTop: '15px' }} onSubmit={onSubmit}>
-                <textarea
-                    style={{ width: '100%', height: '40px', marginTop: '5px' }}
-                    onChange={onHandleChange}
-                    value={commentValue}
-                    placeholder="댓글을 작성해주세요."
-                />
-                <br />
-                <Button style={{ width: '15%', height: '40px' }} className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
-                    등록
+            {user && user.userData.isAuth ?
+                <form style={{ display: 'flex', flexDirection: "column", marginTop: '15px' }} onSubmit={onSubmit}>
+                    <textarea
+                        style={{ padding: "10px", width: '100%', height: '70px', marginTop: '5px', resize: "none", border: "1px solid rgb(233, 236, 239)" }}
+                        onChange={onHandleChange}
+                        value={commentValue}
+                        placeholder="댓글을 작성해주세요."
+                    />
+                    <br />
+                    <Button style={{ width: '15%', height: '40px' }} className="reply-btn" variant="primary" type='button' onClick={onSubmit}>
+                        등록
                 </Button>
-            </form>
+
+                </form>
+
+                :
+                <div style={{ marginTop: "2rem", backgroundColor: "rgb(224, 81, 148)", color: "#ffff", textAlign: "center" }}>
+                    댓글을 작성하려면 로그인이 필요합니다.
+                </div>
+            }
         </div>
     )
 }

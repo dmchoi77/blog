@@ -1,6 +1,14 @@
 import { LOGIN_USER, REGISTER_USER, AUTH_USER } from '../actions/type';
 
-export default function (state = {}, action) {
+export default function (state = {
+    'userData': {
+        isAuth: false,
+        _id: '',
+        isAdmin: false,
+        name: '',
+        role: 0
+    }
+}, action) {
     switch (action.type) {
         case LOGIN_USER:
             return { ...state, loginSuccess: action.payload }

@@ -6,21 +6,14 @@ import { Button, Table, Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import Pagination from '../../modules/Pagination';
 import { paginate } from '../../modules/Pagination';
-import { Helmet } from 'react-helmet'
+import SEO from '../../modules/SEO';
 
 function BoardList(props) {
 
     const user = useSelector(state => state.user)
 
     const [list, setList] = useState({
-        data: {
-            index: '',
-            title: '',
-            content: '',
-            date: '',
-            writer: '',
-            view: ''
-        },
+        data: '',
         pageSize: 10, //한 페이지에 글목록 10개
         currentPage: 1,
         searchKeyword: ''
@@ -86,9 +79,11 @@ function BoardList(props) {
 
     return (
         <Container>
-            <Helmet>
-                <title>글 목록 - dmchoi blog</title>
-            </Helmet>
+            <SEO
+                title={"글 목록"}
+                description={"블로그 글 목록"}
+                url={"board/list"}
+            />
             <Table responsive="sm">
                 <thead>
                     <tr>

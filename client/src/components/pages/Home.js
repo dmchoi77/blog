@@ -3,21 +3,15 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Pagination from '../modules/Pagination';
 import { paginate } from '../modules/Pagination';
+import Profile from '../modules/Profile';
 import Preview from '../modules/Preview';
-import Comments from '../modules/Comments'
-import { Helmet } from 'react-helmet'
+import Comments from '../modules/Comments';
+import SEO from '../modules/SEO';
 
 function Home() {
 
   const [list, setList] = useState({
-    data: {
-      idx: '',
-      title: '',
-      content: '',
-      date: '',
-      writer: '',
-      url: ''
-    },
+    data: '',
     pageSize: 12, //한 페이지에 글목록 10개
     currentPage: 1,
   });
@@ -50,9 +44,11 @@ function Home() {
 
   return (
     <Container>
-      <Helmet>
-        <title>dmchoi blog</title>
-      </Helmet>
+      <SEO
+        title={"dmchoi blog"}
+        description={"dmchoi 블로그입니다."}
+      />
+      <Profile></Profile>
       <h1>전체글</h1>
       <hr />
       <div>
@@ -72,13 +68,15 @@ function Home() {
     </Container>
   )
 }
-const Container = styled.div`
-  padding : 3rem 0 0;
-  margin : 0 auto 7rem;
 
-  @media(max-width : 811px) {
+const Container = styled.div`
+  padding : 3rem 5rem 0;
+  margin : 0 auto 7rem;
+  width : 1100px;
+
+  @media(max-width : 987px) {
     width : 100%;
-}
+  }
 `
 
 export default Home;

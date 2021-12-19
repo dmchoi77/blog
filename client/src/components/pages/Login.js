@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link ,useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../actions/user_action';
 import cookie from 'react-cookies';
-import { Helmet } from 'react-helmet'
+import SEO from '../modules/SEO';
 
 function Login(props) {
 
     const [id, setId] = useState('');
     const [pwd, setPwd] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const idHandler = (e) => {
         setId(e.target.value);
@@ -42,14 +43,16 @@ function Login(props) {
                     localStorage.setItem("x_auth", res.payload.token);
                     window.location.replace("/")
                 }
+                console.log(props)
             })
     }
 
     return (
         <Container>
-            <Helmet>
-                <title>로그인 - dmchoi blog</title>
-            </Helmet>
+            <SEO
+                title={"로그인"}
+                description={"dmchoi 블로그입니다."}
+            />
             <Title>dmchoi</Title>
             <Form >
                 <Form.Group className="mb-3" controlId="formBasicEmail">

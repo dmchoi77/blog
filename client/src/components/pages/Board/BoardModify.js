@@ -15,7 +15,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-import { Helmet } from 'react-helmet'
+import SEO from '../../modules/SEO';
 
 function BoardModify(props) {
 
@@ -70,9 +70,11 @@ function BoardModify(props) {
 
     return (
         <Container>
-            <Helmet>
-                <title>게시글 수정 - dmchoi blog</title>
-            </Helmet>
+            <SEO 
+            title ={"게시글 수정"}
+            url={`board/modify/${index}`}
+            />
+        
             <h2>게시글 수정</h2>
             <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} value={title} />
             <Editor

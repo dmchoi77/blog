@@ -13,7 +13,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-import { Helmet } from 'react-helmet'
+import SEO from '../../modules/SEO';
 
 function BoardWrite(props) {
 
@@ -75,8 +75,7 @@ function BoardWrite(props) {
             headers: { 'Content-type': 'multipart/form-data' }
         });
 
-        temp.push(...imgURL);
-        temp.push(result.data);
+        temp.push(...imgURL, result.data);
         setImgURL(temp);
 
         return result.data;
@@ -84,9 +83,12 @@ function BoardWrite(props) {
 
     return (
         <Container>
-            <Helmet>
-                <title>글 작성 - dmchoi blog</title>
-            </Helmet>
+            <SEO
+                title={"글 작성"}
+                description={"블로그 글 작성"}
+                url={"board/newpost"}
+            />
+
             <h1>게시글 작성</h1>
             <TitleInput type='text' placeholder='제목' name='title' ref={editTitle} onChange={handleInputTitle} />
             <Editor

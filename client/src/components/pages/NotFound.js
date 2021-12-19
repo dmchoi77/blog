@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Helmet } from 'react-helmet'
+import SEO from '../modules/SEO';
 
 function NotFound() {
 
     return (
         <Container>
-            <Helmet>
-                <title>404 - dmchoi blog</title>
-            </Helmet>
+            <SEO
+                title={"404"}
+                description={"페이지를 찾을 수 없습니다."}
+            />
             <h1>존재하지 않는 페이지입니다.</h1>
             <h5>경로를 확인해주세요.</h5>
         </Container>

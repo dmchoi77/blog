@@ -1,20 +1,20 @@
 /*eslint-disable*/
 
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 import MDEditor from "@uiw/react-md-editor"
 import { useSelector } from 'react-redux';
 import Comment from './Sections/Comment'
-import { Helmet } from 'react-helmet'
+import SEO from '../../../modules/SEO';
 
 function View(props) {
 
     const user = useSelector(state => state.user);
     const [post, setPost] = useState([])
-    const { title, content, date, writer, index, view, _id } = post;
+    const { title, content, date, writer, index, url } = post;
     const [comments, setComments] = useState([])
     const idx = props.match.params.data
     const history = useHistory();
@@ -52,7 +52,8 @@ function View(props) {
         }
 
         else { //댓글 삭제 시
-            setComments(comments => comments.filter(comment => comment._id !== variables))
+            setComments(comments =>
+                comments.filter(comment => comment._id !== variables && comment.responseTo !== variables))
         }
     }
 
@@ -75,17 +76,27 @@ function View(props) {
 
     return (
         <Container>
-            <Helmet>
-                <title>{`${title} - dmchoi blog`}</title>
-            </Helmet>
-            <hr className="view-hr" />
-            <div>
-                <h1>{title}</h1>
+            <SEO
+                title={title}
+                description={content}
+                url={`board/view/${index}`}
+            />
+            <div style={{ margin: "0 auto", width: "95%" }}>
+                <h1 style={{ fontSize: "2.3rem", marginBottom: "30px", fontWeight: "900" }}>{title}</h1>
+                <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                    <div style={{ fontWeight: "bold" }}>{writer}</div>
+                    <DateBefore />
+                    <div>
+                        {date}
+                    </div>
+                </div>
+                <div style={{ marginBottom: "20px" }}>
+                    <img src={url} style={{ width: "100%" }} />
+                </div>
             </div>
-            <hr />
             <div>
-                <label>작성자 : {writer} <DateBefore /> {date} <DateBefore /> 조회수 : {view} </label>
             </div>
+
             <hr />
             <div>
                 <div>
@@ -93,34 +104,45 @@ function View(props) {
                 </div>
             </div>
             <hr />
-            <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.push('/board/list')} >
+            {/* <Button className="post-view-go-list-btn" variant="primary" type='button' onClick={() => history.push('/board/list')} >
                 전체글
-            </Button>
-            <Button className="post-view-go-modify-btn" variant="primary" type='button'
-                onClick={() => {
-                    if (user.userData.isAdmin) {
-                        history.push({
-
-                            pathname: '/board/newpost',
-                            state: {
-                                writer: writer, //BoardModify로 props 전달
-                                index: idx,
-                                title: title,
-                                content: content
+            </Button> */}
+            {
+                user.userData.isAdmin &&
+                <>
+                    <hr />
+                    <Button className="post-view-go-modify-btn" variant="primary" type='button'
+                        onClick={() => {
+                            if (user.userData.isAdmin) {
+                                history.push({
+                                    pathname: `/board/modify/${index}`,
+                                    state: {
+                                        writer: writer, //BoardModify로 props 전달
+                                        index: idx,
+                                        title: title,
+                                        content: content
+                                    }
+                                })
                             }
-                        })
-                    }
-                    else {
-                        alert('글쓰기 권한이 없습니다.')
-                    }
-                }}>
-                수정
+                            else {
+                                alert('글쓰기 권한이 없습니다.')
+                            }
+                        }}>
+                        수정
             </Button>
-            <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
-                삭제
+                    <Button className="post-view-go-modify-btn" variant="primary" type='button' onClick={onDelete}>
+                        삭제
             </Button>
-            <hr />
-            <Comment idx={idx} commentList={comments} refreshFunction={refreshFunction} />
+                </>
+            }
+
+            <div>
+                <h5 style={{ fontWeight: 700, marginBottom: "30px" }}>
+                    총 {comments.length} 개의 댓글이 있습니다.
+                </h5>
+                <Comment idx={idx} commentList={comments} refreshFunction={refreshFunction} />
+
+            </div>
         </Container >
 
     )
@@ -128,17 +150,22 @@ function View(props) {
 
 
 const Container = styled.div`
-    padding : 30px 0 0 0;
+    padding : 3rem 1.5rem 0;
     margin : 0 auto 7rem;
-    width : 100%;
     min-height: 100%;
+    width : 768px;
+
+
+    @media(max-width : 987px) {
+      width : 100%;
+    }
 `
 
 const DateBefore = styled.span`
     content: "";
     display: inline-block;
     width: 0.1rem;
-    height: 0.8rem;
+    height: 1rem;
     background: #ccc;
     margin: 0 10px 0 6px;
     vertical-align: -2px;

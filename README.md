@@ -77,14 +77,14 @@ http://15.164.220.78/
 
 ![Hnet-image (3)](https://user-images.githubusercontent.com/76215166/134781352-7dfd189c-aecc-46f1-94b2-8b3bd385a31b.gif)
 
-* 글 목록을 깔끔하게 보여주기 위해 페이징 기능 구현 페이지당 10개의 글이 조회되도록 구현
+* 페이지당 10개의 글이 조회되도록 구현
 
 
 ### 9. 댓글 기능
 
 ![Hnet-image (4)](https://user-images.githubusercontent.com/76215166/134781555-e90b7de9-5de7-46cc-ba83-2d587d2c808a.gif)
 
-* 댓글 등록 및 삭제를 기능을 구현
+* 댓글 등록 및 삭제 기능 구현
 
 ### 10. 조회수 기능
 

@@ -1,5 +1,5 @@
 # 프로젝트 소개
-리액트를 기반으로 나만의 블로그 구축
+리액트 기반의 나만의 블로그 구축
 
 http://15.164.220.78/
 
@@ -13,26 +13,27 @@ http://15.164.220.78/
 ## 목표
 * React Hooks의 생명 주기(Life cycle)에 대해 이해한다.
 * React-Router를 이용하여 SPA와 동적 라우팅 기능에 대해 이해한다. 
-* React와 DB를 연동해 클라이언트와 서버 간 통신을 해본다.
+* Server와 DB를 연동해 통신을 해본다.
 * CRUD를 구현해본다.
 
 
 ## 활용 기술
-* Javascript
+* JavaScript
 * React / Hooks
 * Node.js / Express
 * MongoDB
 * AWS S3,EC2
-* Styled-component
+* Styled-components
 * Bootstrap
 
 
 ## 기능 및 UI
+(아래 이미지들은 버전1의 이미지이므로 현재 버전과 다릅니다)
 ### 1. 로그인 
 
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134780138-9fb1c129-116d-4fd4-91a5-94b294e9e313.gif)
 
-* JWT와 localStorage를 이용하여 로그인 기능 구현
+* Redux, JWT, localStorage를 이용하여 사용자 인증 및 로그인 기능 구현
 
 ### 2. 회원가입
 
@@ -61,9 +62,7 @@ http://15.164.220.78/
 
 ![Hnet-image (2)](https://user-images.githubusercontent.com/76215166/134780990-d5e3da43-663a-436e-b8e4-29a29f9ba560.gif)
 
-* 일반적인 텍스트상자 대신 글을 수정하거나 편집하는데 편리하게 도와주는 라이브러리인 toast ui editor를 이용
-* toast ui editor로 이미지를 업로드하면 base64 형태로 자동 변환되어 업로드되는데 이를 db에서 관리하기엔 메모리 측면에서 무리가 있다고 생각하여 클라우드 웹 스토리지인 Amazon S3에 이미지를 업로드하여 url만 가져오는 방식을 사용 
-* 업로드한 이미지 중 첫 번째 이미지를 메인화면에서의 썸네일로 사용하도록 설정
+* Text Editor로 Toast ui editor를 이용
 
 ### 6. 게시글 삭제
 

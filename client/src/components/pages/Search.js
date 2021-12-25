@@ -38,7 +38,11 @@ function Search() {
   return (
     <Container>
       <SearchBar>
-        <img src="/img/search.png" style={{ width: "25px", height: "25px" }} />
+        <img
+          src="/img/search.png"
+          alt="serach"
+          style={{ width: "25px", height: "25px" }}
+        />
         <Input
           type="search"
           placeholder="검색어를 입력하세요."

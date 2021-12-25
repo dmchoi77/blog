@@ -118,49 +118,50 @@ function View(props) {
         </div>
       </div>
       <hr />
-      <Button
-        className="post-view-go-list-btn"
-        variant="primary"
-        type="button"
-        style={{ marginBottom: "20px" }}
-        onClick={() => history.push("/")}
-      >
-        전체글
-      </Button>
-      {user.userData.isAdmin && (
-        <>
-          <Button
-            className="post-view-go-modify-btn"
-            variant="primary"
-            type="button"
-            onClick={() => {
-              if (user.userData.isAdmin) {
-                history.push({
-                  pathname: `/board/modify/${index}`,
-                  state: {
-                    writer: writer, //BoardModify로 props 전달
-                    index: idx,
-                    title: title,
-                    content: content,
-                  },
-                });
-              } else {
-                alert("글쓰기 권한이 없습니다.");
-              }
-            }}
-          >
-            수정
-          </Button>
-          <Button
-            className="post-view-go-modify-btn"
-            variant="primary"
-            type="button"
-            onClick={onDelete}
-          >
-            삭제
-          </Button>
-        </>
-      )}
+      <div style={{ marginBottom: "20px" }}>
+        <Button
+          className="post-view-go-list-btn"
+          variant="primary"
+          type="button"
+          onClick={() => history.push("/")}
+        >
+          전체글
+        </Button>
+        {user.userData.isAdmin && (
+          <>
+            <Button
+              className="post-view-go-modify-btn"
+              variant="primary"
+              type="button"
+              onClick={() => {
+                if (user.userData.isAdmin) {
+                  history.push({
+                    pathname: `/board/modify/${index}`,
+                    state: {
+                      writer: writer, //BoardModify로 props 전달
+                      index: idx,
+                      title: title,
+                      content: content,
+                    },
+                  });
+                } else {
+                  alert("글쓰기 권한이 없습니다.");
+                }
+              }}
+            >
+              수정
+            </Button>
+            <Button
+              className="post-view-go-modify-btn"
+              variant="primary"
+              type="button"
+              onClick={onDelete}
+            >
+              삭제
+            </Button>
+          </>
+        )}
+      </div>
 
       <div>
         <h5 style={{ fontWeight: 700, marginBottom: "30px" }}>

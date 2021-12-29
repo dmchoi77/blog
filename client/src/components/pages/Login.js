@@ -37,7 +37,7 @@ function Login(props) {
       }
 
       if (res.payload.loginSuccess) {
-        cookie.save("x_auth", res.payload.token);
+        // cookie.save("x_auth", res.payload.token);
         localStorage.removeItem("x_auth");
         localStorage.setItem("x_auth", res.payload.token);
         window.location.replace("/");

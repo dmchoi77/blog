@@ -94,7 +94,7 @@ const Container = styled.header`
 `;
 
 const Nav = styled.nav`
-  width: 1000px;
+  width: 1100px;
   display: flex;
   margin: 0 auto;
   justify-content: space-between;

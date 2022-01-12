@@ -15,7 +15,7 @@ function Header() {
         localStorage.removeItem("x_auth");
         window.location.reload();
       } else {
-        alert("Failed to log out");
+        alert("Failed to logout");
       }
     });
   };
@@ -31,9 +31,9 @@ function Header() {
   return (
     <Container>
       <Nav>
-        <div>
+        <h3>
           <Link to={"/"}>dmchoi</Link>
-        </div>
+        </h3>
         <ul
           style={{
             display: "flex",
@@ -52,29 +52,9 @@ function Header() {
             />
           </li>
           {!user.userData.isAuth ? (
-            <li
-              style={{
-                background: "#e05194",
-                borderRadius: "100px",
-                padding: "4px 15px",
-                color: "#ffff",
-              }}
-              onClick={onLogin}
-            >
-              로그인
-            </li>
+            <Login onClick={onLogin}>로그인</Login>
           ) : (
-            <li
-              style={{
-                background: "#e05194",
-                borderRadius: "100px",
-                padding: "4px 15px",
-                color: "#ffff",
-              }}
-              onClick={onLogout}
-            >
-              로그아웃
-            </li>
+            <Login onClick={onLogout}>로그아웃</Login>
           )}
         </ul>
       </Nav>
@@ -100,6 +80,13 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+`;
+
+const Login = styled.li`
+  background: #e05194;
+  border-radius: 100px;
+  padding: 4px 15px;
+  color: #ffff;
 `;
 
 // const HeaderToggle = styled.div`

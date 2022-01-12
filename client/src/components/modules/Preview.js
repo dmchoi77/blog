@@ -19,11 +19,7 @@ function Preview(props) {
             >
               <Thunmbnail>
                 <img
-                  src={
-                    rowData.url
-                      ? rowData.url
-                      : `https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png`
-                  }
+                  src={rowData.url ? rowData.url : "/img/no-image-found.png"}
                   width="100%"
                   height="100%"
                   alt="thumbnail"
@@ -48,8 +44,9 @@ const Articles = styled.div`
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   align-items: center;
-  padding: 10px 10px;
+  padding: 50px 20px;
 
   @media (max-width: 987px) {
     grid-template-columns: 1fr 1fr;
@@ -73,7 +70,7 @@ const Article = styled.div`
 
   &:hover {
     background-color: rgba($bg-color-dark-0, 0.1);
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
 `;
 

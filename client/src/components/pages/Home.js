@@ -11,7 +11,7 @@ import SEO from "../modules/SEO";
 function Home() {
   const [list, setList] = useState({
     data: "",
-    pageSize: 12, //한 페이지에 글목록 10개
+    pageSize: 10, //한 페이지에 글목록 10개
     currentPage: 1,
   });
 
@@ -20,7 +20,7 @@ function Home() {
       let data = response.data.reverse();
       setList({
         data,
-        pageSize: 12,
+        pageSize: 10,
         currentPage: 1,
       });
     });

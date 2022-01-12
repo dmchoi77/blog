@@ -153,10 +153,6 @@ hr {
 
 /* 반응형 */
 @media (max-width: 811px) {
-  /* * {
-        font-size: 1rem;
-      } */
-
   @keyframes slidein {
     0% {
       left: -40%;

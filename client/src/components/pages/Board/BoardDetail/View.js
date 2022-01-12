@@ -10,12 +10,12 @@ import { useSelector } from "react-redux";
 import Comment from "./Sections/Comment";
 import SEO from "../../../modules/SEO";
 
-function View(props) {
+function View({ match }) {
   const user = useSelector((state) => state.user);
   const [post, setPost] = useState([]);
   const { title, content, date, writer, index, url } = post;
   const [comments, setComments] = useState([]);
-  const idx = props.match.params.data;
+  const idx = match.params.data;
   const history = useHistory();
 
   useEffect(() => {

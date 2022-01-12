@@ -4,10 +4,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../actions/user_action";
-import cookie from "react-cookies";
 import SEO from "../modules/SEO";
 
-function Login(props) {
+function Login() {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const dispatch = useDispatch();
@@ -42,7 +41,6 @@ function Login(props) {
         localStorage.setItem("x_auth", res.payload.token);
         window.location.replace("/");
       }
-      console.log(props);
     });
   };
 

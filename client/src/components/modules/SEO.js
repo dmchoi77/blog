@@ -1,21 +1,30 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
+import React from "react";
+import { Helmet } from "react-helmet";
 
-function SEO(props) {
+function SEO({ title, description, image, url }) {
+  return (
+    <Helmet>
+      <title>{title + " - dmchoi blog"}</title>
 
-
-    return (
-        <Helmet>
-            <title>{props.title + " - dmchoi blog"}</ title >
-
-            <meta property="og:type" content={"website"} data-react-helmet="true" />
-            <meta property="og:title" content={props.title} data-react-helmet="true" />
-            <meta property="og:description" content={props.description} data-react-helmet="true" />
-            <meta property="og:image" content={props.image ?? null} data-react-helmet="true" />
-            <meta property="og:url" content={props.url ? `http://15.164.220.78/${props.url}` : "http://15.164.220.78"} data-react-helmet="true" />
-        </Helmet >
-
-    )
+      <meta property="og:type" content={"website"} data-react-helmet="true" />
+      <meta property="og:title" content={title} data-react-helmet="true" />
+      <meta
+        property="og:description"
+        content={description}
+        data-react-helmet="true"
+      />
+      <meta
+        property="og:image"
+        content={image ?? null}
+        data-react-helmet="true"
+      />
+      <meta
+        property="og:url"
+        content={url ? `http://15.164.220.78/${url}` : "http://15.164.220.78"}
+        data-react-helmet="true"
+      />
+    </Helmet>
+  );
 }
 
-export default SEO
+export default SEO;

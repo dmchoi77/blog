@@ -8,7 +8,7 @@ import Pagination from "../../modules/Pagination";
 import { paginate } from "../../modules/Pagination";
 import SEO from "../../modules/SEO";
 
-function BoardList(props) {
+function BoardList({ history }) {
   const user = useSelector((state) => state.user);
 
   const [list, setList] = useState({
@@ -137,7 +137,7 @@ function BoardList(props) {
         type="button"
         onClick={() => {
           if (user.userData.isAdmin) {
-            props.history.push("/board/newpost");
+            history.push("/board/newpost");
           } else {
             alert("글쓰기 권한이 없습니다.");
           }

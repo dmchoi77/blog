@@ -5,12 +5,12 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 
-function Preview(props) {
+function Preview({ list }) {
   const history = useHistory();
 
   return (
     <Articles>
-      {props.list.map(
+      {list.map(
         (rowData, i) =>
           rowData.idx !== "" && (
             <Article

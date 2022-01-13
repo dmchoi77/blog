@@ -109,8 +109,6 @@ function View({ match }) {
           <img src={url} style={{ width: "100%" }} />
         </div>
       </div>
-      <div></div>
-
       <hr />
       <div>
         <div>
@@ -138,10 +136,10 @@ function View({ match }) {
                   history.push({
                     pathname: `/board/modify/${index}`,
                     state: {
-                      writer: writer, //BoardModify로 props 전달
+                      writer, //BoardModify로 props 전달
                       index: idx,
-                      title: title,
-                      content: content,
+                      title,
+                      content,
                     },
                   });
                 } else {

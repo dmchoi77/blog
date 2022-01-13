@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SingleComment from "./SingleComment";
 
-function ReplyComment(props) {
+function ReplyComment({ parentCommentId, idx, commentList, refreshFunction }) {
   const [childCommentNumber, setChildCommentNumber] = useState(0);
   const [openReply, setOpenReply] = useState(false);
   const isReply = true;
@@ -9,17 +9,17 @@ function ReplyComment(props) {
   useEffect(() => {
     let commentNumber = 0;
 
-    props.commentList.map((comment, index) => {
-      if (comment.responseTo === props.parentCommentId) {
+    commentList.map((comment, index) => {
+      if (comment.responseTo === parentCommentId) {
         commentNumber++;
       }
     });
 
     setChildCommentNumber(commentNumber);
-  }, [props.commentList, props.parentCommentId]);
+  }, [commentList, parentCommentId]);
 
   const renderReplyComment = (parentCommentId) =>
-    props.commentList.map((comment, index) => (
+    commentList.map((comment, index) => (
       <>
         {comment.responseTo === parentCommentId && (
           <div
@@ -28,9 +28,8 @@ function ReplyComment(props) {
             <SingleComment
               isReply={isReply}
               comment={comment}
-              idx={props.idx}
-              commentList={props.commentList}
-              refreshFunction={props.refreshFunction}
+              idx={idx}
+              refreshFunction={refreshFunction}
             />
           </div>
         )}
@@ -51,7 +50,7 @@ function ReplyComment(props) {
           더보기 ({childCommentNumber})
         </p>
       )}
-      {openReply && renderReplyComment(props.parentCommentId)}
+      {openReply && renderReplyComment(parentCommentId)}
     </div>
   );
 }

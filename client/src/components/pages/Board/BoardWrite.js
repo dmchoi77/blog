@@ -58,9 +58,9 @@ function BoardWrite() {
             }`,
             {
               index: Number(response.data) + 1,
-              title: title,
-              content: content,
-              writer: writer,
+              title,
+              content,
+              writer,
               url: imgURL ? imgURL[0] : null,
             }
           )

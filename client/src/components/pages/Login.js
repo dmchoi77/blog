@@ -22,8 +22,8 @@ function Login() {
   const loginHandler = (e) => {
     e.preventDefault();
     let body = {
-      id: id,
-      pwd: pwd,
+      id,
+      pwd,
     };
 
     dispatch(loginUser(body)).then((res) => {

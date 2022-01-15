@@ -1,7 +1,9 @@
+/*eslint-disable*/
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import Prism from "prismjs";
@@ -15,22 +17,14 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import SEO from "../../modules/SEO";
 
-function BoardWrite() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+function PostModify({ location }) {
   const user = useSelector((state) => state.user);
-  const writer = user.userData ? user.userData.name : null;
   const history = useHistory();
   const editTitle = useRef();
   const editContent = useRef();
-  const [imgURL, setImgURL] = useState([]);
-  let temp = [];
-
-  // if (user && !user.userData.role) {
-  //     alert("잘못된 접근입니다.")
-  //     props.history.push('/')
-  //     return
-  // }
+  const [index, setIndex] = useState(location.state.index);
+  const [title, setTitle] = useState(location.state.title);
+  const [content, setContent] = useState(location.state.content);
 
   const handleInputTitle = () => {
     const data = editTitle.current.value;
@@ -43,31 +37,17 @@ function BoardWrite() {
       alert("권한이 없습니다.");
     }
 
-    if (title === "" || content === "") {
-      alert("내용을 입력하세요.");
-      return;
-    }
-
-    axios
-      .get("http://15.164.220.78:8000/api/articles/idxs") //인덱스 조회
-      .then((response) => {
-        axios
-          .post(
-            `http://15.164.220.78:8000/api/articles/${
-              Number(response.data) + 1
-            }`,
-            {
-              index: Number(response.data) + 1,
-              title,
-              content,
-              writer,
-              url: imgURL ? imgURL[0] : null,
-            }
-          )
-          .then((res) => {
-            if (res.data.success) history.push("/board/list");
-          });
-      });
+    if (title !== "" && content !== "") {
+      axios
+        .put(`http://15.164.220.78:8000/api/articles/${index}`, {
+          title: title,
+          content: content,
+          index: index,
+        })
+        .then((res) => {
+          if (res.data.success) history.push("/post/list");
+        });
+    } else alert("내용을 입력하세요.");
   };
 
   const uploadImage = async (blob) => {
@@ -82,34 +62,29 @@ function BoardWrite() {
         headers: { "Content-type": "multipart/form-data" },
       }
     );
-
-    temp.push(...imgURL, result.data);
-    setImgURL(temp);
+    //console.log(result);
 
     return result.data;
   };
 
   return (
     <Container>
-      <SEO
-        title={"글 작성"}
-        description={"블로그 글 작성"}
-        url={"board/newpost"}
-      />
+      <SEO title={"게시글 수정"} url={`post/modify/${index}`} />
 
-      <h1>게시글 작성</h1>
+      <h2>포스팅 수정</h2>
       <TitleInput
         type="text"
         placeholder="제목"
         name="title"
         ref={editTitle}
         onChange={handleInputTitle}
+        value={title}
       />
       <Editor
         previewStyle="vertical"
         height="400px"
         plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
-        data=""
+        initialValue={content}
         name="content"
         ref={editContent}
         hooks={{
@@ -134,7 +109,7 @@ function BoardWrite() {
         type="button"
         onClick={submit}
       >
-        등록
+        수정
       </Button>
     </Container>
   );
@@ -152,4 +127,4 @@ const TitleInput = styled.input`
   margin: 10px 0 10px;
 `;
 
-export default BoardWrite;
+export default PostModify;

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import Comment from "./Sections/Comment";
 import SEO from "../../../modules/SEO";
 
-function View({ match }) {
+function PostContent({ match }) {
   const user = useSelector((state) => state.user);
   const [post, setPost] = useState([]);
   const { title, content, date, writer, index, url } = post;
@@ -196,4 +196,4 @@ const DateBefore = styled.span`
   vertical-align: -2px;
 `;
 
-export default View;
+export default PostContent;

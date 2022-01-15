@@ -6,10 +6,10 @@ import styled from "styled-components";
 import SignUp from "./components/pages/SignUp";
 import Login from "./components/pages/Login";
 import Home from "./components/pages/Home";
-import BoardWrite from "./components/pages/Board/BoardWrite";
-import BoardModify from "./components/pages/Board/BoardModify";
-import BoardList from "./components/pages/Board/BoardList";
-import View from "./components/pages/Board/BoardDetail/View";
+import PostWrite from "./components/pages/Post/PostWrite";
+import PostModify from "./components/pages/Post/PostModify";
+import PostList from "./components/pages/Post/PostList";
+import PostContent from "./components/pages/Post/PostDetail/PostContent";
 import Header from "./components/modules/Header";
 import Footer from "./components/modules/Footer";
 import NotFound from "./components/pages/NotFound";
@@ -28,19 +28,19 @@ function Main() {
             <Route exact path="/" component={Auth(Home, null)} />
             <Route
               exact
-              path="/board/newpost"
-              component={Auth(BoardWrite, true)}
+              path="/post/newpost"
+              component={Auth(PostWrite, true)}
             />
-            <Route exact path="/board/list" component={Auth(BoardList, null)} />
+            <Route exact path="/post/list" component={Auth(PostList, null)} />
             <Route
               exact
-              path="/board/view/:data"
-              component={Auth(View, null)}
+              path="/post/view/:data"
+              component={Auth(PostContent, null)}
             />
             <Route
               exact
-              path="/board/modify/:data"
-              component={Auth(BoardModify, true)}
+              path="/post/modify/:data"
+              component={Auth(PostModify, true)}
             />
             <Route exact path="/login" component={Auth(Login, false)} />
             <Route exact path="/signup" component={Auth(SignUp, null)} />

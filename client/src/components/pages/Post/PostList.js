@@ -8,7 +8,7 @@ import Pagination from "../../modules/Pagination";
 import { paginate } from "../../modules/Pagination";
 import SEO from "../../modules/SEO";
 
-function BoardList({ history }) {
+function PostList({ history }) {
   const user = useSelector((state) => state.user);
 
   const [list, setList] = useState({
@@ -174,4 +174,4 @@ const Search = styled.img`
   padding: 5px;
 `;
 
-export default BoardList;
+export default PostList;

@@ -14,7 +14,7 @@ function Preview({ list }) {
         (rowData, i) =>
           rowData.idx !== "" && (
             <Article
-              onClick={() => history.push(`/board/view/${rowData.index}`)}
+              onClick={() => history.push(`/post/view/${rowData.index}`)}
               key={i}
             >
               <Thunmbnail>

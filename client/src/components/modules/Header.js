@@ -31,9 +31,9 @@ function Header() {
   return (
     <Container>
       <Nav>
-        <h3>
+        <Title>
           <Link to={"/"}>dmchoi</Link>
-        </h3>
+        </Title>
         <ul
           style={{
             display: "flex",
@@ -44,10 +44,9 @@ function Header() {
           }}
         >
           <li>
-            <img
+            <SearchButton
               src="/img/search.png"
               alt="search-buton"
-              style={{ width: "25px", height: "25px" }}
               onClick={onSearch}
             />
           </li>
@@ -73,6 +72,10 @@ const Container = styled.header`
   align-items: center;
 `;
 
+const Title = styled.div`
+  font-size: 25px;
+`;
+
 const Nav = styled.nav`
   width: 1100px;
   display: flex;
@@ -87,6 +90,11 @@ const Login = styled.li`
   border-radius: 100px;
   padding: 4px 15px;
   color: #ffff;
+`;
+
+const SearchButton = styled.img`
+  width: 25px;
+  height: 25px;
 `;
 
 // const HeaderToggle = styled.div`

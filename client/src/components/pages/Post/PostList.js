@@ -80,11 +80,7 @@ function PostList({ history }) {
 
   return (
     <Container>
-      <SEO
-        title={"글 목록"}
-        description={"블로그 글 목록"}
-        url={"board/list"}
-      />
+      <SEO title={"글 목록"} description={"블로그 글 목록"} url={"post/list"} />
       <Table responsive="sm">
         <thead>
           <tr>
@@ -103,7 +99,7 @@ function PostList({ history }) {
                 <tr key={rowData.index}>
                   <td>
                     <Link
-                      to={`/board/view/${rowData.index}`}
+                      to={`/post/view/${rowData.index}`}
                       index={rowData.index}
                     >
                       {rowData.index}
@@ -111,7 +107,7 @@ function PostList({ history }) {
                   </td>
                   <td>
                     <Link
-                      to={`/board/view/${rowData.index}`}
+                      to={`/post/view/${rowData.index}`}
                       index={rowData.index}
                     >
                       {rowData.title}
@@ -137,7 +133,7 @@ function PostList({ history }) {
         type="button"
         onClick={() => {
           if (user.userData.isAdmin) {
-            history.push("/board/newpost");
+            history.push("/post/newpost");
           } else {
             alert("글쓰기 권한이 없습니다.");
           }
@@ -162,10 +158,14 @@ function PostList({ history }) {
 }
 
 const Container = styled.div`
-  padding: 4rem 0 0 0;
-  margin: 0 auto 4rem;
-  width: 100%;
+  padding: 20px 30px 0;
+  margin: 0 auto 3rem;
+  width: 1100px;
   min-height: 100%;
+
+  @media (max-width: 987px) {
+    width: 100%;
+  }
 `;
 
 const Search = styled.img`

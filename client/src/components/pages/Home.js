@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Pagination from "../modules/Pagination";
 import { paginate } from "../modules/Pagination";
 import Profile from "../modules/Profile";
-import Preview from "../modules/Preview";
+import PostPreview from "../modules/PostPreview";
 import Comments from "../modules/Comments";
 import SEO from "../modules/SEO";
 
@@ -42,11 +42,11 @@ function Home() {
   return (
     <Container>
       <SEO title={"dmchoi blog"} description={"dmchoi 블로그입니다."} />
-      <Profile></Profile>
+      <Profile />
       <h1>전체글</h1>
       <hr />
       <div>
-        <Preview list={pagedList} />
+        <PostPreview list={pagedList} />
         <Pagination
           itemCount={count}
           pageSize={pageSize}

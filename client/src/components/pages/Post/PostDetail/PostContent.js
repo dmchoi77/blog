@@ -73,7 +73,7 @@ function PostContent({ match }) {
         })
         .then((res) => {
           alert("삭제되었습니다.");
-          history.push("/board/list");
+          history.push("/post/list");
         });
     } else {
       alert("삭제 권한이 없습니다.");
@@ -83,7 +83,7 @@ function PostContent({ match }) {
 
   return (
     <Container>
-      <SEO title={title} description={content} url={`board/view/${index}`} />
+      <SEO title={title} description={content} url={`post/view/${index}`} />
       <div style={{ margin: "0 auto", width: "95%" }}>
         <h1
           style={{
@@ -134,9 +134,9 @@ function PostContent({ match }) {
               onClick={() => {
                 if (user.userData.isAdmin) {
                   history.push({
-                    pathname: `/board/modify/${index}`,
+                    pathname: `/post/modify/${index}`,
                     state: {
-                      writer, //BoardModify로 props 전달
+                      writer, //PostModify로 props 전달
                       index: idx,
                       title,
                       content,

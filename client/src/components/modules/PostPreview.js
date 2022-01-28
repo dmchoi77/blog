@@ -58,6 +58,7 @@ const Articles = styled.div`
 `;
 
 const Article = styled.div`
+  width: 100%;
   margin-top: 2rem;
   background-color: #fff;
   border: 1px solid #dae1e6;

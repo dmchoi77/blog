@@ -84,7 +84,7 @@ function PostContent({ match }) {
   return (
     <Container>
       <SEO title={title} description={content} url={`post/view/${index}`} />
-      <div style={{ margin: "0 auto", width: "95%" }}>
+      <div style={{ margin: "0 auto" }}>
         <h1
           style={{
             fontSize: "2.3rem",

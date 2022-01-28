@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const userSchema = mongoose.Schema({
   name: {
@@ -60,7 +62,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
 userSchema.methods.generateToken = function (cb) {
   let user = this;
   //jsonwebtoken을 이용해서 token을 생성하기
-  let token = jwt.sign(user._id.toHexString(), "secretToken");
+  let token = jwt.sign(user._id.toHexString(), SECRET_KEY);
 
   user.token = token;
   user.save(function (err, user) {
@@ -73,7 +75,7 @@ userSchema.statics.findByToken = function (token, cb) {
   let user = this;
 
   //토큰을 decode
-  jwt.verify(token, "secretToken", function (err, decoded) {
+  jwt.verify(token, SECRET_KEY, function (err, decoded) {
     //유저 아이디를 이용해서 유저를 찾은 다음에
     //클라이언트에서 가져온 token과 DB에 보관된 token이 일치하는지 확인
 

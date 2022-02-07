@@ -1,10 +1,8 @@
-/*eslint-disable*/
-
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
+import { Spinner } from "react-bootstrap";
 import MDEditor from "@uiw/react-md-editor";
 import { useSelector } from "react-redux";
 import Comment from "./Sections/Comment";
@@ -84,93 +82,106 @@ function PostContent({ match }) {
   return (
     <Container>
       <SEO title={title} description={content} url={`post/view/${index}`} />
-      <div style={{ margin: "0 auto" }}>
-        <h1
-          style={{
-            fontSize: "2.3rem",
-            marginBottom: "30px",
-            fontWeight: "900",
-          }}
-        >
-          {title}
-        </h1>
-        <div
+      {!content ? (
+        <Spinner
           style={{
             display: "flex",
-            alignItems: "center",
-            marginBottom: "10px",
+            justifyContent: "center",
+            margin: "200px auto",
           }}
-        >
-          <div style={{ fontWeight: "bold" }}>{writer}</div>
-          <DateBefore />
-          <div>{date}</div>
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <img src={url} style={{ width: "100%" }} />
-        </div>
-      </div>
-      <hr />
-      <div>
-        <div>
-          <MDEditor.Markdown source={content} />
-        </div>
-      </div>
-      <hr />
-      <div style={{ marginBottom: "20px" }}>
-        <Button
-          className="post-view-go-list-btn"
-          variant="primary"
-          type="button"
-          onClick={() => history.push("/")}
-        >
-          전체글
-        </Button>
-        {user.userData.isAdmin && (
-          <>
-            <Button
-              className="post-view-go-modify-btn"
-              variant="primary"
-              type="button"
-              onClick={() => {
-                if (user.userData.isAdmin) {
-                  history.push({
-                    pathname: `/post/modify/${index}`,
-                    state: {
-                      writer, //PostModify로 props 전달
-                      index: idx,
-                      title,
-                      content,
-                    },
-                  });
-                } else {
-                  alert("글쓰기 권한이 없습니다.");
-                }
+          animation="border"
+          role="status"
+        />
+      ) : (
+        <>
+          <div style={{ margin: "0 auto" }}>
+            <h1
+              style={{
+                fontSize: "2.3rem",
+                marginBottom: "30px",
+                fontWeight: "900",
               }}
             >
-              수정
-            </Button>
+              {title}
+            </h1>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <div style={{ fontWeight: "bold" }}>{writer}</div>
+              <DateBefore />
+              <div>{date}</div>
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <img src={url} style={{ width: "100%" }} />
+            </div>
+          </div>
+          <hr />
+          <div>
+            <div>
+              <MDEditor.Markdown source={content} />
+            </div>
+          </div>
+          <hr />
+          <div style={{ marginBottom: "20px" }}>
             <Button
-              className="post-view-go-modify-btn"
+              className="post-view-go-list-btn"
               variant="primary"
               type="button"
-              onClick={onDelete}
+              onClick={() => history.push("/")}
             >
-              삭제
+              전체글
             </Button>
-          </>
-        )}
-      </div>
-
-      <div>
-        <h5 style={{ fontWeight: 700, marginBottom: "30px" }}>
-          총 {comments.length} 개의 댓글이 있습니다.
-        </h5>
-        <Comment
-          idx={idx}
-          commentList={comments}
-          refreshFunction={refreshFunction}
-        />
-      </div>
+            {user.userData.isAdmin && (
+              <>
+                <Button
+                  className="post-view-go-modify-btn"
+                  variant="primary"
+                  type="button"
+                  onClick={() => {
+                    if (user.userData.isAdmin) {
+                      history.push({
+                        pathname: `/post/modify/${index}`,
+                        state: {
+                          writer, //PostModify로 props 전달
+                          index: idx,
+                          title,
+                          content,
+                        },
+                      });
+                    } else {
+                      alert("글쓰기 권한이 없습니다.");
+                    }
+                  }}
+                >
+                  수정
+                </Button>
+                <Button
+                  className="post-view-go-modify-btn"
+                  variant="primary"
+                  type="button"
+                  onClick={onDelete}
+                >
+                  삭제
+                </Button>
+              </>
+            )}
+          </div>
+          <div>
+            <h5 style={{ fontWeight: 700, marginBottom: "30px" }}>
+              총 {comments.length} 개의 댓글이 있습니다.
+            </h5>
+            <Comment
+              idx={idx}
+              commentList={comments}
+              refreshFunction={refreshFunction}
+            />
+          </div>
+        </>
+      )}
     </Container>
   );
 }
@@ -194,6 +205,15 @@ const DateBefore = styled.span`
   background: #ccc;
   margin: 0 10px 0 6px;
   vertical-align: -2px;
+`;
+
+const Button = styled.button`
+  background-color: #e05194;
+  text-align: cetner;
+  padding: 8px;
+  color: #ffff;
+  border: none;
+  width: 80px;
 `;
 
 export default PostContent;

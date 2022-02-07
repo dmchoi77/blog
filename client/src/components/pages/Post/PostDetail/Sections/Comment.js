@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
-import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -78,7 +77,6 @@ export default function Comment({ idx, commentList, refreshFunction }) {
           />
           <br />
           <Button
-            style={{ width: "15%", height: "40px" }}
             className="reply-btn"
             variant="primary"
             type="button"
@@ -114,4 +112,15 @@ const Message = styled.div`
   background-color: rgb(224, 81, 148);
   color: #ffff;
   text-align: center;
+`;
+
+const Button = styled.button`
+  background-color: #e05194;
+  text-align: cetner;
+  padding: 8px;
+  color: #ffff;
+  border: none;
+  width: 80px;
+  height: 40px;
+  margin-bottom: 15px;
 `;

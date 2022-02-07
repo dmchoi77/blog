@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button, Toast } from "react-bootstrap";
+import { Toast } from "react-bootstrap";
+import styled from "styled-components";
 import axios from "axios";
 import { CommentForm, TextArea } from "./Comment";
 
@@ -92,7 +93,6 @@ function SingleComment({ isReply, comment, idx, refreshFunction }) {
           />
           <br />
           <Button
-            style={{ width: "15%", height: "40px", marginBottom: "15px" }}
             className="reply-btn"
             variant="primary"
             type="button"
@@ -107,3 +107,14 @@ function SingleComment({ isReply, comment, idx, refreshFunction }) {
 }
 
 export default SingleComment;
+
+const Button = styled.button`
+  background-color: #e05194;
+  text-align: cetner;
+  padding: 8px;
+  color: #ffff;
+  border: none;
+  width: 80px;
+  height: 40px;
+  margin-bottom: 15px;
+`;

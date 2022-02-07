@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -111,6 +111,15 @@ const SignUp = styled.p`
   text-align: center;
   padding-top: 20px;
   font-weight: bolder;
+`;
+
+const Button = styled.button`
+  background-color: #e05194;
+  text-align: cetner;
+  padding: 8px;
+  color: #ffff;
+  border: none;
+  width: 100%;
 `;
 
 export default Login;

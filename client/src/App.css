@@ -49,12 +49,6 @@
   width: 100%;
 }
 
-.loginBtn,
-.signupBtn,
-.backBtn {
-  width: 100% !important;
-}
-
 .form-control {
   display: block;
   align-items: center;
@@ -120,8 +114,7 @@
 .post-write-btn,
 .post-view-go-modify-btn,
 .reply-btn {
-  width: 100px;
-  margin: 5px 5px;
+  margin-right: 5px;
 }
 
 .toggle-menu {
@@ -149,10 +142,6 @@ li {
 hr {
   margin-top: 15px;
   margin-bottom: 15px;
-}
-
-.language-javascript {
-  overflow: hidden;
 }
 
 /* 반응형 */

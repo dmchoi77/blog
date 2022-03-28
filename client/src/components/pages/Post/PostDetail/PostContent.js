@@ -12,7 +12,6 @@ function PostContent({ match }) {
   const user = useSelector((state) => state.user);
   const [post, setPost] = useState([]);
   const { title, content, date, writer, index, url } = post;
-  const [comments, setComments] = useState([]);
   const idx = match.params.data;
   const history = useHistory();
 
@@ -29,37 +28,8 @@ function PostContent({ match }) {
           //조회수 증가
           index: res.data[0].index,
         });
-
-        axios
-          .get("http://15.164.220.78:8000/api/comments", {
-            params: {
-              idx: idx,
-            },
-          })
-          .then((res) => {
-            if (res.data.success) {
-              setComments(res.data.comments);
-            } else {
-              // alert("댓글 정보를 가져오는 것에 실패했습니다.")
-            }
-          });
       });
   }, []);
-
-  const refreshFunction = (variables) => {
-    if (typeof variables === "object") {
-      //댓글 등록 시
-      setComments(comments.concat(variables));
-    } else {
-      //댓글 삭제 시
-      setComments((comments) =>
-        comments.filter(
-          (comment) =>
-            comment._id !== variables && comment.responseTo !== variables
-        )
-      );
-    }
-  };
 
   const onDelete = (e) => {
     if (user.userData.isAdmin) {
@@ -171,14 +141,7 @@ function PostContent({ match }) {
             )}
           </div>
           <div>
-            <h5 style={{ fontWeight: 700, marginBottom: "30px" }}>
-              총 {comments.length} 개의 댓글이 있습니다.
-            </h5>
-            <Comment
-              idx={idx}
-              commentList={comments}
-              refreshFunction={refreshFunction}
-            />
+            <Comment idx={idx} />
           </div>
         </>
       )}

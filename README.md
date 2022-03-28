@@ -1,20 +1,20 @@
 # 프로젝트 소개
-리액트 기반의 나만의 블로그 구축(Ver. 1.0.0)
+리액트 기반 기술 블로그 구축(Ver. 1.0.0)
 
 http://15.164.220.78/
 
 ## 주요 서비스
-* 게시글 작성, 수정, 삭제, 검색, 조회수
+* 블로그 포스팅, 수정, 삭제, 조회
 * 댓글 작성 및 삭제 기능
 * 로그인, 로그아웃
 * 방명록
 
 
 ## 목표
-* React Hooks의 생명 주기(Life cycle)에 대해 이해한다.
 * React-Router를 이용하여 SPA와 동적 라우팅 기능에 대해 이해한다. 
 * Server와 DB를 연동해 통신을 해본다.
 * CRUD를 구현해본다.
+* 전체적인 개발 흐름에 대해 이해한다.
 
 
 ## 활용 기술
@@ -22,7 +22,7 @@ http://15.164.220.78/
 * React / Hooks
 * Node.js / Express
 * MongoDB
-* AWS S3,EC2
+* AWS EC2
 * Styled-components
 * Bootstrap
 

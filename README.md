@@ -28,7 +28,7 @@ http://15.164.220.78/
 
 
 ## 기능 및 UI
-(아래 이미지들은 버전1의 이미지이므로 현재와 다를 수 있습니다.)
+(아래 이미지와 기능은 버전1 기준이로 현재와 다를 수 있습니다.)
 ### 1. 로그인 
 
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134780138-9fb1c129-116d-4fd4-91a5-94b294e9e313.gif)
@@ -58,17 +58,17 @@ http://15.164.220.78/
 * 전체글 조회 및 썸네일
 * 방명록 기능 - github 댓글 앱 utterances를 적용
 
-### 5. 게시글 작성, 수정, 조회
+### 5. 포스팅, 수정, 조회
 
 ![Hnet-image (2)](https://user-images.githubusercontent.com/76215166/134780990-d5e3da43-663a-436e-b8e4-29a29f9ba560.gif)
 
 * Text Editor로 Toast ui editor를 이용
 
-### 6. 게시글 삭제
+### 6. 포스팅 삭제
 
 ![Hnet com-image](https://user-images.githubusercontent.com/76215166/134781127-276acece-d8fd-4ae3-849a-d764d6ad79c7.gif)
 
-### 7. 게시글 검색
+### 7.  검색
 
 ![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134781197-85423890-19dd-4bf7-9030-65321171f62e.gif)
 

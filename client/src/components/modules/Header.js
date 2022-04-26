@@ -50,7 +50,7 @@ function Header() {
               onClick={onSearch}
             />
           </li>
-          {!user.userData.isAuth ? (
+          {!user.userData.isAuth && !localStorage.getItem("x_auth") ? (
             <Login onClick={onLogin}>로그인</Login>
           ) : (
             <Login onClick={onLogout}>로그아웃</Login>

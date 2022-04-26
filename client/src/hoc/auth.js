@@ -13,7 +13,18 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     useEffect(() => {
       dispatch(auth()).then((response) => {
-        //console.log(response)
+        if (response.payload.isAuth) {
+          const token = localStorage.getItem("x_auth");
+          const expire = JSON.parse(token).expire;
+
+          // 토큰 시간 만료되면 localStorage에서 제거
+          if (Date.now() > expire && token) {
+            localStorage.removeItem("x_auth");
+            window.location.reload();
+          }
+        }
+
+        console.log(response);
         if (!response.payload.isAuth) {
           if (option) {
             props.history.push("/login");

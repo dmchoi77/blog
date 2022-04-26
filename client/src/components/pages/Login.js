@@ -19,8 +19,7 @@ function Login() {
     setPwd(e.target.value);
   };
 
-  const loginHandler = (e) => {
-    e.preventDefault();
+  const loginHandler = () => {
     let body = {
       id,
       pwd,
@@ -34,11 +33,13 @@ function Login() {
         alert("아이디와 비밀번호를 확인해 주세요.");
         return;
       }
-
+      const loginInfo = {
+        value: res.payload.token,
+        expire: Date.now() + 60 * 10000,
+      };
       if (res.payload.loginSuccess) {
-        // cookie.save("x_auth", res.payload.token);
         localStorage.removeItem("x_auth");
-        localStorage.setItem("x_auth", res.payload.token);
+        localStorage.setItem("x_auth", JSON.stringify(loginInfo));
         window.location.replace("/");
       }
     });

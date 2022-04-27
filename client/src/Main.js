@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import "./App.css";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
@@ -13,7 +12,6 @@ import PostContent from "./components/pages/Post/PostDetail/PostContent";
 import Header from "./components/modules/Header";
 import Footer from "./components/modules/Footer";
 import NotFound from "./components/pages/NotFound";
-import Portfolio from "./components/pages/Portfolio";
 import Search from "./components/pages/Search";
 import Auth from "./hoc/auth";
 
@@ -22,7 +20,6 @@ function Main() {
     <>
       <Header />
       <Container>
-        {/* <LeftNav /> */}
         <Contents>
           <Switch>
             <Route exact path="/" component={Auth(Home, null)} />
@@ -44,7 +41,6 @@ function Main() {
             />
             <Route exact path="/login" component={Auth(Login, false)} />
             <Route exact path="/signup" component={Auth(SignUp, null)} />
-            <Route exact path="/portfolio" component={Auth(Portfolio, null)} />
             <Route exact path="/search" component={Auth(Search, null)} />
             <Route path="*" component={Auth(NotFound, null)} />
           </Switch>

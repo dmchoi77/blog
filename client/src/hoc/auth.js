@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "../actions/user_action";
+import { auth, logoutUser } from "../actions/user_action";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (SpecificComponent, option, adminRoute = null) {
   //option
   //null : 아무나 접근 가능한 페이지
@@ -13,19 +14,19 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     useEffect(() => {
       dispatch(auth()).then((response) => {
-        if (response.payload.isAuth) {
-          const token = localStorage.getItem("x_auth");
+        const token = localStorage.getItem("x_auth");
+        // 임의로 로컬스토리지의 token을 제거했을 경우 -> 로그아웃 되게
+        if (response.payload.isAuth && !token) {
+          logoutUser();
+          window.location.reload();
+        } else if (response.payload.isAuth) {
           const expire = JSON.parse(token).expire;
-
           // 토큰 시간 만료되면 localStorage에서 제거
           if (Date.now() > expire && token) {
             localStorage.removeItem("x_auth");
             window.location.reload();
           }
-        }
-
-        console.log(response);
-        if (!response.payload.isAuth) {
+        } else if (!response.payload.isAuth) {
           if (option) {
             props.history.push("/login");
           }

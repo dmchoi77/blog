@@ -6,12 +6,11 @@ const config = {
   },
 };
 
-const userInfo = localStorage.getItem("x_auth");
-const token = JSON.parse(userInfo);
+const token = localStorage.getItem("x_auth");
 
 // If token, add to headers
 if (token) {
-  config.headers["x_auth"] = token.value;
+  config.headers["x_auth"] = token;
 }
 
 export const headersConfig = config;

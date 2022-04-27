@@ -33,13 +33,10 @@ function Login() {
         alert("아이디와 비밀번호를 확인해 주세요.");
         return;
       }
-      const loginInfo = {
-        value: res.payload.token,
-        expire: Date.now() + 60 * 10000,
-      };
+
       if (res.payload.loginSuccess) {
         localStorage.removeItem("x_auth");
-        localStorage.setItem("x_auth", JSON.stringify(loginInfo));
+        localStorage.setItem("x_auth", res.payload.token);
         window.location.replace("/");
       }
     });

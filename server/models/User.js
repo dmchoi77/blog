@@ -27,10 +27,6 @@ const userSchema = mongoose.Schema({
     // 유효성 검사
     type: String,
   },
-  tokenEXP: {
-    // 토큰 기간
-    type: Number,
-  },
 });
 //save 하기 전에
 userSchema.pre("save", function (next) {
@@ -61,9 +57,9 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
 
 userSchema.methods.generateToken = function (cb) {
   let user = this;
+  const userId = user._id.toHexString();
   //jsonwebtoken을 이용해서 token을 생성하기
-  let token = jwt.sign(user._id.toHexString(), SECRET_KEY);
-
+  let token = jwt.sign({ _id: userId }, SECRET_KEY, { expiresIn: "10m" });
   user.token = token;
   user.save(function (err, user) {
     if (err) return cb(err);
@@ -78,7 +74,6 @@ userSchema.statics.findByToken = function (token, cb) {
   jwt.verify(token, SECRET_KEY, function (err, decoded) {
     //유저 아이디를 이용해서 유저를 찾은 다음에
     //클라이언트에서 가져온 token과 DB에 보관된 token이 일치하는지 확인
-
     user.findOne(
       {
         _id: decoded,

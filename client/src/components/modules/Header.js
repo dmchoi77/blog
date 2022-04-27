@@ -50,10 +50,10 @@ function Header() {
               onClick={onSearch}
             />
           </li>
-          {!user.userData.isAuth && !localStorage.getItem("x_auth") ? (
-            <Login onClick={onLogin}>로그인</Login>
-          ) : (
+          {user.userData.isAuth && localStorage.getItem("x_auth") ? (
             <Login onClick={onLogout}>로그아웃</Login>
+          ) : (
+            <Login onClick={onLogin}>로그인</Login>
           )}
         </ul>
       </Nav>
@@ -96,29 +96,5 @@ const SearchButton = styled.img`
   width: 25px;
   height: 25px;
 `;
-
-// const HeaderToggle = styled.div`
-//     position : fixed;
-//     z-index : 1001;
-//     left : -5px;
-// `
-
-// const Button = styled.img`
-
-//     @media(min-width : 812px) {
-//         display : none;
-//     }
-
-//     @media(max-width : 811px){
-//         width : 19px;
-//         height : 19px;
-//         position : absolute;
-//         top : -8px;
-//         left : 15px;
-//         border : none;
-//         background : none;
-//         z-index : 1000;
-//     }
-// `
 
 export default Header;

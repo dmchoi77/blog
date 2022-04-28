@@ -14,11 +14,16 @@ export default function (SpecificComponent, option, adminRoute = null) {
     useEffect(() => {
       dispatch(auth()).then((response) => {
         const token = localStorage.getItem("x_auth");
-        // 임의로 로컬스토리지의 token을 제거했을 경우 -> 로그아웃 되게
-        if (response.payload.isAuth && !token) {
+        // 임의로 로컬스토리지의 token을 제거했을 경우 & 토근 만료됐을 경우 -> 로그아웃 + 새로고침
+        if (
+          (response.payload.isAuth && !token) ||
+          (!response.payload.isAuth && token)
+        ) {
           logoutUser();
           window.location.reload();
-        } else if (!response.payload.isAuth) {
+        }
+
+        if (!response.payload.isAuth) {
           if (option) {
             props.history.push("/login");
           }

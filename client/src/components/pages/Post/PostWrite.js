@@ -13,7 +13,6 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import SEO from "../../modules/SEO";
 
 function PostWrite() {
   const [title, setTitle] = useState("");
@@ -91,13 +90,7 @@ function PostWrite() {
 
   return (
     <Container>
-      <SEO
-        title={"글 작성"}
-        description={"블로그 글 작성"}
-        url={"post/newpost"}
-      />
-
-      <h1>게시글 작성</h1>
+      <h1>포스팅</h1>
       <TitleInput
         type="text"
         placeholder="제목"
@@ -141,9 +134,9 @@ function PostWrite() {
 }
 
 const Container = styled.div`
-  padding: 3rem 0 0;
-  margin: 0 auto 7rem;
-  width: 100%;
+  padding: 20px 30px 0;
+  margin: 0 auto 3rem;
+  width: 1100px;
 `;
 
 const TitleInput = styled.input`

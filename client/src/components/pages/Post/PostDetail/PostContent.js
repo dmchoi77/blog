@@ -16,20 +16,29 @@ function PostContent({ match }) {
   const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get(`http://15.164.220.78:8000/api/articles/${idx}`, {
-        params: {
-          idx: idx,
-        },
-      })
-      .then((res) => {
-        setPost(res.data[0]);
-        axios.put(`http://15.164.220.78:8000/api/articles/views/${idx}`, {
-          //조회수 증가
-          index: res.data[0].index,
-        });
-      });
+    fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const fetchIndex = await axios.get(
+        `http://15.164.220.78:8000/api/articles/${idx}`,
+        {
+          params: {
+            idx: idx,
+          },
+        }
+      );
+      const postData = fetchIndex.data[0];
+      setPost(postData);
+      await axios.put(`http://15.164.220.78:8000/api/articles/views/${idx}`, {
+        //조회수 증가
+        index: postData.index,
+      });
+    } catch (err) {
+      console.log("ERROR");
+    }
+  };
 
   const onDelete = (e) => {
     if (user.userData.isAdmin) {

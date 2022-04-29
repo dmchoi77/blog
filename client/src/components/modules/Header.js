@@ -11,7 +11,7 @@ function Header() {
 
   const onLogout = () => {
     dispatch(logoutUser()).then((response) => {
-      if (response.payload.success) {
+      if (!response.payload.isAuth && !user.isAuth) {
         localStorage.removeItem("x_auth");
         window.location.reload();
       } else {

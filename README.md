@@ -1,100 +1,126 @@
-# 프로젝트 소개
-리액트 기반 기술 블로그 구축(Ver. 1.0.0)
+## 프로젝트 소개
+### 개인 블로그를 직접 만들어보자
 
+평소에 공부한 개발 지식들을 정리하고 그것들을 이용해 무언가를 만들고 싶었는데, 이 두 가지를 만족하는건 내 블로그를 직접 만들어 보는것이라 생각해 시작하게 된 프로젝트
+
+
+## 사용 기술
+* React, Redux, Styled-components, Node.js, MongoDB, AWS EC2
+
+## 주요 업무 및 기능
+
+* ## React와 Express, MongoDB 연동 및 CRUD 구현
+    
+    프로젝트 구조
+    
+    ![프로젝트구조](https://user-images.githubusercontent.com/76215166/167134762-4bd22dcf-1f70-46e3-b525-7503a2fa8fa9.jpg)
+    
+    ### 왜 DB로 MongoDB를 선택했는가?
+
+    데이터베이스를 처음부터 MongoDB를 사용했던 것은 아니었고 학부 수업 때 다뤄본 경험이 있는 MySQL을 사용했었다. 
+    처음에는 Heroku를 이용해 배포를 하려고 생각해 Heroku에 MySQL을 지원하는 ClearDB 서비스가 있어서 그걸 사용했다.
+    
+    그런데 로컬 환경에서 MySQL을 사용할때와 비교하면 쿼리 처리하는 시간이 오래 걸렸다. 
+    (DB에서 처리 속도가 느리니 클라이언트에서도 데이터 fetching도 오래 걸리게 되고..)
+
+    그러다가 MongoDB가 눈에 들어왔다. MongoDB에 대해 들어본 적은 있지만 사용해 본 경험이 없었는데 
+    이번 기회에 MongoDB도 한 번 다뤄보고 싶어 DB를 교체하는 작업을 했다.
+
+    ### 결과
+
+    MongoDB(Atlas)로 교체 작업 후, 기존의 속도 문제를 해결했다. 또한 짧은 시간이었지만 사용해보면서 느낀점은 매번 긴 SQL문을 입력해 데이터를 다루는 MySQL과 달리 
+    MongoDB은 데이터를 좀 더 유연하게 다룰 수 있어서 편했다.
+
+<br>
+
+* ## 포스팅을 위한 에디터로 TOAST UI EDITOR 라이브러리 사용
+
+    ### TOAST UI EDITOR
+    처음에는 HTML의 <textarea>를 사용하면 될 거라 단순히 생각했다.
+  
+    그런데 좀 더 생각을 해보니 블로그에는 텍스트만 올리는게 아니라 폰트 사이즈, 굵기, 정렬과 같은 기능들도 필요하고 심지어 이미지도 업로드도 해야했다. 
+  
+    아무것도 모르는 상황에서 React Text Editor, JavaScript Editor 등의 키워드를 검색했다.
+  
+    그 결과, 텍스트 에디터와 관련해서 여러가지 자바스크립트 라이브러리들이 존재한다는 것을 알 수 있었고, 이를 활용하기로 했다.
+  
+    그중에서도 마크다운을 기반으로 하고 현재 작성 중인 글을 바로 미리보기할 수 있는 기능이 있는 TOAST UI EDITOR가 눈에 들어와 사용해보기로 했다.(UI도 맘에 들었다)
+
+    ### Toast UI EDITOR (https://ui.toast.com/tui-editor)
+
+    <br>
+  
+    ### 어떤 문제가 발생했고 어떻게 해결했는가?
+
+    라이브러리 적용 후, 이미지를 업로드 하고 포스팅을 저장하려 했으나 실패했다.
+
+    원인은 해당 라이브러리는 이미지를 업로드하면 base64로 인코딩 되는데, 이 엄청난 길이의 base64 코드가 연동해 놓은 DB 테이블에 저장되지 않았기 때문이었다.
+
+    그렇다면 이번에는 base64 코드를 어떻게 관리해야할지에 대해 고민하게 되었다.
+
+    연동해 놓은 DB는 텍스트만 관리하고 이미지들만 따로 관리할 수 있도록 클라우드 스토리지인 AWS S3를 사용하기로 했다.
+
+    base64를 blob으로 변환해 form-data에 담은 후, S3에 전송해 이미지를 저장 및 관리하도록 하고 url을 반환 받아서 이미지를 사용하는 방법으로 해당 문제를 해결할 수 있었다.
+
+<br>
+  
+*  ## Redux를 이용하여 사용자 로그인 상태 관리(with JWT, LocalStorage)
+
+
+    ### Redux 
+
+    어플리케이션에서 로그인을 하게 되면 모든 페이지에서 사용자 정보를 유지해야한다.
+  
+    리액트에서는 기본적으로 부모 컴포넌트에서 자식 컴포넌트로 상태값를 props로 전달하는데,
+    
+    컴포넌트가 많아지면 상태값을 props로 계속해서 컴포넌트에 전달하는 과정이 꽤나 복잡해지게 된다..
+
+    그래서 상태 관리 라이브러리인 Redux의 필요성을 느끼게 되었고, Store를 통해 전역으로 사용자 정보를 관리하도록 했다.
+  
+  
+    ### 어떤 문제가 발생했고 어떻게 해결했는가?
+
+    Redux를 사용해도 페이지를 새로고침 하게 되면 store 데이터가 남아있지 않고 초기화 되어 결국 로그인이 풀리게 되는 현상을 발생하는 것을 발견함.
+    
+    이를 해결하기 위해 로그인 처리 방법에 대해 구글링해봤다.
+  
+    보통 로그인 기능을 구현할 때, JWT와 웹스토리지/쿠키를 사용하고 매 페이지마다 서버와 통신해서 사용자 정보를 응답 받아서 사용자 인증을 하는 방법으로 비교적 쉽게 구현할 수 있다는 것     을 알게 됐다.
+  
+  
+    그래서 JWT와 LocalStorage를 추가했고, 기존의 DB에서 사용자 일치 여부만 확인했던 로직을 다음과 같이 수정했다.
+      1. 사용자가 아이디와 비밀번호 입력
+      2. DB에서 해당 아이디와 비밀번호 일치하는 사용자가 있는지 확인
+      3. 일치하는 유저가 있으면 JWT를 발행
+      4. 클라이언트의 LocalStorage에 JWT 저장
+      5. API 요청시 헤더에 JWT를 전달
+      6. 서버에서는 JWT가 유효한지 판별하고 클라이언트에 응답
+      
+    초기 로그인 시에는 위와 같은 과정을 거치고, 페이지가 변경될때마다 useEffect와 dispatch - auth 액션을 사용해 5번과 6번이 실행되도록하여 사용자 인증을 할 수 있게 해줬다.  
+ 
+    ### 추가로 알게 된 것
+    로그인 기능을 구현할 때 토큰을 쿠키/웹스토리지에 저장하냐, 뭐가 더 안전한가 등 각각 장단점이 있다는 걸 알 수 있었다.
+    새로고침 시에 Redux store의 정보가 초기화 되지 않게 하기 위한 다른 방법으로 Redux-Persist를 사용하는 방법이 있다고 한다. 
+  
+  <br>
+  
+* ## 웹과 모바일 환경을 고려한 반응형 UI 설계
+
+  <br>
+  
+## 배포 링크
+  
 http://15.164.220.78/
+  
+  
+  
 
-## 주요 서비스
-* 블로그 포스팅, 수정, 삭제, 조회
-* 댓글 작성 및 삭제 기능
-* 로그인, 로그아웃
-* 방명록
+  
+  
+  
+  
+  
+  
+  
 
-
-## 목표
-* React-Router를 이용하여 SPA와 동적 라우팅 기능에 대해 이해한다. 
-* Server와 DB를 연동해 통신을 해본다.
-* CRUD를 구현해본다.
-* 전체적인 개발 흐름에 대해 이해한다.
-
-
-## 활용 기술
-* JavaScript
-* React / Hooks
-* Node.js / Express
-* MongoDB
-* AWS EC2
-* Styled-components
-* Bootstrap
-
-
-## 기능 및 UI
-(아래 이미지와 기능은 버전1 기준이로 현재와 다를 수 있습니다.)
-### 1. 로그인 
-
-![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134780138-9fb1c129-116d-4fd4-91a5-94b294e9e313.gif)
-
-* Redux, JWT, localStorage를 이용하여 사용자 인증 및 로그인 기능 구현
-
-### 2. 회원가입
-
-![Hnet-image](https://user-images.githubusercontent.com/76215166/134780381-ee633cff-b08d-4ed3-9c48-20b5f30e53be.gif)
-
-* 비밀번호 체크
-* 중복 아이디 체크
-* crypt를 이용해 비밀번호 암호화하여 db에 저장 
-
-### 3. 로그아웃
-
-![Hnet com-image (3)](https://user-images.githubusercontent.com/76215166/134780523-a348809c-748f-448e-9074-dd03391b77d4.gif)
-
-* 로그아웃하면 저장되어 있는 JWT와 localStorage 정보 제거
-
-
-### 4.메인화면
-
-
-![Hnet-image](https://user-images.githubusercontent.com/76215166/134780599-a32e0c9e-b1bc-4a3e-bb35-ac038eee337f.gif)
-
-* 전체글 조회 및 썸네일
-* 방명록 기능 - github 댓글 앱 utterances를 적용
-
-### 5. 포스팅, 수정, 조회
-
-![Hnet-image (2)](https://user-images.githubusercontent.com/76215166/134780990-d5e3da43-663a-436e-b8e4-29a29f9ba560.gif)
-
-* Text Editor로 Toast ui editor를 이용
-
-### 6. 포스팅 삭제
-
-![Hnet com-image](https://user-images.githubusercontent.com/76215166/134781127-276acece-d8fd-4ae3-849a-d764d6ad79c7.gif)
-
-### 7.  검색
-
-![Hnet com-image (1)](https://user-images.githubusercontent.com/76215166/134781197-85423890-19dd-4bf7-9030-65321171f62e.gif)
-
-### 8. 페이징
-
-![Hnet-image (3)](https://user-images.githubusercontent.com/76215166/134781352-7dfd189c-aecc-46f1-94b2-8b3bd385a31b.gif)
-
-* 페이지당 10개의 글이 조회되도록 구현
-
-
-### 9. 댓글 기능
-
-![Hnet-image (4)](https://user-images.githubusercontent.com/76215166/134781555-e90b7de9-5de7-46cc-ba83-2d587d2c808a.gif)
-
-* 댓글 등록 및 삭제 기능 구현
-
-### 10. 조회수 기능
-
-![Hnet com-image (3)](https://user-images.githubusercontent.com/76215166/134781639-c5574668-270f-4b77-8ca0-20561f2e56fb.gif)
-
-
-### 11. 반응형 
-
-![Hnet-image](https://user-images.githubusercontent.com/76215166/134816302-a0ca3c1e-df44-4fc2-8798-c9858bac0ba8.gif)
-
-
-## 관련 포스팅
-
-https://dmchoi.tistory.com/130
+  
+  *블로그가 Gatsby로 이전 됐습니다.

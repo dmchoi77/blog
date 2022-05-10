@@ -33,7 +33,6 @@ function PostList({ history }) {
     });
   }, []);
 
-  //페이징
   const handlePageChange = (page) => {
     setList({
       ...list,
@@ -44,13 +43,14 @@ function PostList({ history }) {
   const { data, pageSize, currentPage, searchKeyword } = list;
   const { length: count } = list.data;
 
+  // 페이지 별로 해당하는 포스팅 리스트
   const pagedList = paginate(
-    searchKeyword ? searchKeyword : data,
+    searchKeyword ? searchKeyword : data, // 검색 키워드 없으면 전체를 보여줌
     currentPage,
     pageSize
   );
 
-  //게시글 제목 검색
+  // 포스팅 제목 검색
   const onSearch = () => {
     const filtered = data.filter((word) => word.title.includes(search));
 
@@ -69,11 +69,11 @@ function PostList({ history }) {
     setSearch("");
   };
 
-  //검색어 입력값 가져오기
+  // 검색어 입력값 가져오기
   const handleInputTitle = (e) => {
     setSearch(e.target.value);
   };
-  //form에서 엔터 시 새로고침 막음
+  // form에서 엔터 시 새로고침 막음
   const handleSubmit = (e) => {
     e.preventDefault();
   };

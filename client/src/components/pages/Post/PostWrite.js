@@ -47,26 +47,29 @@ function PostWrite() {
       return;
     }
 
-    axios
-      .get("http://15.164.220.78:8000/api/articles/idxs") //인덱스 조회
-      .then((response) => {
-        axios
-          .post(
-            `http://15.164.220.78:8000/api/articles/${
-              Number(response.data) + 1
-            }`,
-            {
-              index: Number(response.data) + 1,
-              title,
-              content,
-              writer,
-              url: imgURL ? imgURL[0] : null,
-            }
-          )
-          .then((res) => {
-            if (res.data.success) history.push("/post/list");
-          });
-      });
+    fetchData();
+  };
+
+  const fetchData = async () => {
+    try {
+      const fetchIndex = await axios.get(
+        "http://15.164.220.78:8000/api/articles/idxs"
+      ); //인덱스 조회
+
+      const fetchData = await axios.post(
+        `http://15.164.220.78:8000/api/articles/${Number(fetchIndex.data) + 1}`,
+        {
+          index: Number(fetchIndex.data) + 1,
+          title,
+          content,
+          writer,
+          url: imgURL ? imgURL[0] : null,
+        }
+      );
+      if (fetchData.data.success) history.push("/post/list");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const uploadImage = async (blob) => {

@@ -164,7 +164,7 @@ const Container = styled.main`
   min-height: 100%;
   width: 768px;
 
-  @media (max-width: 987px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
 `;

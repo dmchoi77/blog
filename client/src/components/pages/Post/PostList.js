@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Table, Form, Row } from "react-bootstrap";
 import styled from "styled-components";
-import Pagination from "../../modules/Pagination";
-import { paginate } from "../../modules/Pagination";
+import Pagination from "../../Pagination";
+import { paginate } from "../../Pagination";
 import SEO from "../../modules/SEO";
 
 function PostList({ history }) {

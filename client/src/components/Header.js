@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../actions/user_action";
+import { logoutUser } from "../actions/user_action";
 
 function Header() {
   const user = useSelector((state) => state.user);

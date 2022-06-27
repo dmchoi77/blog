@@ -76,7 +76,7 @@ function Login() {
           로그인
         </Button>
         <SignUp>
-          처음이면{" "}
+          처음이면
           <Link to={"/signup"} style={{ color: "#004282" }}>
             회원가입
           </Link>

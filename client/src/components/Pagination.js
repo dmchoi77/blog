@@ -9,6 +9,7 @@ function Pagination({ itemCount, pageSize, currentPage, onPageChange }) {
   //   console.log(pageCount); // ex) 2
   const pages = _.range(1, pageCount + 1);
   //   console.log(pages); // [1,2]
+
   return (
     <Paging>
       {pages.map((page) => (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { paginate } from "../modules/Pagination";
+import { paginate } from "../Pagination";
 import axios from "axios";
 import MDEditor from "@uiw/react-md-editor";
 import { useHistory } from "react-router-dom";

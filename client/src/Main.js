@@ -9,8 +9,8 @@ import PostWrite from "./components/pages/Post/PostWrite";
 import PostModify from "./components/pages/Post/PostModify";
 import PostList from "./components/pages/Post/PostList";
 import PostContent from "./components/pages/Post/PostDetail/PostContent";
-import Header from "./components/modules/Header";
-import Footer from "./components/modules/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import NotFound from "./components/pages/NotFound";
 import Search from "./components/pages/Search";
 import Auth from "./hoc/auth";
@@ -66,7 +66,6 @@ const Contents = styled.div`
   margin-top: 50px;
   min-height: 700px;
   width: 100%;
-  z-index: 1;
 
   // @media(max-width : 811px) {
   //   width : 100vw;

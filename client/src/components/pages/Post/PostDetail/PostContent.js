@@ -60,7 +60,12 @@ function PostContent({ match }) {
 
   return (
     <Container>
-      <SEO title={title} description={content} url={`post/view/${index}`} />
+      <SEO
+        title={title}
+        description={content}
+        url={`post/view/${index}`}
+        image={url}
+      />
       {!content ? (
         <Spinner
           style={{
